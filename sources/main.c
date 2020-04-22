@@ -20,7 +20,6 @@ int main(int ac, char **av)
     draw(rtv);
     mlx(rtv);
     
-
     return (0);
 }
 

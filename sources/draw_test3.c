@@ -10,13 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "rtv.h"
 
 
-
-void draw(t_rtv *rtv)
+void draw_test3(t_rtv *rtv)
 {
-    draw_test3(rtv);
-    //draw_test1(rtv);
-    //draw_test2(rtv);
+
+    init_draw(rtv);
+
+    int final_color = BLACK;
+
+
+    int x = 0;
+    int y = 0;
+
+    while (x < rtv->screen_w)
+    {
+        y = 0;
+        while (y < rtv->screen_h)
+        {
+            final_color = BLACK;
+
+
+            add_px(rtv, x, y, final_color);
+
+            y++;
+        }
+        x++;
+    }
+
+    mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
+    draw_axis(rtv);
 }

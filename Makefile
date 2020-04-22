@@ -53,7 +53,8 @@ SOURCES_LIST = main.c\
 				s_sphere.c\
 				s_plane.c\
 				draw_test1.c\
-				draw_test2.c
+				draw_test2.c\
+				draw_test3.c
 
 				
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
