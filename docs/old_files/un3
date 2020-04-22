@@ -1,0 +1,301 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_rtv.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgouifer <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/14 19:03:09 by sgouifer          #+#    #+#             */
+/*   Updated: 2019/08/14 19:03:09 by sgouifer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv.h"
+
+int intersect_v2(t_ray *r, t_sphere *s)
+{
+    float u = 20000.0f;
+    float *t = &u;
+
+    int retval = 0;
+    float A = vector_dot(&r->dir, &r->dir);
+    t_vector dist = vector_sub(&r->start, &s->position);
+    float B = 2 * vector_dot(&r->dir, &dist);
+    float C = vector_dot(&dist, &dist) - (s->radius * s->radius);
+    float discr = B * B - 4 * A * C;
+    if (discr < 0)
+        retval = 0;
+    else
+    {
+        float sqrtdiscr = sqrtf(discr);
+        float t0 = (-B + sqrtdiscr) / (2);
+        float t1 = (-B - sqrtdiscr) / (2);
+        if (t0 > t1)
+            t0 = t1;
+        if ((t0 > 0.001f) && (t0 < *t))
+        {
+            *t = t0;
+            retval = 1;
+        }
+        else
+            retval = 0;
+    }
+
+    return retval;
+}
+
+int intersect_v3(t_ray *ray, t_sphere *sphere)
+{
+    int res = 0;
+    double A = pow(ray->dir.x - ray->start.x, 2.0) + pow(ray->dir.y - ray->start.y, 2.0) + pow(ray->dir.z - ray->start.z, 2.0);
+    double B = -2 * (((ray->dir.x - ray->start.x) * (sphere->position.x - ray->dir.x)) + ((ray->dir.y - ray->start.y) * (sphere->position.y - ray->start.y)) + ((sphere->position.z - ray->start.z) * (ray->dir.z - ray->start.z)));
+    double C = pow((sphere->position.x - ray->start.x), 2.0) + pow((sphere->position.y - ray->start.y), 2.0) + pow((sphere->position.z - ray->start.z), 2.0) - pow(sphere->radius, 2.0);
+    double discr = B * B - 4 * A * C;
+    if (discr >= 0)
+        res = 1;
+    return (res);
+}
+
+void draw_test(t_rtv *rtv)
+{
+    init_draw(rtv);
+    t_ray primary_ray;
+    t_sphere *spheres;
+
+    int radius = 100;
+    int sphere_c = 2;
+    spheres = (t_sphere *)malloc(sizeof(t_sphere) * sphere_c);
+    spheres[0] = get_sphere(radius, BLUE, projected_v(rtv, vector_new(0, 0, 0)));
+    spheres[1] = get_sphere(radius, RED, projected_v(rtv, vector_new(0, -40, 0)));
+    //spheres[2] = get_sphere(radius, YELLOW, projected_v(rtv, vector_new(0, 0, -102)));
+
+    // printf("sphere 0 dist: %f\n", spheres[0].position.z - spheres[0].radius);
+    // printf("sphere 1 dist: %f\n", spheres[1].position.z - spheres[1].radius);
+    //printf("sphere 2 dist: %f\n", spheres[2].position.z - spheres[2].radius);
+    // spheres[2] = get_sphere(radius, GREEN, projected_v(rtv, vector_new(0, 0, -50)));
+
+    int final_color = BLACK;
+    int z_range = 800;
+    int z_max_distance = z_range;
+    int x = 0;
+    int y = 0;
+    double prev_sphere_dist = z_range;
+    int closer_obj = -1;
+    int intersections_c = 0;
+    int one_intersected_obj = -1;
+    double sphere_dist;
+
+    primary_ray.start = vector_new(0,0,-z_range);
+    primary_ray.dir = vector_new(0,0,z_range);
+    if (intersect_v2(&primary_ray, &spheres[0]))
+    {
+        sphere_dist = spheres[0].position.z - spheres[0].radius;
+        printf("intersects and sphere_dist 0 center : %f\n", sphere_dist);
+    }else{
+         printf("doesn't intersect\n");
+    }
+    /*
+    while (x < rtv->screen_w)
+    {
+        y = 0;
+        while (y < rtv->screen_h)
+        {
+            primary_ray.start.x = x;
+            primary_ray.start.y = y;
+            primary_ray.start.z = -z_range;
+            primary_ray.dir.x = x;
+            primary_ray.dir.y = y;
+            primary_ray.dir.z = z_range;
+            final_color = BLACK;
+            int i = 0;
+            int intersects = 0;
+            closer_obj = -1;
+            while (i < sphere_c)
+            {
+                if (intersect_v3(&primary_ray, &spheres[i]))
+                {
+                    sphere_dist = spheres[i].position.z - spheres[i].radius;
+                    one_intersected_obj = i;
+                    if (sphere_dist <= prev_sphere_dist)
+                    {
+                        prev_sphere_dist = sphere_dist;
+                        closer_obj = i;
+                    }
+                    intersects++;
+                }
+                i++;
+            }
+            if (intersects > 0)
+            {
+                if (intersects == 1)
+                {
+                    final_color = spheres[one_intersected_obj].color;
+                }
+                else if (intersects > 1)
+                {
+                    if (closer_obj != -1)
+                        final_color = spheres[closer_obj].color;
+                    else
+                        final_color = GREEN;
+                }
+            }
+            add_px(rtv, x, y, final_color);
+            y++;
+        }
+        x++;
+    }
+    */
+    //printf("closer_obj: %d\n", closer_obj);
+    mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
+    draw_axis(rtv);
+}
+
+/*
+
+
+int intersect_v3(t_rtv *rtv, t_ray *ray, t_sphere *sphere, t_vector *point_hit)
+{
+    int res = 0;
+    double A = pow(ray->dir.x - ray->start.x, 2.0) + pow(ray->dir.y - ray->start.y, 2.0) + pow(ray->dir.z - ray->start.z, 2.0);
+    double B = -2 * (((ray->dir.x - ray->start.x) * (sphere->position.x - ray->dir.x)) + ((ray->dir.y - ray->start.y) * (sphere->position.y - ray->start.y)) + ((sphere->position.z - ray->start.z) * (ray->dir.z - ray->start.z)));
+    double C = pow((sphere->position.x - ray->start.x), 2.0) + pow((sphere->position.y - ray->start.y), 2.0) + pow((sphere->position.z - ray->start.z), 2.0) - pow(sphere->radius, 2.0);
+    double discr = B * B - 4 * A * C;
+    double t = (-B + sqrt(pow(B, 2.0) - (4 * A * C))) / (2 * A);
+    point_hit->x = ray->start.x + (ray->dir.x - ray->start.x) * t;
+    point_hit->y = ray->start.y + (ray->dir.y - ray->start.y) * t;
+    point_hit->z = ray->start.z + (ray->dir.z - ray->start.z) * t;
+    if (discr >= 0)
+        res = 1;
+    return (res);
+}
+
+int intersect_v1(t_ray *ray, t_sphere *sphere)
+{
+    int res = 0;
+    double A = pow(ray->dir.x - ray->start.x, 2.0) + pow(ray->dir.y - ray->start.y, 2.0) + pow(ray->dir.z - ray->start.z, 2.0);
+    double B = -2 * (((ray->dir.x - ray->start.x) * (sphere->position.x - ray->dir.x)) + ((ray->dir.y - ray->start.y) * (sphere->position.y - ray->start.y)) + ((sphere->position.z - ray->start.z) * (ray->dir.z - ray->start.z)));
+    double C = pow((sphere->position.x - ray->start.x), 2.0) + pow((sphere->position.y - ray->start.y), 2.0) + pow((sphere->position.z - ray->start.z), 2.0) - pow(sphere->radius, 2.0);
+    double discr = B * B - 4 * A * C;
+    if (discr >= 0)
+        res = 1;
+    return (res);
+}
+
+int intersect_v2(t_ray *r, t_sphere *s)
+{
+    float u = 20000.0f;
+    float *t = &u;
+
+    int retval = 0;
+    float A = vectorDot(&r->dir, &r->dir);
+    t_vector dist = vectorSub(&r->start, &s->position);
+    float B = 2 * vectorDot(&r->dir, &dist);
+    float C = vectorDot(&dist, &dist) - (s->radius * s->radius);
+    float discr = B * B - 4 * A * C;
+    if (discr < 0)
+        retval = 0;
+    else
+    {
+        float sqrtdiscr = sqrtf(discr);
+        float t0 = (-B + sqrtdiscr) / (2);
+        float t1 = (-B - sqrtdiscr) / (2);
+        if (t0 > t1)
+            t0 = t1;
+        if ((t0 > 0.001f) && (t0 < *t))
+        {
+            *t = t0;
+            retval = 1;
+        }
+        else
+            retval = 0;
+    }
+
+    return retval;
+}
+
+*/
+
+/*
+void draw_test1(t_rtv *rtv)
+{
+    init_draw(rtv);
+    t_ray primary_ray;
+    t_vector point_hit;
+
+    t_sphere sphere;
+    sphere.position.x = 0;
+    sphere.position.y = 0;
+    sphere.position.z = 0;
+    sphere.radius = 50;
+    sphere.color = BLUE1;
+
+    t_sphere sphere2;
+    sphere2.position.x = 100;
+    sphere2.position.y = 0;
+    sphere2.position.z = 0;
+    sphere2.radius = 50;
+    sphere2.color = RED1;
+
+    int final_color = BLACK;
+    int z_max_distance = 1000;
+    int x = 0;
+    int y = 0;
+    int x_offset = rtv->screen_w / 2 + rtv->camera->offset_x;
+    int y_offset = rtv->screen_h / 2 + rtv->camera->offset_y;
+    while (x < rtv->screen_w)
+    {
+        y = 0;
+        while (y < rtv->screen_h)
+        {
+            primary_ray.start.x = x - x_offset;
+            primary_ray.start.y = y - y_offset;
+            primary_ray.start.z = 0 ;
+            primary_ray.dir.x = x- x_offset;
+            primary_ray.dir.y = y- y_offset;
+            primary_ray.dir.z = 1;
+            
+            int z_min = primary_ray.dir.z;
+            final_color = BLACK;
+            while (z_min < z_max_distance)
+            {
+                primary_ray.dir.z++;
+                if (intersect_v1(&primary_ray, &sphere)) //if (intersect(&primary_ray,&sphere))
+                {
+                    final_color = sphere.color;
+                }
+                z_min++;
+            }
+            
+            add_px(rtv, x, y, final_color);
+            y++;
+        }
+        x++;
+    }
+    mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
+    draw_axis(rtv);
+}
+
+void draw_test0(t_rtv *rtv)
+{
+    init_draw(rtv);
+    int color = 0;
+    int x;
+    int y = 0;
+    while (y < rtv->screen_h)
+    {
+        x = 0;
+        while (x < rtv->screen_w)
+        {
+            float r = (float)x / (float)rtv->screen_w;
+            float g = (float)y / (float)rtv->screen_h;
+            float b = 0.2;
+            int col = get_color((int)255.99 *r, (int)255.99 *g, (int)255.99 *b);
+            
+            add_px(rtv, x, y, col);
+            x++;
+        }
+        y++;
+    }
+   mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
+}
+*/

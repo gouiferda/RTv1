@@ -1,0 +1,169 @@
+void draw_test(t_rtv *rtv)
+{
+    init_draw(rtv);
+
+    int final_color = BLACK;
+
+    //v1
+    /*
+    int hit;
+    t_sphere s;
+    t_ray r;
+    s.position = vector_new(200, 200, 100);
+    s.radius = 100;
+    s.color= BLUE;
+    r.direction = vector_new(0, 0, 1);
+    r.start.z = 0;
+    */
+
+    //v2
+    ///*
+    t_ray ray;
+
+    //spheres
+    int spheres_c = 2;
+    t_sphere spheres[spheres_c];
+    t_color sphere_color1 = get_color(1, 0, 0);
+    t_color sphere_color2 = get_color(0, 1, 0);
+    spheres[0] = get_sphere(100, sphere_color1, vector_new(200, 300, 0));
+    spheres[1] = get_sphere(100, sphere_color2, vector_new(400, 400, 0));
+
+    //lights
+    t_color light_color1 = get_color(1, 1, 1);
+    t_color light_color2 = get_color(0.3, 0.5, 1);
+    int lights_c = 2;
+    t_light lights[lights_c];
+    lights[0] = get_light(vector_new(0, 240, -100), light_color1);
+    lights[1] = get_light(vector_new(600, 0, -100), light_color2);
+
+    //int z_range = 2000;
+    //*/
+
+    int x = 0;
+    int y = 0;
+
+
+    while (x < rtv->screen_w)
+    {
+        y = 0;
+        //v1
+        /*
+        r.start.x = x;
+        */
+        while (y < rtv->screen_h)
+        {
+            final_color = BLACK;
+
+            //v1
+            /*
+            r.start.y = y;
+            hit = intersectRaySphere_v1(&r, &s);
+            final_color = (hit) ? s.color : BLACK;
+            */
+
+            //v2
+            ///*
+
+            float red = 0;
+            float green = 0;
+            float blue = 0;
+
+            int level = 0;
+            float coef = 1.0;
+
+            ray.start = vector_new(x, y, -2000);
+            ray.direction = vector_new(0, 0, 1);
+            while (level < 2) //while ((coef > 0.0f) && level < 2)
+            {
+                float t = 20000.0f;
+                int currentSphere = -1;
+
+                int i = 0;
+                while (i < spheres_c)
+                {
+                    if (intersectRaySphere_v2(&ray, &spheres[i], &t))
+                        currentSphere = i;
+                    i++;
+                }
+                if (currentSphere == -1)
+                    break;
+
+                t_vector scaled = vector_scale(t, &ray.direction);
+                t_vector newStart = vector_add(&ray.start, &scaled);
+
+                /* Find the normal for this new vector at the point of intersection */
+                t_vector n = vector_sub(&newStart, &spheres[currentSphere].position);
+                float temp = vector_dot(&n, &n);
+                if (temp == 0)
+                    break;
+
+                temp = 1.0f / sqrtf(temp);
+                n = vector_scale(temp, &n);
+
+                /* Find the material to determine the colour */
+                t_color currentSphereColor = spheres[currentSphere].color;
+
+                int j = 0;
+                while (j < lights_c)
+                {
+                    t_light currentLight = lights[j];
+                    t_vector dist = vector_sub(&currentLight.position, &newStart);
+                    if (vector_dot(&n, &dist) <= 0.0f)
+                        continue;
+                    float t = sqrtf(vector_dot(&dist, &dist));
+                    if (t <= 0.0f)
+                        continue;
+
+                    
+                    t_ray lightRay;
+                    lightRay.start = newStart;
+                    lightRay.direction = vector_scale((1 / t), &dist);
+
+                   //Calculate shadows
+                    int inShadow = 0;
+                    int k = 0;
+                    while (k < spheres_c)
+                    {
+                        if (intersectRaySphere_v2(&lightRay, &spheres[k], &t))
+                        {
+                            inShadow = 1;
+                            break;
+                        }
+                        k++;
+                    }
+                    if (!inShadow)
+                    {
+                        //Lambert diffusion
+                        float lambert = vector_dot(&lightRay.direction, &n) * coef;
+                        red += lambert * currentLight.intensity.red * currentSphereColor.red;
+                        green += lambert * currentLight.intensity.green * currentSphereColor.green;
+                        blue += lambert * currentLight.intensity.blue * currentSphereColor.blue;
+                    }
+                    
+                    j++;
+                }
+                
+                //Iterate over the reflection
+				coef *= 0.5;
+				
+				// The reflected ray start and direction 
+				ray.start = newStart;
+				float reflect = 2.0f * vector_dot(&ray.direction, &n);
+				t_vector tmp = vector_scale(reflect, &n);
+				ray.direction = vector_sub(&ray.direction, &tmp);
+                
+                
+                level++;
+            }
+
+            final_color = get_color1((int)red, (int)green, (int)blue);
+            //*/
+            add_px(rtv, x, y, final_color);
+            y++;
+        }
+        x++;
+    }
+
+    mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
+    draw_axis(rtv);
+}
