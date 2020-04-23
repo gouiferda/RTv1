@@ -45,8 +45,7 @@ t_rtv *init_rtv(void)
 {
     t_rtv *rtv;
 
-    ft_putendl("\n");
-    ft_putendl("__________________________");
+    ft_putendl("_________________________");
     ft_putendl("\n");
     ft_putendl("RTv1:           Main");
     ft_putendl("RTv1:           Init RTv1");
