@@ -46,19 +46,13 @@ typedef struct s_rtv
 	int max_iter;
 	int mouse_x;
 	int mouse_y;
-	int to_draw_plane;
 	double r;
 	double g;
 	double b;
-	int to_draw_controls;
-	int to_draw_info;
 	int x_start;
 	int y_start;
 	int x_finish;
 	int y_finish;
-	int power;
-	int lock_shape;
-	int projection;
 	int zoom;
 	double alpha;
 	double beta;
@@ -69,8 +63,6 @@ typedef struct s_rtv
 } t_rtv;
 
 
-// #define min(a,b) (((a) < (b)) ? (a) : (b))
-
 void    set_defaults(t_rtv *rtv);
 void init_draw(t_rtv *rtv);
 t_rtv *init_rtv(void);
@@ -78,7 +70,6 @@ t_rtv *init_rtv(void);
 void mlx(t_rtv *rtv);
 
 void	draw_line(t_rtv *f, t_point p1, t_point p2, int c);
-void		draw_p_line(t_rtv *rtv, t_point p1, t_point p2, int c);
 
 void    add_px(t_rtv *rtv, int x, int y, int color);
 
@@ -94,16 +85,5 @@ int		expose(void *param);
 
 void	reset(int keycode, t_rtv *rtv);
 
-
-// t_point get_point(int x, int y, int z);
-// void    add_point(t_rtv *rtv,t_point p, int c);
-// void    add_p_point(t_rtv *rtv, t_point p, int c);
-// void    add_p_point2(t_rtv *rtv, int x, int y, int z, int c);
-
-// void draw_axis(t_rtv *rtv);
-
-
-// t_color		get_color(double r, double g, double b);
-// int		get_color1(int r, int g, int b);
 
 #endif

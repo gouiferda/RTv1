@@ -26,11 +26,6 @@ void    add_point(t_rtv *rtv,t_point p, int c)
     add_px(rtv, p.x, p.y, c);
 }
 
-void    add_p_point(t_rtv *rtv, t_point p, int c)
-{
-    p = projected_p(rtv,p);
-    add_px(rtv, p.x, p.y, c);
-}
 
 void    add_p_point2(t_rtv *rtv, int x, int y, int z, int c)
 {

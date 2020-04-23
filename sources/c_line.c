@@ -40,11 +40,3 @@ void	draw_line(t_rtv *f, t_point p1, t_point p2, int c)
 		}
 	}
 }
-
-void		draw_p_line(t_rtv *rtv, t_point p1, t_point p2, int c)
-{
-	p1 = projected_p(rtv, p1);
-	p2 = projected_p(rtv, p2);
-	draw_line(rtv, p1, p2, c);
-}
-
