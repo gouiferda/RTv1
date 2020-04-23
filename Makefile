@@ -39,7 +39,9 @@ SOURCES_LIST = main.c \
 				mlx_hooks.c\
 				init.c\
 				draw.c\
-				events.c
+				events.c\
+				c_pixel.c\
+				c_color.c
 				
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
