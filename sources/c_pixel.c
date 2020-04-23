@@ -16,7 +16,7 @@ void add_px(t_rtv *rtv, int x, int y, int color)
 {
     int i;
 
-    if (x > 0 && y > 0 && x < (rtv->screen_w + RIGHT_MENU_W) && y < rtv->screen_h)
+    if (x > 0 && y > 0 && x < (rtv->screen_w) && y < rtv->screen_h)
     {
         i = (x * rtv->bpp / 8) + (y * rtv->size_line);
         rtv->img_data[i] = color;

@@ -18,10 +18,10 @@ void init_draw(t_rtv *rtv)
     int *img;
 
     ft_bzero(rtv->img_data,
-             (rtv->screen_w + RIGHT_MENU_W) * rtv->screen_h * (rtv->bpp / 8));
+             (rtv->screen_w) * rtv->screen_h * (rtv->bpp / 8));
     img = (int *)(rtv->img_data);
     i = 0;
-    while (i < rtv->screen_h * (rtv->screen_w + RIGHT_MENU_W))
+    while (i < rtv->screen_h * (rtv->screen_w))
     {
         img[i] = BACKGROUND;
         i++;
@@ -53,8 +53,8 @@ t_rtv *init_rtv(void)
     rtv = (t_rtv *)ft_memalloc(sizeof(t_rtv));
     set_defaults(rtv);
     rtv->mlx = mlx_init();
-    rtv->img_ptr = mlx_new_image(rtv->mlx, rtv->screen_w + RIGHT_MENU_W, rtv->screen_h);
+    rtv->img_ptr = mlx_new_image(rtv->mlx, rtv->screen_w, rtv->screen_h);
     rtv->img_data = mlx_get_data_addr(rtv->img_ptr, &(rtv->bpp), &(rtv->size_line), &(rtv->endian));
-    rtv->win = mlx_new_window(rtv->mlx, rtv->screen_w + RIGHT_MENU_W, rtv->screen_h, "RTv1 v1.0 - @sgouifer");
+    rtv->win = mlx_new_window(rtv->mlx, rtv->screen_w, rtv->screen_h, "RTv1 v1.0 - @sgouifer");
     return (rtv);
 }
