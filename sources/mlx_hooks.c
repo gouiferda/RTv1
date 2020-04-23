@@ -48,3 +48,13 @@ int keys_hook(int keycode, void *param)
 		reset(keycode, rtv);
 	return (0);
 }
+
+int expose(void *param)
+{
+	t_rtv *rtv;
+
+	//rtv = (t_rtv *)param;
+	printf("expose event\n");
+
+	return (0);
+}

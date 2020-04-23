@@ -15,7 +15,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
+#include <stdio.h> //to delete
 #include <math.h>
 #include "mlx.h"
 #include "libft.h"
@@ -90,6 +90,7 @@ void	end(char *msg);
 int		closer_hook(void *param);
 int		keys_hook(int keycode, void *param);
 int		mouse_hook(int keycode, int x, int y, void *param);
+int		expose(void *param);
 
 void	reset(int keycode, t_rtv *rtv);
 

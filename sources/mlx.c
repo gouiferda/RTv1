@@ -29,6 +29,7 @@ void mlx(t_rtv *rtv)
 	mlx_hook(rtv->win, 17, 0, closer_hook, rtv);
     mlx_hook(rtv->win, 2, 0, keys_hook, rtv);
 	mlx_hook(rtv->win, 4, 0, mouse_hook, rtv);
+	mlx_hook(rtv->win, 12, 0, expose, rtv);
     ft_putendl("minilibx:       Looping");
     mlx_loop(rtv->mlx);
     ft_putendl("RTv1:           Finished");   

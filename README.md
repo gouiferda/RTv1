@@ -3,6 +3,7 @@
 ## To do
 
 - [X] Author file
+- [X] Minilibx expose properly (mlx_expose_hook)
 - [ ] Functions and structures 
     - [ ] vector
     - [ ] ray
@@ -13,7 +14,6 @@
     - [ ] cone
     - [ ] camera
     - [ ] light
-- [ ] Minilibx expose properly (mlx_expose_hook)
 - [ ] Light works on fixed and moved objects
     - [ ] ambiant light 
         - [ ] sphere
