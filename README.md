@@ -28,6 +28,7 @@
 - [ ] Norm & Handle errors and leaks and messages
 - [ ] Bonuses: Shine effect, Multi lights (spots)
 
+______
 
 ## Notes
 
@@ -44,7 +45,7 @@ for every pixel {
     compute color at the intersection point
 }
 ```
-______
+Or:
 
 ```
 for each pixel of the screen {
@@ -71,7 +72,8 @@ for each pixel of the screen {
 }
 
 ```
-______
+
+### Steps:
 
 The first ray we shoot from the eye into the scene is called a primary ray,
 visibility ray, or camera ray.
@@ -80,7 +82,7 @@ visibility ray, or camera ray.
 2. find out how much light it receives by throwing
 another ray (called shadow rays) from the hit point to the scene's light
 
-______
+Or:
 
 1. Scanning the screen
 1. casting rays for good
@@ -94,15 +96,35 @@ ______
 
 ### Light reflection:
 
-#### Factors
+#### Color of points Factors
 
 1. Incoming light: Distance to object, Angle to direction of light
+    - determine if object is visible to light source (shadow ray)
 2. Reflection: Color of an object, Material, Dull objects deffuse, shiny surfaces: specular
 3. Camera position
 
 - Spotlight intensity: appearance
-- Diffuse: controls roghness of object
+- Diffuse: controls roghness/dullness of object
 - Specular: controls shinningness
+
+### Light rays
+
+- Direct illumination
+- Indirect illumination: Light bounding off of other objects in the scene
+    - Reflected ray
+- Refraction 
+
+- Ambiant: Color alone
+- Specular + Diffuse: How surface responds to light
+
+
+
+### Ray object intersection
+
+- the intersection of a ray and a line in 2D
+
+
+______
 
 
 ## Resources
