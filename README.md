@@ -3,13 +3,27 @@
 ## To do
 
 - [X] Author file
+- [ ] Functions and structures 
+    - [ ] vector
+    - [ ] ray
+    - [ ] color
+    - [ ] sphere
+    - [ ] plane
+    - [ ] cylinder
+    - [ ] cone
+    - [ ] camera
+    - [ ] light
 - [ ] Minilibx expose properly (mlx_expose_hook)
 - [ ] Les 4 objects de base: sphere plane cylinder cone
 - [ ] Multi objects and intersections
 - [ ] Moving and rotating the objects
 - [ ] Moving and rotating the camera
 - [ ] Light works on fixed and moved objects
-    - [ ] ambiant light
+    - [ ] ambiant light 
+        - [ ] sphere
+        - [ ] plane
+        - [ ] cylinder
+        - [ ] cone
     - [ ] diffusion 
 - [ ] Shadows
 - [ ] Norm & Handle errors and leaks and messages
@@ -17,5 +31,5 @@
 
 ## Resources
 
-- [purplealienplanet part2](https://www.purplealienplanet.com/node/20)
-- [purplealienplanet part2](https://www.purplealienplanet.com/node/23)
+- [A Ray Tracer - Part 1](https://www.purplealienplanet.com/node/20)
+- [A Ray Tracer - Part 2](https://www.purplealienplanet.com/node/23)
