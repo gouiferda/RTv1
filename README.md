@@ -130,7 +130,9 @@ ______
 ## Resources
 
 ### Videos
-- [Ray tracing explained](https://www.youtube.com/watch?v=bN8AV_x4BXI)
+
+- [Easy explaination](https://www.youtube.com/watch?v=bN8AV_x4BXI)
+- [Lecture](https://www.youtube.com/watch?v=Ahp6LDQnK4Y)
 
 ### Tutorials
 
