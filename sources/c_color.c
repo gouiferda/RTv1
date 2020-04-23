@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-int		get_color1(int r, int g, int b)
+int		get_color(int r, int g, int b)
 {
 	return (r << 16) + (g << 8) + (b);
 }

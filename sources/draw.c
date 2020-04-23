@@ -27,7 +27,7 @@ void draw(t_rtv *rtv)
             r = y * 0.2;
             g = x * 0.2;
             b = 10;
-            final_color = get_color1(r,g,b);
+            final_color = get_color(r,g,b);
             add_px(rtv, x, y, final_color);
 
             y++;
