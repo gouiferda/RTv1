@@ -96,12 +96,22 @@ Or:
 
 ### Light reflection:
 
-#### Color of points Factors
 
-1. Incoming light: Distance to object, Angle to direction of light
-    - determine if object is visible to light source (shadow ray)
-2. Reflection: Color of an object, Material, Dull objects deffuse, shiny surfaces: specular
-3. Camera position
+
+### Ray tracing intuition
+
+- Problems:
+    - Where does a ray intersect a scene object ?
+    - Do shadow rays intersect other objects before they hit the light source ?
+    - How does the surface reflect light (diffuse,specular) ?
+    - How far away is the light source ?
+    - Where is the camera ?
+
+- Color of points Factors:
+    1. Incoming light: Distance to object, Angle to direction of light
+        - determine if object is visible to light source (shadow ray)
+    2. Reflection: Color of an object, Material, Dull objects deffuse, shiny surfaces: specular
+    3. Camera position
 
 - Spotlight intensity: appearance
 - Diffuse: controls roghness/dullness of object
@@ -112,16 +122,19 @@ Or:
 - Direct illumination
 - Indirect illumination: Light bounding off of other objects in the scene
     - Reflected ray
-- Refraction 
-
+- Refraction
 - Ambiant: Color alone
 - Specular + Diffuse: How surface responds to light
-
-
 
 ### Ray object intersection
 
 - the intersection of a ray and a line in 2D
+    - C: camera point + viewing direction
+    - P: pixel in the image line (image plane) (where we have our normal x,y on our screen)
+    - I: point in the scene (where we would calculate intersactions)
+    - Math used: slope-intercept form of a line (System of equations of 2 line equations)
+- the intersection of a ray and a line in 3D
+    - Math used: parametric function R(t)=(1-t)C+tP where t is a number and C and P have x,y
 
 
 ______
