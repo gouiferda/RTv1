@@ -24,8 +24,8 @@ void draw(t_rtv *rtv)
         y = 0;
         while (y < rtv->screen_h)
         {
-            r = y;
-            g = x;
+            r = y * 0.2;
+            g = x * 0.2;
             b = 10;
             final_color = get_color1(r,g,b);
             add_px(rtv, x, y, final_color);
