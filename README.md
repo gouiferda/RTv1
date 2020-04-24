@@ -8,9 +8,10 @@
     - [ ] point/vector
     - [ ] ray
     - [ ] color
+    - [ ] object
     - [ ] sphere
     - [ ] plane
-    
+
     - [ ] cylinder
     - [ ] cone
     - [ ] light

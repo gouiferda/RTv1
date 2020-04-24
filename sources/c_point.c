@@ -21,16 +21,14 @@ t_point get_point(int x, int y, int z)
     return (point);
 }
 
-void    add_point(t_rtv *rtv,t_point p, int c)
+void    add_point(t_rtv *rtv,t_point p)
 {
-    add_px(rtv, p.x, p.y, c);
+    add_px(rtv, p.x, p.y, p.z);
 }
-
 
 void    add_p_point2(t_rtv *rtv, int x, int y, int z, int c)
 {
     t_point p;
     p = get_point(x,y,z);
-    p.color = c;
-    add_p_point(rtv, p, p.color);
+    add_p_point(rtv, p);
 }

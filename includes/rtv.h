@@ -22,15 +22,26 @@
 #include "colors.h"
 #include "defaults.h"
 
-
 typedef struct s_point
 {
 	int x;
 	int y;
 	int z;
-	int color;
 } t_point;
 
+typedef struct s_ray
+{
+	t_point pos;
+	t_point dir;
+} t_ray;
+
+typedef struct s_object
+{
+	t_point pos;
+	int color;
+	int object_type;
+	void *object;
+} t_object;
 
 typedef struct s_rtv
 {
@@ -62,7 +73,6 @@ typedef struct s_rtv
 	int offset_z;
 } t_rtv;
 
-
 void    set_defaults(t_rtv *rtv);
 void init_draw(t_rtv *rtv);
 t_rtv *init_rtv(void);
@@ -70,6 +80,10 @@ t_rtv *init_rtv(void);
 void mlx(t_rtv *rtv);
 
 void	draw_line(t_rtv *f, t_point p1, t_point p2, int c);
+
+t_point get_point(int x, int y, int z);
+void    add_point(t_rtv *rtv,t_point p);
+void    add_p_point2(t_rtv *rtv, int x, int y, int z, int c);
 
 void    add_px(t_rtv *rtv, int x, int y, int color);
 
