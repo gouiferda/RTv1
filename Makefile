@@ -41,7 +41,10 @@ SOURCES_LIST = main.c \
 				draw.c\
 				events.c\
 				c_pixel.c\
-				c_color.c
+				c_color.c\
+				c_point.c\
+				utils.c\
+				t_rotation.c
 				
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 

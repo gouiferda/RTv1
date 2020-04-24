@@ -37,8 +37,8 @@ typedef struct s_ray
 
 typedef struct s_object
 {
-	int object_type;
-	int redius;
+	int type;
+	int radius;
 	t_point pos;
 	t_point rotation;
 	int color;
@@ -86,7 +86,6 @@ void	draw_line(t_rtv *f, t_point p1, t_point p2, int c);
 
 t_point get_point(int x, int y, int z);
 void    add_point(t_rtv *rtv,t_point p);
-void    add_p_point2(t_rtv *rtv, int x, int y, int z, int c);
 
 void    add_px(t_rtv *rtv, int x, int y, int color);
 
@@ -101,6 +100,25 @@ int		mouse_hook(int keycode, int x, int y, void *param);
 int		expose(void *param);
 
 void	reset(int keycode, t_rtv *rtv);
+
+t_point		proj_p(t_rtv *rtv, t_point p);
+
+void    add_p_point(t_rtv *rtv, t_point p, int color);
+
+
+void	affect_int(int *x, int val);
+void	affect_double(double *x, double val);
+void	affect_double2(double *x, double val);
+void	affect_int2(int *x, int val);
+void	affect_double3(double *x, double *y, double val);
+
+void	position(int keycode, t_rtv *rtv);
+void	zoom(int keycode, t_rtv *rtv);
+void	rotate(int keycode, t_rtv *rtv);
+
+void		rx(int *y, int *z, double alpha);
+void		ry(int *x, int *z, double beta);
+void		rz(int *x, int *y, double gamma);
 
 
 #endif

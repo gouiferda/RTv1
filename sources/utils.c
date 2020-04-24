@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_px.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgouifer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,39 +12,30 @@
 
 #include "rtv.h"
 
-t_point get_point(int x, int y, int z)
+void	affect_int(int *x, int val)
 {
-    t_point point;
-    point.x = x;
-    point.y = y;
-    point.z = z;
-    return (point);
+	if (*x + val > 0)
+		*x = *x + val;
 }
 
-void    add_point(t_rtv *rtv,t_point p)
+void	affect_double(double *x, double val)
 {
-    add_px(rtv, p.x, p.y, p.z);
+	if (*x + val > 0)
+		*x = *x + val;
 }
 
-
-
-t_point		proj_p(t_rtv *rtv, t_point p)
+void	affect_double2(double *x, double val)
 {
-	p.y = p.y * -1;
-	p.x *= rtv->zoom;
-	p.y *=  rtv->zoom;
-	p.z *=  rtv->zoom;
-	p.z += rtv->offset_z;
-    rx(&p.y, &p.z, rtv->alpha);
-	ry(&p.x, &p.z, rtv->beta);
-	rz(&p.x, &p.y, rtv->gamma);
-	p.x += rtv->offset_x + (rtv->screen_w / 2);
-	p.y += rtv->offset_y + (rtv->screen_h / 2);
-	return (p);
+	*x = *x + val;
 }
 
-void    add_p_point(t_rtv *rtv, t_point p, int color)
+void	affect_int2(int *x, int val)
 {
-    p = proj_p(rtv,p);
-    add_px(rtv, p.x, p.y, color);
+	*x = *x + val;
+}
+
+void	affect_double3(double *x, double *y, double val)
+{
+	*x = *x + val;
+	*y = *y + val;
 }
