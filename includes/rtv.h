@@ -116,9 +116,9 @@ void	position(int keycode, t_rtv *rtv);
 void	zoom(int keycode, t_rtv *rtv);
 void	rotate(int keycode, t_rtv *rtv);
 
-void		rx(int *y, int *z, double alpha);
-void		ry(int *x, int *z, double beta);
-void		rz(int *x, int *y, double gamma);
+void	rx(int *y, int *z, double alpha);
+void	ry(int *x, int *z, double beta);
+void	rz(int *x, int *y, double gamma);
 
 
 #endif

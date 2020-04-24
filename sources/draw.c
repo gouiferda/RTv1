@@ -129,6 +129,45 @@ void test_d1(t_rtv *rtv)
     }
 }
 
+void test_d2(t_rtv *rtv)
+{
+
+    int final_color = BLACK;
+    int x = -500;
+    int y = -500;
+    int x_end = 1000;
+    int y_end = 1000;
+
+    //ray starts from center screen
+    int ray_start_z = -1000;
+    int ray_len = 1000;
+    t_point ray_start = proj_p(rtv,get_point(0, 0, ray_start_z));
+    t_point ray_dir = proj_p(rtv,get_point(-500, -500, ray_len));
+    t_ray ray = {ray_start, ray_dir};
+    t_object obj1 = {SPHERE, rtv->zoom * 50, proj_p(rtv,get_point(0, 0, 0)), get_point(0, 0, 0), RED};
+
+    while (x < x_end)
+    {
+        y = -500;
+        while (y < y_end)
+        {
+            // final_color = WHITE;
+
+            //cast a ray from the eye
+            ray.dir.x = x;
+            ray.dir.y = y;
+            //find intersections with the ray
+            if (obj_inter(ray, obj1) == 1)
+            {
+                final_color = obj1.color;
+                add_px(rtv, x, y, obj1.color);
+            }
+            y++;
+        }
+        x++;
+    }
+}
+
 void draw(t_rtv *rtv)
 {
     init_draw(rtv);
@@ -137,6 +176,7 @@ void draw(t_rtv *rtv)
     draw_bg(rtv);
     draw_axis(rtv);
     //test_d1(rtv);
+    test_d2(rtv);
 
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }

@@ -49,7 +49,7 @@ void	rotate(int keycode, t_rtv *rtv)
 		affect_double2(&rtv->gamma, val);
 	else if (keycode == MAIN_PAD_6 || keycode == N_1)
 		affect_double2(&rtv->gamma, -val);
-    printf("rotate:	alpha: %f	beta: %f	gamma: %f\n", rtv->alpha,rtv->beta,rtv->gamma);
+    //printf("rotate:	alpha: %f	beta: %f	gamma: %f\n", rtv->alpha,rtv->beta,rtv->gamma);
 	draw(rtv);
 }
 
@@ -63,7 +63,7 @@ void	position(int keycode, t_rtv *rtv)
 		affect_int2(&rtv->offset_y, MOVE_STEPS);
 	else if (keycode == ARROW_UP)
 		affect_int2(&rtv->offset_y, -MOVE_STEPS);
-    printf("position:	offset_x: %d	offset_y: %d\n", rtv->offset_x,rtv->offset_y);
+    //printf("position:	offset_x: %d	offset_y: %d\n", rtv->offset_x,rtv->offset_y);
 	draw(rtv);
 }
 
@@ -73,6 +73,6 @@ void	zoom(int keycode, t_rtv *rtv)
 		affect_int(&rtv->zoom, ZOOM_STEPS);
 	else if (keycode == MOUSE_SCROLL_DOWN || keycode == N_MINUS)
 		affect_int(&rtv->zoom, -ZOOM_STEPS);
-	printf("zoom: %d\n",rtv->zoom);
+	//printf("zoom: %d\n",rtv->zoom);
 	draw(rtv);
 }
