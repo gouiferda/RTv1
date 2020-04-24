@@ -5,21 +5,21 @@
 - [X] Author file
 - [X] Minilibx expose properly (mlx_expose_hook)
 - [ ] Functions and structures 
-    - [ ] point/vector
-    - [ ] ray
+    - [X] point/vector
+    - [X] ray
     - [ ] color
     - [ ] object
-        - [ ] sphere
+        - [X] sphere: properties and intersection
         - [ ] plane
         - [ ] cylinder
         - [ ] cone
 - [ ] Light works on fixed and moved objects
     - [ ] ambiant light 
-        - [ ] sphere
+        - [X] sphere
         - [ ] plane
         - [ ] cylinder
         - [ ] cone
-    - [ ] diffusion 
+    - [ ] diffusion
 - [ ] Shadows
 - [ ] Multi objects and intersections
 - [ ] Moving and rotating the objects
@@ -116,6 +116,8 @@ Or:
 
 ### Light rays
 
+![Img](https://raw.githubusercontent.com/gouiferda/RTv1/master/docs/amb_diff_spec.png?token=AODZD5BLDLABX7PBXMWLHR26UM2LI)
+
 - Direct illumination
 - Indirect illumination: Light bounding off of other objects in the scene
     - Reflected ray
@@ -163,7 +165,6 @@ ______
 ### Tutorials
 
 - [Khan academy course: Basics and the Mathematics of rendering](https://www.khanacademy.org/partner-content/pixar/rendering/rendering1/v/rendering-1)
-
 - [Udacity course: Interactive 3D Graphics](https://classroom.udacity.com/courses/cs291)
 
 
