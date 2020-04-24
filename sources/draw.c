@@ -55,10 +55,13 @@ void test(t_rtv *rtv)
     //ray starts from center screen
     int ray_start_z = -1000;
     int ray_len = 1000;
-    t_point ray_start = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
+    t_point ray_pos = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
     t_point ray_dir = get_point(0, 0, 0);
-    t_ray ray = {ray_start, ray_dir};
-    t_object obj1 = {SPHERE, 100, get_point((rtv->screen_w / 2), (rtv->screen_h / 2), 0), get_point(0, 0, 0), BLUE};
+    t_ray ray = {ray_pos, ray_dir};
+
+    //object in center screen
+    t_point obj_pos = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
+    t_object obj1 = {SPHERE, 100, obj_pos, get_point(0, 0, 0), BLUE};
 
     while (x < rtv->screen_w)
     {
