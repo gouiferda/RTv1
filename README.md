@@ -5,14 +5,14 @@
 - [X] Author file
 - [X] Minilibx expose properly (mlx_expose_hook)
 - [ ] Functions and structures 
-    - [ ] vector
+    - [ ] point/vector
     - [ ] ray
     - [ ] color
     - [ ] sphere
     - [ ] plane
+    
     - [ ] cylinder
     - [ ] cone
-    - [ ] camera
     - [ ] light
 - [ ] Light works on fixed and moved objects
     - [ ] ambiant light 
@@ -96,8 +96,6 @@ Or:
 
 ### Light reflection:
 
-
-
 ### Ray tracing intuition
 
 - Problems:
@@ -131,11 +129,27 @@ Or:
 - the intersection of a ray and a line in 2D
     - C: camera point + viewing direction
     - P: pixel in the image line (image plane) (where we have our normal x,y on our screen)
-    - I: point in the scene (where we would calculate intersactions)
+    - I: point of the intersection in the scene (where we would calculate intersactions)
     - Math used: slope-intercept form of a line (System of equations of 2 line equations)
 - the intersection of a ray and a line in 3D
-    - Math used: parametric function R(t)=(1-t)C+tP where t is a number and C and P have x,y
+    - Math used: parametric function R(t)=(1-t)C+tP where:
+        - t is a number and C and P and I that is R(t) have x,y
+- How do we intersect a ray with a triangle ?
 
+- We pick a Camera position (C) x,y,z and a viewing direction
+- Image plane perpendicular to the viewing direction
+- Now the intersection point is I=R(t)=(1-t)C+tP where points have x,y,z
+- Implicit equation of a line: ax+by+c=0  <> Delta y * x - Delta x * y + i Delta x = 0
+- Implicit equation of a plane: ax+by+cz+d=0 
+- n Vector that is normal => perpendicular to a plane of ax+by+cz=d, a is a vector on the plane: gives us n.a=0 (dot product)
+
+aIx+bIy+cIz+d=0
+I=R(t)=(1-t)C+tP
+
+- How to compute coords of I in the plane: we get equations of Ix,Iy,Iz by t, then Iy,Iz by Ix, then we replace in plane equation to get the I coords
+
+- How to tell if the point is inside/on or outside the triangle??
+- Math used: weighted averages of three points, I=aA+bB+cC, where a,b,c are the weights, we know I,A,B,C so if one or two of the weights is negative then I is outside the triangle
 
 ______
 
@@ -145,10 +159,14 @@ ______
 ### Videos
 
 - [Easy explaination](https://www.youtube.com/watch?v=bN8AV_x4BXI)
-- [Lecture](https://www.youtube.com/watch?v=Ahp6LDQnK4Y)
+- [UC Davis Ray Tracing Lecture](https://www.youtube.com/watch?v=Ahp6LDQnK4Y)
 
 ### Tutorials
 
-- [Khan academy course](https://www.khanacademy.org/partner-content/pixar/rendering/rendering1/v/rendering-1)
+
+- [Khan academy course: Basics and the Mathematics of rendering](https://www.khanacademy.org/partner-content/pixar/rendering/rendering1/v/rendering-1)
+
+- [Udacity course: Interactive 3D Graphics](https://classroom.udacity.com/courses/cs291)
+
 - [A Ray Tracer - Part 1](https://www.purplealienplanet.com/node/20)
 - [A Ray Tracer - Part 2](https://www.purplealienplanet.com/node/23)
