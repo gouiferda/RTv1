@@ -37,11 +37,14 @@ typedef struct s_ray
 
 typedef struct s_object
 {
-	t_point pos;
-	int color;
 	int object_type;
-	void *object;
+	int redius;
+	t_point pos;
+	t_point rotation;
+	int color;
 } t_object;
+
+
 
 typedef struct s_rtv
 {

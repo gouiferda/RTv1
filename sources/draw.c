@@ -48,15 +48,21 @@ void test_d1(t_rtv *rtv)
     t_point ray_start = get_point(rtv->screen_w / 2, rtv->screen_h / 2, -ray_len);
     t_ray ray = {ray_start, get_point(0, 0, ray_len)};
 
+    t_object obj1 = {SPHERE, 100, get_point(0, 0, 0), get_point(0, 0, 0), BLUE};
+
     while (x < rtv->screen_w)
     {
         y = 0;
         while (y < rtv->screen_h)
         {
+
+            //cast a ray from the eye
             ray.dir.x = x;
             ray.dir.y = y;
-            //cast a ray from the eye
+
+            //find intersections with the ray
             
+
             add_px(rtv, x, y, final_color);
             y++;
         }

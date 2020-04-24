@@ -53,9 +53,12 @@
 # define BACKGROUND			BLACK
 # define MENU_BACKGROUND	GREEN2
 
+//shapes
 # define PLANE 1
 # define SPHERE 2
 # define CYLINDER 3
 # define CONE 4
+
+
 
 #endif

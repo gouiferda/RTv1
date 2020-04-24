@@ -9,12 +9,10 @@
     - [ ] ray
     - [ ] color
     - [ ] object
-    - [ ] sphere
-    - [ ] plane
-
-    - [ ] cylinder
-    - [ ] cone
-    - [ ] light
+        - [ ] sphere
+        - [ ] plane
+        - [ ] cylinder
+        - [ ] cone
 - [ ] Light works on fixed and moved objects
     - [ ] ambiant light 
         - [ ] sphere
