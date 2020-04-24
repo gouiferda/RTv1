@@ -12,7 +12,7 @@
 
 #include "rtv.h"
 
-void test_screen(t_rtv *rtv)
+void draw_colorful_test_screen(t_rtv *rtv)
 {
     int final_color = BLUE;
     int x = 0;
@@ -135,8 +135,8 @@ void test_d2(t_rtv *rtv)
     int final_color = BLACK;
     int x = -500;
     int y = -500;
-    int x_end = 1000;
-    int y_end = 1000;
+    int x_end = 500;
+    int y_end = 500;
 
     //ray starts from center screen
     int ray_start_z = -1000;
@@ -168,15 +168,53 @@ void test_d2(t_rtv *rtv)
     }
 }
 
+void test_d3(t_rtv *rtv)
+{
+
+    int final_color = WHITE;
+    int x = 0;
+    int y = 0;
+
+    //ray starts from center screen
+    int ray_start_z = -1000;
+    int ray_len = 1000;
+    t_point ray_start = get_point(-(rtv->screen_w / 2), -(rtv->screen_h / 2), ray_start_z);
+    t_point ray_dir = get_point(0, 0, 0);
+    t_ray ray = {ray_start, ray_dir};
+    t_object obj1 = {SPHERE, 40, get_point(0, 0, 0), get_point(0, 0, 0), BLUE};
+
+    while (x < rtv->screen_w)
+    {
+        y = 0;
+        while (y < rtv->screen_h)
+        {
+            // final_color = WHITE;
+
+            //cast a ray from the eye
+            ray.dir.x = x;
+            ray.dir.y = y;
+            //find intersections with the ray
+            if (obj_inter(ray, obj1) == 1)
+            {
+                final_color = obj1.color;
+                add_px(rtv, x, y, final_color);
+            }
+            y++;
+        }
+        x++;
+    }
+}
+
 void draw(t_rtv *rtv)
 {
     init_draw(rtv);
 
-    //test_screen(rtv);
+    //draw_colorful_test_screen(rtv);
     draw_bg(rtv);
     draw_axis(rtv);
     //test_d1(rtv);
-    test_d2(rtv);
+    //test_d2(rtv);
+    test_d3(rtv);
 
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }
