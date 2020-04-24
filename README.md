@@ -107,8 +107,8 @@ Or:
 - Color of points Factors:
     1. Incoming light: Distance to object, Angle to direction of light
         - determine if object is visible to light source (shadow ray)
-    2. Reflection: Color of an object, Material, Dull objects deffuse, shiny surfaces: specular
-    3. Camera position
+    1. Reflection: Color of an object, Material, Dull objects deffuse, shiny surfaces: specular
+    1. Camera position
 
 - Spotlight intensity: appearance
 - Diffuse: controls roghness/dullness of object
@@ -162,10 +162,13 @@ ______
 
 ### Tutorials
 
-
 - [Khan academy course: Basics and the Mathematics of rendering](https://www.khanacademy.org/partner-content/pixar/rendering/rendering1/v/rendering-1)
 
 - [Udacity course: Interactive 3D Graphics](https://classroom.udacity.com/courses/cs291)
 
+
+### Useful links
+
+- [Intersection of a line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
 - [A Ray Tracer - Part 1](https://www.purplealienplanet.com/node/20)
 - [A Ray Tracer - Part 2](https://www.purplealienplanet.com/node/23)
