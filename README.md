@@ -44,6 +44,7 @@ for every pixel {
     compute color at the intersection point
 }
 ```
+
 Or:
 
 ```
