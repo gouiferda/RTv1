@@ -29,9 +29,9 @@ void draw_bg(t_rtv *rtv)
     }
 }
 
-int obj_inter(t_ray ray, t_object obj)
+int obj_inter(t_ray ray, t_object obj, t_point *s1, t_point *s2)
 {
-    double a, b, c;
+    double a, b, c, t1, t2;
     int res = 0;
 
     if (obj.type == SPHERE)
@@ -39,6 +39,18 @@ int obj_inter(t_ray ray, t_object obj)
         a = pow((ray.dir.x - ray.pos.x), 2) + pow((ray.dir.y - ray.pos.y), 2) + pow((ray.dir.z - ray.pos.z), 2);
         b = -2 * ((ray.dir.x - ray.pos.x) * (obj.pos.x - ray.pos.x) + (ray.dir.y - ray.pos.y) * (obj.pos.y - ray.pos.y) + (obj.pos.z - ray.pos.z) * (ray.dir.z - ray.pos.z));
         c = pow((obj.pos.x - ray.pos.x), 2) + pow((obj.pos.y - ray.pos.y), 2) + pow((obj.pos.z - ray.pos.z), 2) - pow(obj.radius, 2);
+
+        t1 = (-b + sqrt(pow(b, 2) - (4 * a * c))) / (2 * a);
+        t2 = (-b - sqrt(pow(b, 2) - (4 * a * c))) / (2 * a);
+
+        s1->x = ray.pos.x + ((ray.dir.x - ray.pos.x) * t1);
+        s1->y = ray.pos.y + ((ray.dir.y - ray.pos.y) * t1);
+        s1->z = ray.pos.z + ((ray.dir.z - ray.pos.z) * t1);
+
+        s2->x = ray.pos.x + ((ray.dir.x - ray.pos.x) * t2);
+        s2->y = ray.pos.y + ((ray.dir.y - ray.pos.y) * t2);
+        s2->z = ray.pos.z + ((ray.dir.z - ray.pos.z) * t2);
+
         if ((pow(b, 2) - (4 * a * c)) >= 0)
             res = 1;
     }
@@ -60,23 +72,49 @@ void test(t_rtv *rtv)
     t_ray ray = {ray_pos, ray_dir};
 
     //object in center screen
-    t_point obj_pos = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
-    t_object obj1 = {SPHERE, 100, obj_pos, get_point(0, 0, 0), BLUE};
+    t_point obj_pos1 = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
+    t_point obj_pos2 = get_point((rtv->screen_w / 2), (rtv->screen_h / 3), 10);
 
+    t_object objects[] = {
+        {.type = SPHERE, .radius = 100, .pos = obj_pos1, .rotation = get_point(0, 0, 0), .color = BLUE},
+        {.type = SPHERE, .radius = 100, .pos = obj_pos2, .rotation = get_point(0, 0, 0), .color = YELLOW},
+    };
+    int i = 0;
+    int closestObjDistance;
+    int closestObjId = 0;
+    t_object closestObject;
+    t_point s1, s2;
     while (x < rtv->screen_w)
     {
         y = 0;
         while (y < rtv->screen_h)
         {
-            // final_color = WHITE;
+            // final_color = BLACK;
 
             //cast a ray from the eye
             ray.dir.x = x;
             ray.dir.y = y;
             //find intersections with the ray
-            if (obj_inter(ray, obj1) == 1)
+            //     for each object in the scene
+            while (i < 2)
             {
-                final_color = obj1.color;
+                //     determine closest ray object/intersection;
+                t_object currentObject = objects[i];
+                closestObjId = i;
+                closestObjDistance = s1.z;
+                if (obj_inter(ray, objects[i], &s1, &s2) == 1)
+                {
+                    if (s1.z < closestObjDistance)
+                    {
+                        closestObjDistance = s1.z;
+                        closestObjId = i;
+                    }
+                }
+                i++;
+            }
+            if (obj_inter(ray, objects[closestObjId], &s1, &s2) == 1)
+            {
+                final_color = objects[closestObjId].color;
                 add_px(rtv, x, y, final_color);
             }
             y++;
