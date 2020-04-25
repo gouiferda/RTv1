@@ -68,7 +68,7 @@ void test(t_rtv *rtv)
     int ray_start_z = -1000;
     int ray_len = 1000;
     t_point ray_pos = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
-    t_point ray_dir = get_point(0, 0, 0);
+    t_point ray_dir = get_point(0, 0, ray_len);
     t_ray ray = {ray_pos, ray_dir};
 
     //object in center screen
@@ -102,9 +102,9 @@ void test(t_rtv *rtv)
                 t_object currentObject = objects[i];
                 if (obj_inter(ray, currentObject, &s1, &s2) == 1)
                 {
-                    if (s1.z > closestObjDistance)
+                    if (s2.z > closestObjDistance)
                     {
-                        closestObjDistance = s1.z;
+                        closestObjDistance = s2.z;
                         closestObjId = i;
                     }
                 }
@@ -116,6 +116,7 @@ void test(t_rtv *rtv)
                 {
                     final_color = objects[closestObjId].color;
                     add_px(rtv, x, y, final_color);
+                    closestObjId = -1;
                 }
             }
 
@@ -125,8 +126,29 @@ void test(t_rtv *rtv)
     }
 }
 
+void simulation(t_rtv *rtv)
+{
+
+    t_point obj_pos1 = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
+    t_object obj = {.type = SPHERE, .radius = 100, .pos = obj_pos1, .rotation = get_point(0, 0, 0), .color = BLUE};
+
+    t_point s1, s2;
+    int ray_start_z = -1000;
+    int ray_len = 1000;
+    t_point ray_pos = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
+    t_point ray_dir = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), ray_len);
+    t_ray ray = {ray_pos, ray_dir};
+
+    if (obj_inter(ray, obj, &s1, &s2) == 1)
+    {
+        printf("Interestected in : s1(%d,%d,%d) s2(%d,%d,%d) \n",s1.x,s1.y,s1.z,s2.x,s2.y,s2.z);
+    }
+}
+
 void draw(t_rtv *rtv)
 {
+    simulation(rtv);
+
     init_draw(rtv);
 
     draw_bg(rtv);
