@@ -73,15 +73,15 @@ void test(t_rtv *rtv)
 
     //object in center screen
     t_point obj_pos1 = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
-    t_point obj_pos2 = get_point((rtv->screen_w / 2), (rtv->screen_h / 3), 10);
+    t_point obj_pos2 = get_point((rtv->screen_w / 2), (rtv->screen_h / 3), 200);
 
     t_object objects[] = {
         {.type = SPHERE, .radius = 100, .pos = obj_pos1, .rotation = get_point(0, 0, 0), .color = BLUE},
         {.type = SPHERE, .radius = 100, .pos = obj_pos2, .rotation = get_point(0, 0, 0), .color = YELLOW},
     };
     int i = 0;
-    int closestObjDistance;
-    int closestObjId = 0;
+    int closestObjDistance = ray_start_z;
+    int closestObjId = -1;
     t_object closestObject;
     t_point s1, s2;
     while (x < rtv->screen_w)
@@ -100,11 +100,9 @@ void test(t_rtv *rtv)
             {
                 //     determine closest ray object/intersection;
                 t_object currentObject = objects[i];
-                closestObjId = i;
-                closestObjDistance = s1.z;
-                if (obj_inter(ray, objects[i], &s1, &s2) == 1)
+                if (obj_inter(ray, currentObject, &s1, &s2) == 1)
                 {
-                    if (s1.z < closestObjDistance)
+                    if (s1.z > closestObjDistance)
                     {
                         closestObjDistance = s1.z;
                         closestObjId = i;
@@ -112,11 +110,15 @@ void test(t_rtv *rtv)
                 }
                 i++;
             }
-            if (obj_inter(ray, objects[closestObjId], &s1, &s2) == 1)
+            if (closestObjId > -1)
             {
-                final_color = objects[closestObjId].color;
-                add_px(rtv, x, y, final_color);
+                if (obj_inter(ray, objects[closestObjId], &s1, &s2) == 1)
+                {
+                    final_color = objects[closestObjId].color;
+                    add_px(rtv, x, y, final_color);
+                }
             }
+
             y++;
         }
         x++;
