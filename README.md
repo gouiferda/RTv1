@@ -10,15 +10,17 @@ Ray tracer in C
     - [X] point/vector
     - [X] ray
     - [X] color
-    - [ ] object
+    - [X] light
+    - [X] object
+    - [X] object types:
         - [X] sphere: properties and intersection
         - [ ] plane
         - [ ] cylinder
         - [ ] cone
 - [ ] Light works on fixed and moved objects
     - [X] ambiant light
-    - [ ] diffusion
-    - [ ] specular
+    - [ ] diffusion: lambert diffuse model
+    - [ ] specular: blinn specular model
 - [ ] Shadows
 - [ ] Multi objects and intersections
     - [X] spheres
@@ -32,6 +34,16 @@ ______
 ## Notes
 
 ### Pseudo code:
+
+```
+For each pixel {
+    determine viewing direction
+    intersect ray with scene
+    compute illumination
+    tore result in pixel
+}
+```
+Or:
 
 ```
 for every pixel {
@@ -124,6 +136,8 @@ Or:
 - Refraction
 - Ambiant: Color alone
 - Specular + Diffuse: How surface responds to light
+
+- Shading model: diffuse + specular reflection
 
 ### Ray object intersection
 

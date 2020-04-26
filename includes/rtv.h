@@ -35,6 +35,12 @@ typedef struct s_ray
 	t_point dir;
 } t_ray;
 
+typedef struct s_light
+{
+	t_point pos;
+	int intensity;
+} t_light;
+
 typedef struct	s_color
 {
 	int		red;
