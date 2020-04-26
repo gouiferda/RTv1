@@ -14,7 +14,7 @@
 
 void draw_bg(t_rtv *rtv)
 {
-    int final_color = BLACK;
+    int final_color = WHITE;
     int x = 0;
     int y = 0;
     while (x < rtv->screen_w)
@@ -74,7 +74,6 @@ void getClosestTest()
         }
         i++;
     }
-
     printf("closest_dist = %i , clostedObjId=%i", furthest_dist, clostedObjId);
 }
 
@@ -96,7 +95,6 @@ void test(t_rtv *rtv)
     int objects_c = 6;
     t_object objects[objects_c];
     int colors[]={BLUE,RED,GREEN2,ORANGE2,YELLOW,BLUE3,GREEN,BLUE3};
-
     int j = 0;
     while (j < objects_c)
     {
@@ -109,7 +107,6 @@ void test(t_rtv *rtv)
     }
 
     int i = 0;
-    //int closestObjDistance = ray_start_z;
     int furthestDistance = ray_len;
     int closestObjId = -1;
     t_point s1, s2;
@@ -118,18 +115,14 @@ void test(t_rtv *rtv)
         y = 0;
         while (y < rtv->screen_h)
         {
-            // final_color = BLACK;
-
-            //cast a ray from the eye
             ray.dir.x = x;
             ray.dir.y = y;
-            //find intersections with the ray
-            //     for each object in the scene
+            //     for each object in the scene determine closest ray object/intersection;
             i = 0;
             furthestDistance = ray_len;
             while (i < objects_c)
             {
-                //     determine closest ray object/intersection;
+            //find intersections with the ray
                 if (obj_inter(ray, objects[i], &s1, &s2) == 1)
                 {
                     if (s2.z < furthestDistance)
@@ -137,7 +130,6 @@ void test(t_rtv *rtv)
                         furthestDistance = s2.z;
                         closestObjId = i;
                     }
-                    //closestObjId = i;
                 }
                 i++;
             }
