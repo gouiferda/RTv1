@@ -138,11 +138,11 @@ Or:
 - Sphere defined by center coords (Xc,Yc,Zc)
 - Ray defined by start and direction coords (X1,Y1,Z1) (X2,Y2,Z2), and radius R
 
+First find the values of the coefficients  a, b  and  c:
 
 a = (X2 − X1)^2 + (Y2 − Y1)^2 + (Z2 − Z1)^2
 b = − 2[(X2 − X1)(Xc − X1) + (Y2 − Y1)(Yc − Y1) + (Zc − Z1)(Z2 − Z1)]
 c = (Xc − X1)^2 + (Yc − Y1)^2 + (Zc − Z1)^2 − R^2
-
 
 Condition for intersection: 	b2 − 4ac > 0
 Condition for tangency: 	b2 − 4ac = 0
@@ -161,11 +161,13 @@ t1=(-b+sqrt(b^2-4ac))/2a
 t2=(-b-sqrt(b^2-4ac))/2a
 
 Therefor the coords of the intersections points are:
-for point 1
+
+for point 1:
 x = x1 + (x2 − x1)*t1
 y = y1 + (y2 − y1)*t1
 z = z1 + (z2 − z1)*t1
-for point 2
+
+for point 2:
 x = x1 + (x2 − x1)*t2
 y = y1 + (y2 − y1)*t2
 z = z1 + (z2 − z1)*t2
