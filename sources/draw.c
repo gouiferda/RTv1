@@ -73,7 +73,7 @@ void draw_test(t_rtv *rtv)
     t_ray ray = {ray_pos, ray_dir};
 
     //object in center screen
-    int objects_c = 6;
+    int objects_c = 1;
     t_object objects[objects_c];
     int colors[]={BLUE,RED,GREEN2,ORANGE2,YELLOW,BLUE3,GREEN,BLUE3};
     int j = 0;
@@ -81,7 +81,7 @@ void draw_test(t_rtv *rtv)
     {
         objects[j].type = SPHERE;
         objects[j].radius = 50;
-        objects[j].pos = get_point((rtv->screen_w / (3 - (j * 0.3))), (rtv->screen_h / 2), 0);
+        objects[j].pos = get_point((rtv->screen_w / (2 - (j * 0.3))), (rtv->screen_h / 2), 0);
         objects[j].rotation = get_point(0, 0, 0);
         objects[j].color = colors[j];
         j++;
