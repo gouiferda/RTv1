@@ -20,8 +20,10 @@
         - [ ] cylinder
         - [ ] cone
     - [ ] diffusion
+    - [ ] specular
 - [ ] Shadows
 - [ ] Multi objects and intersections
+    - [X] spheres
 - [ ] Moving and rotating the objects
 - [ ] Moving and rotating the camera
 - [ ] Norm & Handle errors and leaks and messages
@@ -94,7 +96,6 @@ Or:
 1. Phong
 1. Antialiasing
 
-### Light reflection:
 
 ### Ray tracing intuition
 
@@ -128,30 +129,46 @@ Or:
 
 ### Ray object intersection
 
-- the intersection of a ray and a line in 2D
-    - C: camera point + viewing direction
-    - P: pixel in the image line (image plane) (where we have our normal x,y on our screen)
-    - I: point of the intersection in the scene (where we would calculate intersactions)
-    - Math used: slope-intercept form of a line (System of equations of 2 line equations)
-- the intersection of a ray and a line in 3D
-    - Math used: parametric function R(t)=(1-t)C+tP where:
-        - t is a number and C and P and I that is R(t) have x,y
-- How do we intersect a ray with a triangle ?
+#### Detect
 
-- We pick a Camera position (C) x,y,z and a viewing direction
-- Image plane perpendicular to the viewing direction
-- Now the intersection point is I=R(t)=(1-t)C+tP where points have x,y,z
-- Implicit equation of a line: ax+by+c=0  <> Delta y * x - Delta x * y + i Delta x = 0
-- Implicit equation of a plane: ax+by+cz+d=0 
-- n Vector that is normal => perpendicular to a plane of ax+by+cz=d, a is a vector on the plane: gives us n.a=0 (dot product)
+- Know if the ray interesetcs a plane in 3D:
 
-aIx+bIy+cIz+d=0
-I=R(t)=(1-t)C+tP
+- Substituting line values x, y and z into the equation of the sphere gives a quadratic equation of the form: at^2 + bt + c = 0
 
-- How to compute coords of I in the plane: we get equations of Ix,Iy,Iz by t, then Iy,Iz by Ix, then we replace in plane equation to get the I coords
+- Sphere defined by center coords (Xc,Yc,Zc)
+- Ray defined by start and direction coords (X1,Y1,Z1) (X2,Y2,Z2), and radius R
 
-- How to tell if the point is inside/on or outside the triangle??
-- Math used: weighted averages of three points, I=aA+bB+cC, where a,b,c are the weights, we know I,A,B,C so if one or two of the weights is negative then I is outside the triangle
+
+a = (X2 − X1)^2 + (Y2 − Y1)^2 + (Z2 − Z1)^2
+b = − 2[(X2 − X1)(Xc − X1) + (Y2 − Y1)(Yc − Y1) + (Zc − Z1)(Z2 − Z1)]
+c = (Xc − X1)^2 + (Yc − Y1)^2 + (Zc − Z1)^2 − R^2
+
+
+Condition for intersection: 	b2 − 4ac > 0
+Condition for tangency: 	b2 − 4ac = 0
+No intersection when: 	b2 − 4ac < 0
+
+#### Points of intersection
+
+The solution for  t  is: 	t=(-b±sqrt(b^2-4ac))/2a
+
+Ray given by parametric form is:
+x = x1 + (x2 − x1)t
+y = y1 + (y2 − y1)t
+z = z1 + (z2 − z1)t
+
+t1=(-b+sqrt(b^2-4ac))/2a
+t2=(-b-sqrt(b^2-4ac))/2a
+
+Therefor the coords of the intersections points are:
+for point 1
+x = x1 + (x2 − x1)*t1
+y = y1 + (y2 − y1)*t1
+z = z1 + (z2 − z1)*t1
+for point 2
+x = x1 + (x2 − x1)*t2
+y = y1 + (y2 − y1)*t2
+z = z1 + (z2 − z1)*t2
 
 ______
 

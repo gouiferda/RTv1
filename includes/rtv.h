@@ -35,6 +35,13 @@ typedef struct s_ray
 	t_point dir;
 } t_ray;
 
+typedef struct	s_color
+{
+	int		red;
+	int		green;
+	int		blue;
+}				t_color;
+
 typedef struct s_object
 {
 	int type;
@@ -119,6 +126,8 @@ void	rotate(int keycode, t_rtv *rtv);
 void	rx(int *y, int *z, double alpha);
 void	ry(int *x, int *z, double beta);
 void	rz(int *x, int *y, double gamma);
+
+t_color		get_color_s(int r, int g, int b);
 
 
 #endif

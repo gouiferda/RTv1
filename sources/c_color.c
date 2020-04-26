@@ -16,3 +16,10 @@ int		get_color(int r, int g, int b)
 {
 	return (r << 16) + (g << 8) + (b);
 }
+
+
+t_color		get_color_s(int r, int g, int b)
+{
+	t_color color = {r,g,b};
+	return color;
+}
