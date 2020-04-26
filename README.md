@@ -7,18 +7,14 @@
 - [ ] Functions and structures 
     - [X] point/vector
     - [X] ray
-    - [ ] color
+    - [X] color
     - [ ] object
         - [X] sphere: properties and intersection
         - [ ] plane
         - [ ] cylinder
         - [ ] cone
 - [ ] Light works on fixed and moved objects
-    - [ ] ambiant light 
-        - [X] sphere
-        - [ ] plane
-        - [ ] cylinder
-        - [ ] cone
+    - [X] ambiant light
     - [ ] diffusion
     - [ ] specular
 - [ ] Shadows
