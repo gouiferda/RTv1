@@ -117,7 +117,7 @@ Or:
 
 ### Light rays
 
-![Img](https://raw.githubusercontent.com/gouiferda/RTv1/master/docs/amb_diff_spec.png?token=AODZD5BLDLABX7PBXMWLHR26UM2LI)
+![Img](https://i.imgur.com/9yEmvmn.png)
 
 - Direct illumination
 - Indirect illumination: Light bounding off of other objects in the scene
