@@ -1,5 +1,7 @@
 # RTv1
 
+Ray tracer in C
+
 ## To do
 
 - [X] Author file
