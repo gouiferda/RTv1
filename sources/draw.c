@@ -57,6 +57,28 @@ int obj_inter(t_ray ray, t_object obj, t_point *s1, t_point *s2)
     return (res);
 }
 
+void getClosestTest()
+{
+    int end_distance=1000;
+    int obj_count = 8;
+    int objects_z[]={10,40,80,5,67,9,50,90,7};
+    int furthest_dist = end_distance;
+    int i = 0;
+    int clostedObjId = -1;
+     while (i <= obj_count)
+    {
+        if (objects_z[i] < furthest_dist)
+        {
+            furthest_dist = objects_z[i];
+            clostedObjId = i;
+            
+        }
+     i++;   
+    }
+    
+    printf("closest_dist = %i , clostedObjId=%i", furthest_dist,clostedObjId);
+}
+
 void test(t_rtv *rtv)
 {
 
@@ -72,17 +94,18 @@ void test(t_rtv *rtv)
     t_ray ray = {ray_pos, ray_dir};
 
     //object in center screen
-    t_point obj_pos1 = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
-    t_point obj_pos2 = get_point((rtv->screen_w / 2), (rtv->screen_h / 3), 200);
+    t_point obj_pos1 = get_point((rtv->screen_w / 2.5), (rtv->screen_h / 2), 0);
+    t_point obj_pos2 = get_point((rtv->screen_w /2), (rtv->screen_h / 2), 0);
 
     t_object objects[] = {
         {.type = SPHERE, .radius = 100, .pos = obj_pos1, .rotation = get_point(0, 0, 0), .color = BLUE},
         {.type = SPHERE, .radius = 100, .pos = obj_pos2, .rotation = get_point(0, 0, 0), .color = YELLOW},
     };
+
     int i = 0;
-    int closestObjDistance = ray_start_z;
+    //int closestObjDistance = ray_start_z;
+    int furthestDistance = ray_len;
     int closestObjId = -1;
-    t_object closestObject;
     t_point s1, s2;
     while (x < rtv->screen_w)
     {
@@ -96,21 +119,23 @@ void test(t_rtv *rtv)
             ray.dir.y = y;
             //find intersections with the ray
             //     for each object in the scene
+            i = 0;
+            furthestDistance = ray_len;
             while (i < 2)
             {
                 //     determine closest ray object/intersection;
-                t_object currentObject = objects[i];
-                if (obj_inter(ray, currentObject, &s1, &s2) == 1)
+                if (obj_inter(ray, objects[i], &s1, &s2) == 1)
                 {
-                    if (s2.z > closestObjDistance)
+                    if (s2.z < furthestDistance)
                     {
-                        closestObjDistance = s2.z;
+                        furthestDistance = s2.z; 
                         closestObjId = i;
                     }
+                    //closestObjId = i;
                 }
                 i++;
             }
-            if (closestObjId > -1)
+            if (closestObjId != -1)
             {
                 if (obj_inter(ray, objects[closestObjId], &s1, &s2) == 1)
                 {
@@ -126,7 +151,7 @@ void test(t_rtv *rtv)
     }
 }
 
-void simulation(t_rtv *rtv)
+void intersection_test(t_rtv *rtv)
 {
 
     t_point obj_pos1 = get_point((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
@@ -147,7 +172,7 @@ void simulation(t_rtv *rtv)
 
 void draw(t_rtv *rtv)
 {
-    simulation(rtv);
+    //intersection_test(rtv);
 
     init_draw(rtv);
 
