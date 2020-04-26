@@ -112,9 +112,9 @@ Or:
 - Diffuse: controls roghness/dullness of object
 - Specular: controls shinningness
 
-### Light rays
-
 ![Img](https://i.imgur.com/9yEmvmn.png)
+
+### Light rays
 
 - Direct illumination
 - Indirect illumination: Light bounding off of other objects in the scene
@@ -134,39 +134,37 @@ Or:
 - Sphere defined by center coords (Xc,Yc,Zc)
 - Ray defined by start and direction coords (X1,Y1,Z1) (X2,Y2,Z2), and radius R
 
-First find the values of the coefficients  a, b  and  c:
+- First find the values of the coefficients  a, b  and  c:
 
-a = (X2 − X1)^2 + (Y2 − Y1)^2 + (Z2 − Z1)^2
-b = − 2[(X2 − X1)(Xc − X1) + (Y2 − Y1)(Yc − Y1) + (Zc − Z1)(Z2 − Z1)]
-c = (Xc − X1)^2 + (Yc − Y1)^2 + (Zc − Z1)^2 − R^2
+- a = (X2 − X1)^2 + (Y2 − Y1)^2 + (Z2 − Z1)^2
+- b = − 2[(X2 − X1)(Xc − X1) + (Y2 − Y1)(Yc − Y1) + (Zc − Z1)(Z2 − Z1)]
+- c = (Xc − X1)^2 + (Yc − Y1)^2 + (Zc − Z1)^2 − R^2
 
-Condition for intersection: 	b2 − 4ac > 0
-Condition for tangency: 	b2 − 4ac = 0
-No intersection when: 	b2 − 4ac < 0
+- Condition for intersection: 	b2 − 4ac > 0
+- Condition for tangency: 	b2 − 4ac = 0
+- No intersection when: 	b2 − 4ac < 0
 
 #### Points of intersection
 
-The solution for  t  is: 	t=(-b±sqrt(b^2-4ac))/2a
+- The solution for  t  is: 	t=(-b±sqrt(b^2-4ac))/2a
 
-Ray given by parametric form is:
-x = x1 + (x2 − x1)t
-y = y1 + (y2 − y1)t
-z = z1 + (z2 − z1)t
+- Ray given by parametric form is:
+- x = x1 + (x2 − x1)t
+- y = y1 + (y2 − y1)t
+- z = z1 + (z2 − z1)t
 
-t1=(-b+sqrt(b^2-4ac))/2a
-t2=(-b-sqrt(b^2-4ac))/2a
+- t1=(-b+sqrt(b^2-4ac))/2a
+- t2=(-b-sqrt(b^2-4ac))/2a
 
-Therefor the coords of the intersections points are:
-
-for point 1:
-x = x1 + (x2 − x1)*t1
-y = y1 + (y2 − y1)*t1
-z = z1 + (z2 − z1)*t1
-
-for point 2:
-x = x1 + (x2 − x1)*t2
-y = y1 + (y2 − y1)*t2
-z = z1 + (z2 − z1)*t2
+- Therefor the coords of the intersections points are:
+    - for point 1:
+        - x = x1 + (x2 − x1)*t1
+        - y = y1 + (y2 − y1)*t1
+        - z = z1 + (z2 − z1)*t1
+    - for point 2:
+        - x = x1 + (x2 − x1)*t2
+        - y = y1 + (y2 − y1)*t2
+        - z = z1 + (z2 − z1)*t2
 
 ______
 
