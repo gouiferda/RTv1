@@ -64,9 +64,7 @@ void draw_test(t_rtv *rtv)
     int x = 0;
     int y = 0;
 
-    t_light light = {get_point(0, 0, 0), 100};
-    int inShadow = 0;
-    t_ray shadowRay;
+    t_light light = {get_point((rtv->screen_w), (rtv->screen_h / 2), -500), 100};
 
     //ray starts from center screen
     int ray_start_z = -1000;
@@ -89,7 +87,6 @@ void draw_test(t_rtv *rtv)
         objects[j].color = colors[j];
         j++;
     }
-
     int i = 0;
     int minDistance = ray_len;
     int closestObjId = -1;
@@ -122,22 +119,10 @@ void draw_test(t_rtv *rtv)
             {
                 if (obj_inter(ray, objects[closestObjId], &s1, &s2) == 1)
                 {
-                    i = 0;
-                    while (i < objects_c)
-                    {
-                        shadowRay.pos = get_point(s2.x, s2.y, s2.z);
-                        shadowRay.dir = get_point(light.pos.x, light.pos.y, light.pos.z);
-                        //find intersections with the ray
-                        if (obj_inter(shadowRay, objects[i], &sh1, &sh2) == 1)
-                        {
-                            inShadow = 1;
-                        }
-                        i++;
-                    }
-                    final_color = (inShadow == 1) ? BLACK : objects[closestObjId].color;
+                    
+                    final_color = objects[closestObjId].color;
                     add_px(rtv, x, y, final_color);
                     closestObjId = -1;
-                    inShadow = 0;
                 }
             }
             y++;

@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "algorithm": "c"
+        "algorithm": "c",
+        "vector": "c",
+        "iosfwd": "c",
+        "iterator": "c"
     }
 }

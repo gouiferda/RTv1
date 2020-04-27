@@ -135,5 +135,10 @@ void	rz(int *x, int *y, double gamma);
 
 t_color		get_color_s(int r, int g, int b);
 
+t_point vectorSub(t_point *v1, t_point *v2);
+float vectorDot(t_point *v1, t_point *v2);
+t_point vectorScale(float c, t_point *v);
+t_point vectorAdd(t_point *v1, t_point *v2);
+
 
 #endif
