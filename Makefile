@@ -44,7 +44,8 @@ SOURCES_LIST = main.c \
 				c_color.c\
 				c_point.c\
 				utils.c\
-				t_rotation.c
+				t_rotation.c\
+				c_vector.c
 				
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 

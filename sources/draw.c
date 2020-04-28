@@ -29,7 +29,7 @@ void draw_bg(t_rtv *rtv)
     }
 }
 
-int obj_inter(t_ray ray, t_object obj, t_point *s1, t_point *s2)
+int obj_inter1(t_ray ray, t_object obj, t_point *s1, t_point *s2)
 {
     double a, b, c, t1, t2;
     int res = 0;
@@ -57,9 +57,8 @@ int obj_inter(t_ray ray, t_object obj, t_point *s1, t_point *s2)
     return (res);
 }
 
-void draw_test(t_rtv *rtv)
+void draw_test1(t_rtv *rtv)
 {
-
     int final_color = WHITE;
     int x = 0;
     int y = 0;
@@ -105,7 +104,7 @@ void draw_test(t_rtv *rtv)
             while (i < objects_c)
             {
                 //find intersections with the ray
-                if (obj_inter(ray, objects[i], &s1, &s2) == 1)
+                if (obj_inter1(ray, objects[i], &s1, &s2) == 1)
                 {
                     if (s2.z < minDistance)
                     {
@@ -117,9 +116,9 @@ void draw_test(t_rtv *rtv)
             }
             if (closestObjId != -1)
             {
-                if (obj_inter(ray, objects[closestObjId], &s1, &s2) == 1)
+                if (obj_inter1(ray, objects[closestObjId], &s1, &s2) == 1)
                 {
-                    
+
                     final_color = objects[closestObjId].color;
                     add_px(rtv, x, y, final_color);
                     closestObjId = -1;
@@ -131,14 +130,192 @@ void draw_test(t_rtv *rtv)
     }
 }
 
+/* Check if the ray and sphere intersect */
+int intersectRaySphere(ray *r, sphere *s, float *t)
+{
+
+    int retval = 0;
+
+    /* A = d.d, the vector dot product of the direction */
+    float A = vectorDot(&r->dir, &r->dir);
+
+    /* We need a vector representing the distance between the start of 
+	 * the ray and the position of the circle.
+	 * This is the term (p0 - c) 
+	 */
+    vector dist = vectorSub(&r->start, &s->pos);
+
+    /* 2d.(p0 - c) */
+    float B = 2 * vectorDot(&r->dir, &dist);
+
+    /* (p0 - c).(p0 - c) - r^2 */
+    float C = vectorDot(&dist, &dist) - (s->radius * s->radius);
+
+    /* Solving the discriminant */
+    float discr = B * B - 4 * A * C;
+
+    /* If the discriminant is negative, there are no real roots.
+	 * Return false in that case as the ray misses the sphere.
+	 * Return true in all other cases (can be one or two intersections)
+	 * t represents the distance between the start of the ray and
+	 * the point on the sphere where it intersects.
+	 */
+    if (discr < 0)
+        retval = 0;
+    else
+    {
+        float sqrtdiscr = sqrtf(discr);
+        float t0 = (-B + sqrtdiscr) / (2);
+        float t1 = (-B - sqrtdiscr) / (2);
+
+        /* We want the closest one */
+        if (t0 > t1)
+            t0 = t1;
+
+        /* Verify t1 larger than 0 and less than the original t */
+        if ((t0 > 0.001f) && (t0 < *t))
+        {
+            *t = t0;
+            retval = 1;
+        }
+        else
+            retval = 0;
+    }
+
+    return retval;
+}
+
+void draw_test2(t_rtv *rtv)
+{
+    int final_color = BLACK;
+    int x = 0;
+    int y = 0;
+
+    ray r;
+
+    material materials[1];
+    materials[0].diffuse.red = 1;
+    materials[0].diffuse.green = 0;
+    materials[0].diffuse.blue = 0;
+    materials[0].reflection = 0.2;
+
+    int spheres_c=1;
+    sphere spheres[spheres_c];
+    spheres[0].pos.x = (rtv->screen_w / 2);
+    spheres[0].pos.y = (rtv->screen_h / 2);
+    spheres[0].pos.z = 0;
+    spheres[0].radius = 100;
+    spheres[0].material = 0;
+
+    int lights_c=1;
+    light lights[lights_c];
+
+    lights[0].pos.x = 0;
+    lights[0].pos.y = 0;
+    lights[0].pos.z = 400;
+    lights[0].intensity.red = 1;
+    lights[0].intensity.green = 1;
+    lights[0].intensity.blue = 1;
+
+
+    r.start.x = (rtv->screen_w / 2);
+    r.start.y = (rtv->screen_h / 2);
+    r.start.z = -2000;
+
+
+    while (x < rtv->screen_w)
+    {
+        y = 0;
+        while (y < rtv->screen_h)
+        {
+            float red = 0;
+            float green = 0;
+            float blue = 0;
+
+            int level = 0;
+            float coef = 1.0;
+
+            
+            r.dir.x = x;
+            r.dir.y = y;
+            r.dir.z = 2000;
+
+            /* Find closest intersection */
+            float t = 20000.0f;
+            int currentSphere = -1;
+
+            unsigned int i;
+            for (i = 0; i < spheres_c; i++)
+            {
+                if (intersectRaySphere(&r, &spheres[i], &t))
+                    currentSphere = i;
+            }
+            if (currentSphere == -1)
+                break;
+
+            vector scaled = vectorScale(t, &r.dir);
+            vector newStart = vectorAdd(&r.start, &scaled);
+
+            /* Find the normal for this new vector at the point of intersection */
+            vector n = vectorSub(&newStart, &spheres[currentSphere].pos);
+            float temp = vectorDot(&n, &n);
+            if (temp == 0)
+                break;
+
+            temp = 1.0f / sqrtf(temp);
+            n = vectorScale(temp, &n);
+
+            /* Find the material to determine the colour */
+            material currentMat = materials[spheres[currentSphere].material];
+
+            /* Find the value of the light at this point */
+            unsigned int j;
+            for (j = 0; j < lights_c; j++)
+            {
+                light currentLight = lights[j];
+                vector dist = vectorSub(&currentLight.pos, &newStart);
+                if (vectorDot(&n, &dist) <= 0.0f)
+                    continue;
+                float t = sqrtf(vectorDot(&dist, &dist));
+                if (t <= 0.0f)
+                    continue;
+
+                ray lightRay;
+                lightRay.start = newStart;
+                lightRay.dir = vectorScale((1 / t), &dist);
+
+                /* Lambert diffusion */
+                float lambert = vectorDot(&lightRay.dir, &n) * coef;
+                red += lambert * currentLight.intensity.red * currentMat.diffuse.red;
+                green += lambert * currentLight.intensity.green * currentMat.diffuse.green;
+                blue += lambert * currentLight.intensity.blue * currentMat.diffuse.blue;
+            }
+            /* Iterate over the reflection */
+            coef *= currentMat.reflection;
+
+            /* The reflected ray start and direction */
+            r.start = newStart;
+            float reflect = 2.0f * vectorDot(&r.dir, &n);
+            vector tmp = vectorScale(reflect, &n);
+            r.dir = vectorSub(&r.dir, &tmp);
+
+            final_color = get_color(red,green,blue);
+            add_px(rtv, x, y, final_color);
+
+            y++;
+        }
+        x++;
+    }
+}
+
 void draw(t_rtv *rtv)
 {
-    //intersection_test(rtv);
 
     init_draw(rtv);
 
     draw_bg(rtv);
-    draw_test(rtv);
+    //draw_test1(rtv);
+    draw_test2(rtv);
 
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }

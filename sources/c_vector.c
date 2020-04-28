@@ -1,7 +1,8 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_px.c                                          :+:      :+:    :+:   */
+/*   c_vector.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgouifer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,37 +13,29 @@
 
 #include "rtv.h"
 
-t_point get_point(int x, int y, int z)
+/* Subtract two vectors and return the resulting vector */
+vector vectorSub(vector *v1, vector *v2)
 {
-	t_point point;
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	return (point);
+	vector result = {v1->x - v2->x, v1->y - v2->y, v1->z - v2->z};
+	return result;
 }
 
-void add_point(t_rtv *rtv, t_point p)
+/* Multiply two vectors and return the resulting scalar (dot product) */
+float vectorDot(vector *v1, vector *v2)
 {
-	add_px(rtv, p.x, p.y, p.z);
+	return v1->x * v2->x + v1->y * v2->y + v1->z * v2->z;
 }
 
-t_point proj_p(t_rtv *rtv, t_point p)
+/* Calculate vector x Scalar and return resulting vector*/
+vector vectorScale(float c, vector *v)
 {
-	p.y = p.y * -1;
-	p.x *= rtv->zoom;
-	p.y *= rtv->zoom;
-	p.z *= rtv->zoom;
-	p.z += rtv->offset_z;
-	rx(&p.y, &p.z, rtv->alpha);
-	ry(&p.x, &p.z, rtv->beta);
-	rz(&p.x, &p.y, rtv->gamma);
-	p.x += rtv->offset_x + (rtv->screen_w / 2);
-	p.y += rtv->offset_y + (rtv->screen_h / 2);
-	return (p);
+	vector result = {v->x * c, v->y * c, v->z * c};
+	return result;
 }
 
-void add_p_point(t_rtv *rtv, t_point p, int color)
+/* Add two vectors and return the resulting vector */
+vector vectorAdd(vector *v1, vector *v2)
 {
-	p = proj_p(rtv, p);
-	add_px(rtv, p.x, p.y, color);
+	vector result = {v1->x + v2->x, v1->y + v2->y, v1->z + v2->z};
+	return result;
 }

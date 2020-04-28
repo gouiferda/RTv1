@@ -29,11 +29,14 @@ typedef struct s_point
 	int z;
 } t_point;
 
+
 typedef struct s_ray
 {
 	t_point pos;
 	t_point dir;
 } t_ray;
+
+
 
 typedef struct s_light
 {
@@ -58,6 +61,42 @@ typedef struct s_object
 } t_object;
 
 
+//new
+typedef struct vector
+{
+	int x;
+	int y;
+	int z;
+} vector;
+
+typedef struct v_ray
+{
+	vector start;
+	vector dir;
+} ray;
+
+typedef struct{
+        vector pos;
+        float  radius;
+	int material;
+}sphere; 
+
+typedef struct{
+	float red, green, blue;
+}colour;
+
+
+typedef struct{
+	colour diffuse;
+	float reflection;
+}material;
+
+typedef struct{
+	vector pos;
+	colour intensity;
+}light;
+
+//end new
 
 typedef struct s_rtv
 {
@@ -135,10 +174,11 @@ void	rz(int *x, int *y, double gamma);
 
 t_color		get_color_s(int r, int g, int b);
 
-t_point vectorSub(t_point *v1, t_point *v2);
-float vectorDot(t_point *v1, t_point *v2);
-t_point vectorScale(float c, t_point *v);
-t_point vectorAdd(t_point *v1, t_point *v2);
+vector vectorSub(vector *v1, vector *v2);
+float vectorDot(vector *v1, vector *v2);
+vector vectorScale(float c, vector *v);
+vector vectorAdd(vector *v1, vector *v2);
 
+#define min(a,b) (((a) < (b)) ? (a) : (b))
 
 #endif
