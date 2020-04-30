@@ -42,7 +42,6 @@ SOURCES_LIST = main.c \
 				events.c\
 				c_pixel.c\
 				c_color.c\
-				c_point.c\
 				utils.c\
 				t_rotation.c\
 				c_vector.c

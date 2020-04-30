@@ -22,61 +22,50 @@
 #include "colors.h"
 #include "defaults.h"
 
-typedef struct s_point
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+
+
+typedef struct		s_vector
 {
-	int x;
-	int y;
-	int z;
-} t_point;
+	double 			x;
+	double 			y;
+	double 			z;
+}					t_vector;
 
-
-typedef struct s_ray
+typedef struct		s_ray
 {
-	t_point pos;
-	t_point dir;
-} t_ray;
-
-
+	t_vector		origin;
+	t_vector		dir;
+}					t_ray;
 
 typedef struct s_light
 {
-	t_point pos;
-	int intensity;
+	t_vector		pos;
+	int				type;
+	double			intens;
 } t_light;
 
 typedef struct	s_color
 {
-	int		red;
-	int		green;
-	int		blue;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
 }				t_color;
 
 typedef struct s_object
 {
 	int type;
 	int radius;
-	t_point pos;
-	t_point rotation;
-	int color;
+	t_vector		pos;
+	t_vector		direction;
+	t_color			color;
 } t_object;
 
 
-//new
-typedef struct vector
-{
-	int x;
-	int y;
-	int z;
-} vector;
 
-typedef struct v_ray
-{
-	vector start;
-	vector dir;
-} ray;
 
 typedef struct{
-        vector pos;
+        t_vector pos;
         float  radius;
 	int material;
 }sphere; 
@@ -92,7 +81,7 @@ typedef struct{
 }material;
 
 typedef struct{
-	vector pos;
+	t_vector pos;
 	colour intensity;
 }light;
 
@@ -134,10 +123,10 @@ t_rtv *init_rtv(void);
 
 void mlx(t_rtv *rtv);
 
-void	draw_line(t_rtv *f, t_point p1, t_point p2, int c);
+// void	draw_line(t_rtv *f, t_point p1, t_point p2, int c);
 
-t_point get_point(int x, int y, int z);
-void    add_point(t_rtv *rtv,t_point p);
+// t_point get_point(int x, int y, int z);
+// void    add_point(t_rtv *rtv,t_point p);
 
 void    add_px(t_rtv *rtv, int x, int y, int color);
 
@@ -153,9 +142,9 @@ int		expose(void *param);
 
 void	reset(int keycode, t_rtv *rtv);
 
-t_point		proj_p(t_rtv *rtv, t_point p);
+// t_point		proj_p(t_rtv *rtv, t_point p);
 
-void    add_p_point(t_rtv *rtv, t_point p, int color);
+// void    add_p_point(t_rtv *rtv, t_point p, int color);
 
 
 void	affect_int(int *x, int val);
@@ -174,11 +163,11 @@ void	rz(int *x, int *y, double gamma);
 
 t_color		get_color_s(int r, int g, int b);
 
-vector vectorSub(vector *v1, vector *v2);
-float vectorDot(vector *v1, vector *v2);
-vector vectorScale(float c, vector *v);
-vector vectorAdd(vector *v1, vector *v2);
+t_vector vectorSub(t_vector *v1, t_vector *v2);
+float vectorDot(t_vector *v1, t_vector *v2);
+t_vector vectorScale(float c, t_vector *v);
+t_vector vectorAdd(t_vector *v1, t_vector *v2);
 
-#define min(a,b) (((a) < (b)) ? (a) : (b))
+
 
 #endif
