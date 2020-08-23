@@ -79,9 +79,11 @@ void draw_figures_v1(t_rtv *rtv)
     // figure1.radius = 50;
     // figure1.color = YELLOW;
 
-    int figures_count = 4;
+  
+    int figures_count = 3;
     t_figure figures[figures_count];
-    int colors[] = {RED, BLUE, GREEN, YELLOW,GOLDEN};
+    int colors[] = {RED, BLUE, GREEN};
+    int figure_types[] = {SPHERE, SPHERE, PLANE};
 
     int start_x = rtv->screen_w / 3;
     int bet_s = 30;
@@ -91,9 +93,9 @@ void draw_figures_v1(t_rtv *rtv)
     {
 
         figures[k].pos = newVect(start_x, (rtv->screen_h / 2), 0);
-
         figures[k].radius = 50;
         figures[k].color = colors[k];
+        figures[k].type = figure_types[k];
 
         start_x += (figures[k].radius * 2) - 30;
         k++;
