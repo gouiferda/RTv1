@@ -55,6 +55,7 @@ typedef struct s_figure
 	int type;
 	float  radius;
 	t_vector		pos;
+	t_vector		dir;
 	int color;
 } t_figure;
 

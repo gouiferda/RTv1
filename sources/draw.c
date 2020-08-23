@@ -12,6 +12,56 @@
 
 #include "rtv.h"
 
+int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
+{
+    t_vector plane_norm = figure.dir;
+    t_vector plane_point = figure.pos;
+
+    //get plane equation from vector
+    //general equation : a(x−x1)+b(y−y1)+c(z−z1)+d=0.
+
+    //plane which passes through plane_point
+    //normal vector is plane_norm
+    //d is plane radius*2 (optional)
+
+    //equation is:
+    //plane_norm.x*(x-plane_point.x)+plane_norm.y*(y-plane_point.y)+plane_norm.z*(z-plane_point.z)+(radius*2)=0
+
+    //we need to get perimitric equation of line:
+    //x = X0+at  , y=y0+at , z=z0+at
+    // x,y,z 0 are starting point : ray.pos
+    //get vector from line (ray)
+    t_vector line_dir_vector = vectorSub(&ray.dir, &ray.origin); //has values a b and c
+
+    //x = ray.pos.x + line_dir_vector.x * t
+    //y = ray.pos.y + line_dir_vector.y * t
+    //z = ray.pos.z + line_dir_vector.z * t
+
+    //we plug x,y,z from line eq to plane equation to get intersection point
+    //we find t then replace it in permitric eq to find intersection point
+
+    //------
+
+    float denom = vectorDot(&plane_norm, &line_dir_vector);
+
+    // Prevent divide by zero:
+    if (abs(denom) <= 1e-4f)
+        return (0);
+
+    // If you want to ensure the ray reflects off only
+    // the "top" half of the plane, use this instead:
+    if (-denom <= 1e-4f)
+        return (0);
+
+    float t = -(vectorDot(&plane_norm, &ray.origin) + 10) / denom;
+    if (t <= 1e-4)
+        return (0);
+
+    t_vector vv = vectorScale(t, &line_dir_vector);
+    *s1 = vectorAdd(&ray.origin, &vv);
+    return 1;
+}
+
 int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s1, t_vector *s2)
 {
     double a, b, c, t1, t2;
@@ -79,7 +129,6 @@ void draw_figures_v1(t_rtv *rtv)
     // figure1.radius = 50;
     // figure1.color = YELLOW;
 
-  
     int figures_count = 3;
     t_figure figures[figures_count];
     int colors[] = {RED, BLUE, GREEN};
@@ -101,7 +150,7 @@ void draw_figures_v1(t_rtv *rtv)
         k++;
     }
 
-    t_vector s1, s2;
+    t_vector s1, s2, s3;
 
     int x = 0;
     int y = 0;
@@ -119,25 +168,47 @@ void draw_figures_v1(t_rtv *rtv)
             minDistance = ray_len;
             while (k < figures_count)
             {
-                if (sphere_inter_v1(ray, figures[k], &s1, &s2) == 1)
+                if (figures[k].type == SPHERE)
                 {
-                    if (s2.z < minDistance)
+                    if (sphere_inter_v1(ray, figures[k], &s1, &s2) == 1)
                     {
-                        minDistance = s2.z;
+                        if (s2.z < minDistance)
+                        {
+                            minDistance = s2.z;
+                            closest_object_index = k;
+                        }
+                    }
+                }
+                else if (figures[k].type == PLANE)
+                {
+                    if (plane_inter_v1(ray, figures[closest_object_index], &s3) == 1)
+                    {
+                        minDistance = s3.z;
                         closest_object_index = k;
                     }
                 }
                 k++;
             }
-
             ray.dir = newVect(x, y, ray_len);
             if (closest_object_index != -1)
             {
-                if (sphere_inter_v1(ray, figures[closest_object_index], &s1, &s2) == 1)
+                if (figures[closest_object_index].type == SPHERE)
                 {
-                    final_color = figures[closest_object_index].color;
-                    add_px(rtv, x, y, final_color);
+                    if (sphere_inter_v1(ray, figures[closest_object_index], &s1, &s2) == 1)
+                    {
+                        final_color = figures[closest_object_index].color;
+                        add_px(rtv, x, y, final_color);
+                    }
                 }
+                else if (figures[k].type == PLANE)
+                {
+                    if (plane_inter_v1(ray, figures[closest_object_index], &s3) == 1)
+                    {
+                        final_color = figures[closest_object_index].color;
+                        add_px(rtv, x, y, final_color);
+                    }
+                }
+                closest_object_index = -1;
             }
             y++;
         }

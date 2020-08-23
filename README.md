@@ -203,5 +203,6 @@ ______
 ### Useful links
 
 - [Intersection of a line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
+- [Intersection of a Line and a Plane](https://www.youtube.com/watch?v=_W3aVWsMp14)
 - [A Ray Tracer - Part 1](https://www.purplealienplanet.com/node/20)
 - [A Ray Tracer - Part 2](https://www.purplealienplanet.com/node/23)
