@@ -14,35 +14,9 @@
 
 int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
 {
-    return 0;
-    
-    t_vector plane_norm = figure.dir;
+    t_vector line_dir_vector = vectorSub(&ray.dir, &ray.pos); //has values a b and c
+    t_vector plane_norm = vectorSub(&figure.dir,&figure.pos);
     t_vector plane_point = figure.pos;
-
-    //get plane equation from vector
-    //general equation : a(x−x1)+b(y−y1)+c(z−z1)+d=0.
-
-    //plane which passes through plane_point
-    //normal vector is plane_norm
-    //d is plane radius*2 (optional)
-
-    //equation is:
-    //plane_norm.x*(x-plane_point.x)+plane_norm.y*(y-plane_point.y)+plane_norm.z*(z-plane_point.z)+(radius*2)=0
-
-    //we need to get perimitric equation of line:
-    //x = X0+at  , y=y0+at , z=z0+at
-    // x,y,z 0 are starting point : ray.pos
-    //get vector from line (ray)
-    t_vector line_dir_vector = vectorSub(&ray.dir, &ray.origin); //has values a b and c
-
-    //x = ray.pos.x + line_dir_vector.x * t
-    //y = ray.pos.y + line_dir_vector.y * t
-    //z = ray.pos.z + line_dir_vector.z * t
-
-    //we plug x,y,z from line eq to plane equation to get intersection point
-    //we find t then replace it in permitric eq to find intersection point
-
-    //------
 
     float denom = vectorDot(&plane_norm, &line_dir_vector);
 
@@ -55,12 +29,12 @@ int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
     if (-denom <= 1e-4f)
         return (0);
 
-    float t = -(vectorDot(&plane_norm, &ray.origin) + 10) / denom;
+    float t = -(vectorDot(&plane_norm, &ray.pos) + 10) / denom;
     if (t <= 1e-4)
         return (0);
 
     t_vector vv = vectorScale(t, &line_dir_vector);
-    *s1 = vectorAdd(&ray.origin, &vv);
+    *s1 = vectorAdd(&ray.pos, &vv);
     return 1;
 }
 
@@ -69,51 +43,26 @@ int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s1, t_vector *s2)
     double a, b, c, t1, t2;
     int res = 0;
 
-    a = pow((ray.dir.x - ray.origin.x), 2) + pow((ray.dir.y - ray.origin.y), 2) + pow((ray.dir.z - ray.origin.z), 2);
-    b = -2 * ((ray.dir.x - ray.origin.x) * (figure.pos.x - ray.origin.x) + (ray.dir.y - ray.origin.y) * (figure.pos.y - ray.origin.y) + (figure.pos.z - ray.origin.z) * (ray.dir.z - ray.origin.z));
-    c = pow((figure.pos.x - ray.origin.x), 2) + pow((figure.pos.y - ray.origin.y), 2) + pow((figure.pos.z - ray.origin.z), 2) - pow(figure.radius, 2);
+    a = pow((ray.dir.x - ray.pos.x), 2) + pow((ray.dir.y - ray.pos.y), 2) + pow((ray.dir.z - ray.pos.z), 2);
+    b = -2 * ((ray.dir.x - ray.pos.x) * (figure.pos.x - ray.pos.x) + (ray.dir.y - ray.pos.y) * (figure.pos.y - ray.pos.y) + (figure.pos.z - ray.pos.z) * (ray.dir.z - ray.pos.z));
+    c = pow((figure.pos.x - ray.pos.x), 2) + pow((figure.pos.y - ray.pos.y), 2) + pow((figure.pos.z - ray.pos.z), 2) - pow(figure.radius, 2);
 
     t1 = (-b + sqrt(pow(b, 2) - (4 * a * c))) / (2 * a);
     t2 = (-b - sqrt(pow(b, 2) - (4 * a * c))) / (2 * a);
 
-    s1->x = ray.origin.x + ((ray.dir.x - ray.origin.x) * t1);
-    s1->y = ray.origin.y + ((ray.dir.y - ray.origin.y) * t1);
-    s1->z = ray.origin.z + ((ray.dir.z - ray.origin.z) * t1);
+    s1->x = ray.pos.x + ((ray.dir.x - ray.pos.x) * t1);
+    s1->y = ray.pos.y + ((ray.dir.y - ray.pos.y) * t1);
+    s1->z = ray.pos.z + ((ray.dir.z - ray.pos.z) * t1);
 
-    s2->x = ray.origin.x + ((ray.dir.x - ray.origin.x) * t2);
-    s2->y = ray.origin.y + ((ray.dir.y - ray.origin.y) * t2);
-    s2->z = ray.origin.z + ((ray.dir.z - ray.origin.z) * t2);
+    s2->x = ray.pos.x + ((ray.dir.x - ray.pos.x) * t2);
+    s2->y = ray.pos.y + ((ray.dir.y - ray.pos.y) * t2);
+    s2->z = ray.pos.z + ((ray.dir.z - ray.pos.z) * t2);
 
     if ((pow(b, 2) - (4 * a * c)) >= 0)
         res = 1;
 
     return (res);
 }
-
-/*
-for each pixel of the screen {
-    Final color = 0;
-    Ray = { starting point, direction };
-    Repeat
-    {
-        for each object in the scene 
-        {
-            determine closest ray object/intersection;
-        }
-        if intersection exists {
-            for each light in the scene {
-                if the light is not in shadow of another object
-                {
-                    add this light contribution to computed color;
-                }
-            }
-        }
-        Final color = Final color + computed color * previous reflection factor;
-        reflection factor = reflection factor * surface reflection property;
-        increment depth;
-    } until reflection factor is 0 or maximum depth is reached;
-}
-*/
 
 void draw_figures_v1(t_rtv *rtv)
 {
@@ -124,7 +73,7 @@ void draw_figures_v1(t_rtv *rtv)
 
     t_ray ray;
     //Ray = { starting point, direction };
-    ray.origin = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
+    ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
 
     // t_figure figure1;
     // figure1.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
@@ -135,19 +84,17 @@ void draw_figures_v1(t_rtv *rtv)
     t_figure figures[figures_count];
     int colors[] = {RED, BLUE, GREEN};
     int figure_types[] = {SPHERE, SPHERE, PLANE};
-
     int start_x = rtv->screen_w / 3;
     int bet_s = 30;
 
     int k = 0;
     while (k < figures_count)
     {
-
         figures[k].pos = newVect(start_x, (rtv->screen_h / 2), 0);
         figures[k].radius = 50;
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
-
+        figures[k].dir = newVect(start_x, (rtv->screen_h / 2), -100);
         start_x += (figures[k].radius * 2) - 30;
         k++;
     }
@@ -164,7 +111,6 @@ void draw_figures_v1(t_rtv *rtv)
         y = 0;
         while (y < rtv->screen_h)
         {
-
             //for each object in the scene determine closest ray object/intersection;
             k = 0;
             minDistance = ray_len;
@@ -183,13 +129,17 @@ void draw_figures_v1(t_rtv *rtv)
                 }
                 else if (figures[k].type == PLANE)
                 {
-                    if (plane_inter_v1(ray, figures[closest_object_index], &s3) == 1)
+                    if (plane_inter_v1(ray, figures[k], &s3) == 1)
                     {
-                        minDistance = s3.z;
-                        closest_object_index = k;
+                        if (s3.z < minDistance)
+                        {
+                            minDistance = s3.z;
+                            closest_object_index = k;
+                        }
                     }
                 }
                 k++;
+                
             }
             ray.dir = newVect(x, y, ray_len);
             if (closest_object_index != -1)
@@ -202,7 +152,7 @@ void draw_figures_v1(t_rtv *rtv)
                         add_px(rtv, x, y, final_color);
                     }
                 }
-                else if (figures[k].type == PLANE)
+                else if (figures[closest_object_index].type == PLANE)
                 {
                     if (plane_inter_v1(ray, figures[closest_object_index], &s3) == 1)
                     {
