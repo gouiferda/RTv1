@@ -51,13 +51,50 @@ void draw_colorful_test_screen(t_rtv *rtv)
     }
 }
 
+void draw_test1(t_rtv *rtv)
+{
+    int final_color = RED;
+
+    t_ray ray;
+    ray.origin = newVect(0, 0, -500);
+
+
+    int ray_len =1000;
+
+    t_sphere sphere1;
+    sphere1.pos = newVect(0, 0, 0);
+    sphere1.radius = 100;
+    sphere1.color = YELLOW;
+
+
+
+    int x = 0;
+    int y = 0;
+    int r, g, b;
+    while (x < rtv->screen_w)
+    {
+        y = 0;
+        while (y < rtv->screen_h)
+        {
+            ray.dir = newVect(x, y, ray_len);
+            // r = y * 0.35;
+            // g = x * 0.25;
+            // b = 10;
+            // final_color = get_color(r, g, b);
+            add_px(rtv, x, y, final_color);
+            y++;
+        }
+        x++;
+    }
+}
+
 void draw(t_rtv *rtv)
 {
-
     init_draw(rtv);
 
     draw_bg(rtv);
-    draw_colorful_test_screen(rtv);
+    //draw_colorful_test_screen(rtv);
+    draw_test1(rtv);
 
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }

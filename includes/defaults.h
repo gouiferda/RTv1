@@ -59,6 +59,7 @@
 # define CYLINDER 3
 # define CONE 4
 
+# define min(a,b) (((a) < (b)) ? (a) : (b))
 
 
 #endif

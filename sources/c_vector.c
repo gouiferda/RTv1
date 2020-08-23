@@ -39,3 +39,12 @@ t_vector vectorAdd(t_vector *v1, t_vector *v2)
 	t_vector result = {v1->x + v2->x, v1->y + v2->y, v1->z + v2->z};
 	return result;
 }
+
+t_vector newVect(double x, double y,double z)
+{
+	t_vector v;
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	return v;
+}

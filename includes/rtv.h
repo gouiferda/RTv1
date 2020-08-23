@@ -22,8 +22,6 @@
 #include "colors.h"
 #include "defaults.h"
 
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-
 
 typedef struct		s_vector
 {
@@ -62,28 +60,27 @@ typedef struct s_object
 } t_object;
 
 
-
-
-typedef struct{
+typedef struct s_sphere
+{
         t_vector pos;
         float  radius;
-	int material;
-}sphere; 
+		int color;
+	//int material;
+} t_sphere; 
 
-typedef struct{
-	float red, green, blue;
-}colour;
+// typedef struct{
+// 	float red, green, blue;
+// }colour;
 
+// typedef struct{
+// 	colour diffuse;
+// 	float reflection;
+// }material;
 
-typedef struct{
-	colour diffuse;
-	float reflection;
-}material;
-
-typedef struct{
-	t_vector pos;
-	colour intensity;
-}light;
+// typedef struct{
+// 	t_vector pos;
+// 	colour intensity;
+// }light;
 
 //end new
 
@@ -158,6 +155,8 @@ t_vector vectorSub(t_vector *v1, t_vector *v2);
 float vectorDot(t_vector *v1, t_vector *v2);
 t_vector vectorScale(float c, t_vector *v);
 t_vector vectorAdd(t_vector *v1, t_vector *v2);
+
+t_vector newVect(double x, double y,double z);
 
 
 #endif
