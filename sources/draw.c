@@ -80,10 +80,10 @@ void draw_figures_v1(t_rtv *rtv)
     // figure1.radius = 50;
     // figure1.color = YELLOW;
 
-    int figures_count = 3;
+    int figures_count = 4;
     t_figure figures[figures_count];
-    int colors[] = {RED, BLUE, GREEN};
-    int figure_types[] = {SPHERE, SPHERE, PLANE};
+    int colors[] = {RED, BLUE, YELLOW, GREEN};
+    int figure_types[] = {SPHERE, SPHERE,SPHERE, PLANE};
     int start_x = rtv->screen_w / 3;
     int bet_s = 30;
 
