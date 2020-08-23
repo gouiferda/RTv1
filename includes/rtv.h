@@ -123,10 +123,6 @@ t_rtv *init_rtv(void);
 
 void mlx(t_rtv *rtv);
 
-// void	draw_line(t_rtv *f, t_point p1, t_point p2, int c);
-
-// t_point get_point(int x, int y, int z);
-// void    add_point(t_rtv *rtv,t_point p);
 
 void    add_px(t_rtv *rtv, int x, int y, int color);
 
@@ -141,11 +137,6 @@ int		mouse_hook(int keycode, int x, int y, void *param);
 int		expose(void *param);
 
 void	reset(int keycode, t_rtv *rtv);
-
-// t_point		proj_p(t_rtv *rtv, t_point p);
-
-// void    add_p_point(t_rtv *rtv, t_point p, int color);
-
 
 void	affect_int(int *x, int val);
 void	affect_double(double *x, double val);
@@ -167,7 +158,6 @@ t_vector vectorSub(t_vector *v1, t_vector *v2);
 float vectorDot(t_vector *v1, t_vector *v2);
 t_vector vectorScale(float c, t_vector *v);
 t_vector vectorAdd(t_vector *v1, t_vector *v2);
-
 
 
 #endif

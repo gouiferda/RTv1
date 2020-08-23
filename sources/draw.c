@@ -29,14 +29,35 @@ void draw_bg(t_rtv *rtv)
     }
 }
 
+void draw_colorful_test_screen(t_rtv *rtv)
+{
+    int final_color = BLUE;
+    int x = 0;
+    int y = 0;
+    int r, g, b;
+    while (x < rtv->screen_w)
+    {
+        y = 0;
+        while (y < rtv->screen_h)
+        {
+            r = y * 0.35;
+            g = x * 0.25;
+            b = 10;
+            final_color = get_color(r, g, b);
+            add_px(rtv, x, y, final_color);
+            y++;
+        }
+        x++;
+    }
+}
+
 void draw(t_rtv *rtv)
 {
 
     init_draw(rtv);
 
     draw_bg(rtv);
-    //draw_test1(rtv);
-   // draw_test2(rtv);
+    draw_colorful_test_screen(rtv);
 
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }
