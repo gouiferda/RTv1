@@ -14,6 +14,8 @@
 
 int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
 {
+    return 0;
+    
     t_vector plane_norm = figure.dir;
     t_vector plane_point = figure.pos;
 
