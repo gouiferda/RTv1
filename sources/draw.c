@@ -79,9 +79,9 @@ void draw_figures_v1(t_rtv *rtv)
     // figure1.radius = 50;
     // figure1.color = YELLOW;
 
-    int figures_count = 3;
+    int figures_count = 4;
     t_figure figures[figures_count];
-    int colors[] = {RED, BLUE, GREEN, YELLOW};
+    int colors[] = {RED, BLUE, GREEN, YELLOW,GOLDEN};
 
     int start_x = rtv->screen_w / 3;
     int bet_s = 30;
@@ -117,9 +117,6 @@ void draw_figures_v1(t_rtv *rtv)
             minDistance = ray_len;
             while (k < figures_count)
             {
-                // figures[k].pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
-                // figures[k].radius = 50;
-                // figures[k].color = YELLOW;
                 if (sphere_inter_v1(ray, figures[k], &s1, &s2) == 1)
                 {
                     if (s2.z < minDistance)
