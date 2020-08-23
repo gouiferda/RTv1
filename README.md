@@ -13,20 +13,19 @@ Ray tracer in C
     - [X] light
     - [X] object
     - [ ] object types: properties and intersection
-        - [ ] sphere
+        - [X] sphere
         - [ ] plane
         - [ ] cylinder
         - [ ] cone
-- [ ] Light works on fixed and moved objects
+- [ ] Light works on fixed and moved objects - Multi objects and intersections
     - [ ] ambiant light
+        - [ ] spheres
+        - [ ] plane
+        - [ ] cylinder
+        - [ ] cone
     - [ ] diffusion: lambert diffuse model
     - [ ] specular: blinn specular model
 - [ ] Shadows
-- [ ] Multi objects and intersections
-    - [ ] spheres
-    - [ ] plane
-    - [ ] cylinder
-    - [ ] cone
 - [ ] Moving and rotating the objects
 - [ ] Moving and rotating the camera
 - [ ] Norm & Handle errors and leaks and messages
