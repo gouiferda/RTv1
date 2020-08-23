@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef RTV_H
-#define RTV_H
+# define RTV_H
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -50,23 +50,15 @@ typedef struct	s_color
 	unsigned int	b;
 }				t_color;
 
-typedef struct s_object
+typedef struct s_figure
 {
 	int type;
-	int radius;
+	float  radius;
 	t_vector		pos;
-	t_vector		direction;
-	t_color			color;
-} t_object;
+	int color;
+} t_figure;
 
 
-typedef struct s_sphere
-{
-        t_vector pos;
-        float  radius;
-		int color;
-	//int material;
-} t_sphere; 
 
 // typedef struct{
 // 	float red, green, blue;
@@ -82,7 +74,6 @@ typedef struct s_sphere
 // 	colour intensity;
 // }light;
 
-//end new
 
 typedef struct s_rtv
 {
@@ -157,6 +148,9 @@ t_vector vectorScale(float c, t_vector *v);
 t_vector vectorAdd(t_vector *v1, t_vector *v2);
 
 t_vector newVect(double x, double y,double z);
+
+void draw_bg(t_rtv *rtv);
+void draw_colorful_test_screen(t_rtv *rtv);
 
 
 #endif

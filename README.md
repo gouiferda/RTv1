@@ -19,7 +19,7 @@ Ray tracer in C
         - [ ] cone
 - [ ] Light works on fixed and moved objects - Multi objects and intersections
     - [ ] ambiant light
-        - [ ] spheres
+        - [X] spheres
         - [ ] plane
         - [ ] cylinder
         - [ ] cone
