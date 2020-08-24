@@ -5,18 +5,19 @@ Ray tracer in C
 ## To do
 
 - [X] Author file
-- [X] Minilibx expose properly (mlx_expose_hook)
+- [X] Minilibx functions: including expose properly (mlx_expose_hook)
 - [ ] Functions and structures 
-    - [X] point/vector
+    - [X] vector
     - [X] ray
-    - [X] color
-    - [X] light
-    - [X] object
-    - [ ] object types: properties and intersection
-        - [X] sphere
-        - [X] plane
-        - [ ] cylinder
-        - [ ] cone
+    - [X] figure
+    - [ ] light
+    - [ ] color
+    - [ ] material
+- [ ] Figures types: including intersection with ray
+    - [X] sphere
+    - [X] plane
+    - [ ] cylinder
+    - [ ] cone
 - [ ] Light works on fixed and moved objects - Multi objects and intersections
     - [ ] ambiant light
         - [X] spheres

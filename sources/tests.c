@@ -159,4 +159,60 @@ int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
 
     return 1;
 }
+
+
+int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
+{
+    //Step 1: Convert the plane into an equation
+    //plane eq: Ax + By + Cz = D.
+    //A , B , C are the coords of normal vector
+
+    //x and y and z  r cords of a point from plane (plane pos)
+
+    t_vector plane_normal = vectorSub(&figure.dir, &figure.pos);
+    t_vector plane_point = figure.pos;
+
+    // double d = plane_normal.x * plane_point.x + plane_normal.y * plane_point.y + plane_normal.z * plane_point.z;
+
+    //printf("result: %.2f\n", d);
+
+    //Find the equation for the line
+
+    t_vector ray_normal = vectorSub(&ray.dir, &ray.pos);
+    t_vector intersection_p;
+    if (vectorDot(&ray_normal, &plane_normal) == 0)
+    {
+        printf("Line and Plane do not intersect, either parallel or line is on the plane \n");
+        return (0);
+    }
+    else
+    {
+        t_vector diff = vectorSub(&ray.pos, &plane_point);
+        t_vector av1 = vectorAdd(&diff, &plane_point);
+        double dot1 = vectorDot(&ray_normal, &plane_normal);
+        double dot2 = vectorDot(&diff, &plane_normal);
+        t_vector sv1 = vectorScale(-dot2 / dot1, &ray_normal);
+
+        intersection_p = vectorAdd(&av1, &sv1);
+        *s1 = intersection_p;
+        //printf("intersection_p:(%.2f,%.2f,%.2f) \n", intersection_p.x, intersection_p.y, intersection_p.z);
+        return 1;
+    }
+}
+void plane_intersection_test_v1(t_rtv *rtv)
+{
+    t_ray ray1;
+    ray1.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), -500);
+    ray1.dir = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 500);
+
+    t_figure figure1;
+    figure1.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
+    figure1.dir = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
+
+    t_vector s1;
+
+    plane_inter_v1(ray1, figure1, &s1);
+}
+
+
 */
