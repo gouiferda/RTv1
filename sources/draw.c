@@ -57,6 +57,35 @@ int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s1, t_vector *s2)
     return (res);
 }
 
+int cylinder_inter_v1(t_ray ray, t_figure figure, double *s1, double *s2)
+{
+    // t_vector	res;
+	// double		discrim;
+
+   
+	// res.x = vectorDot(&ray.dir, &ray.dir) - pow(vectorDot(&ray.dir, &figure.dir), 2.0);
+
+    // t_vector vs0 = vectorSub(&ray.pos, &figure.pos);
+  
+	// res.y = (vectorDot(&ray.dir, &vs0) - vectorDot(&ray.dir, &figure.dir) *
+	// 		vectorDot(&vs0, &figure.dir)) * 2.0;
+
+	// res.z = vectorDot(&vs0, &vs0) -
+	// 	pow(vectorDot(&vs0, &figure.dir), 2) - (figure.radius * figure.radius);
+	// discrim = res.y * res.y - (4.0 * res.x * res.z);
+	// if (discrim < 0)
+	// {
+    //     *s1 = -1;
+    //     *s2 = -1;
+	// 	return 0;
+	// }
+	// *s1 = ((-res.y + sqrt(discrim)) / (2.0 * res.x));
+	// *s2 = ((-res.y - sqrt(discrim)) / (2.0 * res.x));
+	return (1);
+}
+
+
+
 void draw_figures_v1(t_rtv *rtv)
 {
     int final_color = BLACK;
