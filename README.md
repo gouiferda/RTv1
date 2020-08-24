@@ -14,13 +14,13 @@ Ray tracer in C
     - [X] object
     - [ ] object types: properties and intersection
         - [X] sphere
-        - [ ] plane
+        - [X] plane
         - [ ] cylinder
         - [ ] cone
 - [ ] Light works on fixed and moved objects - Multi objects and intersections
     - [ ] ambiant light
         - [X] spheres
-        - [ ] plane
+        - [X] plane
         - [ ] cylinder
         - [ ] cone
     - [ ] diffusion: lambert diffuse model

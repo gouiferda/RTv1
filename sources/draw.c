@@ -14,28 +14,56 @@
 
 int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
 {
-    t_vector line_dir_vector = vectorSub(&ray.dir, &ray.pos); //has values a b and c
-    t_vector plane_norm = vectorSub(&figure.dir,&figure.pos);
+    //Step 1: Convert the plane into an equation
+    //plane eq: Ax + By + Cz = D.
+    //A , B , C are the coords of normal vector
+
+    //x and y and z  r cords of a point from plane (plane pos)
+
+    t_vector plane_normal = vectorSub(&figure.dir, &figure.pos);
     t_vector plane_point = figure.pos;
 
-    float denom = vectorDot(&plane_norm, &line_dir_vector);
+    // double d = plane_normal.x * plane_point.x + plane_normal.y * plane_point.y + plane_normal.z * plane_point.z;
 
-    // Prevent divide by zero:
-    if (abs(denom) <= 1e-4f)
+    //printf("result: %.2f\n", d);
+
+    //Find the equation for the line
+
+    t_vector ray_normal = vectorSub(&ray.dir, &ray.pos);
+    t_vector intersection_p;
+    if (vectorDot(&ray_normal, &plane_normal) == 0)
+    {
+        printf("Line and Plane do not intersect, either parallel or line is on the plane \n");
         return (0);
+    }
+    else
+    {
+        t_vector diff = vectorSub(&ray.pos, &plane_point);
+        t_vector av1 = vectorAdd(&diff, &plane_point);
+        double dot1 = vectorDot(&ray_normal, &plane_normal);
+        double dot2 = vectorDot(&diff, &plane_normal);
+        t_vector sv1 = vectorScale(-dot2 / dot1, &ray_normal);
 
-    // If you want to ensure the ray reflects off only
-    // the "top" half of the plane, use this instead:
-    if (-denom <= 1e-4f)
-        return (0);
+        intersection_p = vectorAdd(&av1, &sv1);
+        *s1 = intersection_p;
+        //printf("intersection_p:(%.2f,%.2f,%.2f) \n", intersection_p.x, intersection_p.y, intersection_p.z);
+        return 1;
+    }
+}
 
-    float t = -(vectorDot(&plane_norm, &ray.pos) + 10) / denom;
-    if (t <= 1e-4)
-        return (0);
+void plane_intersection_test_v1(t_rtv *rtv)
+{
+    t_ray ray1;
+    ray1.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), -500);
+    ray1.dir = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 500);
 
-    t_vector vv = vectorScale(t, &line_dir_vector);
-    *s1 = vectorAdd(&ray.pos, &vv);
-    return 1;
+    t_figure figure1;
+    figure1.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
+    figure1.dir = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
+
+    t_vector s1;
+
+    plane_inter_v1(ray1, figure1, &s1);
 }
 
 int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s1, t_vector *s2)
@@ -75,15 +103,10 @@ void draw_figures_v1(t_rtv *rtv)
     //Ray = { starting point, direction };
     ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
 
-    // t_figure figure1;
-    // figure1.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
-    // figure1.radius = 50;
-    // figure1.color = YELLOW;
-
     int figures_count = 4;
     t_figure figures[figures_count];
-    int colors[] = {RED, BLUE, YELLOW, GREEN};
-    int figure_types[] = {SPHERE, SPHERE,SPHERE, PLANE};
+    int colors[] = {C_PINK, C_TEAL1, C_TEAL2, C_GREY};
+    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE};
     int start_x = rtv->screen_w / 3;
     int bet_s = 30;
 
@@ -94,7 +117,7 @@ void draw_figures_v1(t_rtv *rtv)
         figures[k].radius = 50;
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
-        figures[k].dir = newVect(start_x, (rtv->screen_h / 2), -100);
+        figures[k].dir = newVect(start_x, 100, -100);
         start_x += (figures[k].radius * 2) - 30;
         k++;
     }
@@ -139,7 +162,6 @@ void draw_figures_v1(t_rtv *rtv)
                     }
                 }
                 k++;
-                
             }
             ray.dir = newVect(x, y, ray_len);
             if (closest_object_index != -1)
@@ -175,6 +197,7 @@ void draw(t_rtv *rtv)
     draw_bg(rtv);
     //draw_colorful_test_screen(rtv);
     draw_figures_v1(rtv);
+    //plane_intersection_test_v1(rtv);
 
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }
