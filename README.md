@@ -43,3 +43,18 @@ Ray tracer in C
 - Specular + Diffuse: How surface responds to light
 - Indirect illumination: Light bounding off of other objects in the scene (Reflected rays)
 - Shading model: diffuse + specular reflection
+
+## Helpful links
+
+- Vectors
+
+- Ray tracing explained
+
+- Sphere line intersection
+
+http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm
+
+- Plane line intersection
+
+http://pi.math.cornell.edu/~froh/231f08e1a.pdf
+https://rosettacode.org/wiki/Find_the_intersection_of_a_line_with_a_plane#C
