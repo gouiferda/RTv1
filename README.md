@@ -58,3 +58,9 @@ http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm
 
 http://pi.math.cornell.edu/~froh/231f08e1a.pdf
 https://rosettacode.org/wiki/Find_the_intersection_of_a_line_with_a_plane#C
+
+# Hmza to do
+- read and research helpful links
+- look for cylinder/line intersection
+- look for cone/line  intersection
+- add vmod canvas to docs
