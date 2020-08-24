@@ -35,9 +35,6 @@ Ray tracer in C
 - [ ] Extras: Antialiasing, External files for scene description, Reflection,• Transparency, Shadow according to transparency, Textures
 
 
-
-
-
 ## Key definitions
 
 - Ambiant: Color alone of the object
