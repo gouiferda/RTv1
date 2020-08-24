@@ -117,7 +117,10 @@ void draw_figures_v1(t_rtv *rtv)
         figures[k].radius = 50;
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
-        figures[k].dir = newVect(start_x, 100, -100);
+        figures[k].dir = newVect(start_x, 100, 0);
+        if (k == 4)
+            figures[k].dir = newVect(start_x, (rtv->screen_h / 2), 300);
+
         start_x += (figures[k].radius * 2) - 30;
         k++;
     }
