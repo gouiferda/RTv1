@@ -74,12 +74,16 @@ void draw_figures_v1(t_rtv *rtv)
     int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE,PLANE};
     int start_x = rtv->screen_w / 3;
     int bet_s = 30;
+    int sphere_radius = 50;
 
     int k = 0;
     while (k < figures_count)
     {
+
         figures[k].pos = newVect(start_x, (rtv->screen_h / 2), 0);
-        figures[k].radius = 50;
+        if (k <= 2)
+            figures[k].pos = newVect(start_x, (rtv->screen_h / 2) - sphere_radius, 0);
+        figures[k].radius = sphere_radius;
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
         figures[k].dir = newVect(start_x, 100, -100);
