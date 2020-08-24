@@ -30,3 +30,5 @@ Ray tracer in C
 - [ ] Moving and rotating the camera
 - [ ] Norm & Handle errors and leaks and messages
 - [ ] Bonuses: Shine effect, Multi lights (spots)
+
+- [ ] Extras: Antialiasing, External files for scene description, Reflection,• Transparency, Shadow according to transparency, Textures

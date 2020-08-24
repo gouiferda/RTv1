@@ -103,10 +103,10 @@ void draw_figures_v1(t_rtv *rtv)
     //Ray = { starting point, direction };
     ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
 
-    int figures_count = 4;
+    int figures_count = 5;
     t_figure figures[figures_count];
-    int colors[] = {C_PINK, C_TEAL1, C_TEAL2, C_GREY};
-    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE};
+    int colors[] = {C_PINK1, C_TEAL1, C_TEAL2, C_GREY1,C_GREY2};
+    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE,PLANE};
     int start_x = rtv->screen_w / 3;
     int bet_s = 30;
 
