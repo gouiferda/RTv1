@@ -13,14 +13,14 @@ Ray tracer in C
     - [ ] light
     - [ ] color
     - [ ] material
-- [ ] Figures types: including intersection with ray
+- [ ] Figures intersection with ray
     - [X] sphere
     - [X] plane
     - [ ] cylinder
     - [ ] cone
 - [ ] Light works on fixed and moved objects - Multi objects and intersections
     - [ ] ambiant light
-        - [X] spheres
+        - [X] sphere
         - [X] plane
         - [ ] cylinder
         - [ ] cone
@@ -33,3 +33,16 @@ Ray tracer in C
 - [ ] Bonuses: Shine effect, Multi lights (spots)
 
 - [ ] Extras: Antialiasing, External files for scene description, Reflection,• Transparency, Shadow according to transparency, Textures
+
+
+
+
+
+## Key definitions
+
+- Ambiant: Color alone of the object
+- Diffuse: controls roghness/dullness of object
+- Specular: controls shinningness
+- Specular + Diffuse: How surface responds to light
+- Indirect illumination: Light bounding off of other objects in the scene (Reflected rays)
+- Shading model: diffuse + specular reflection
