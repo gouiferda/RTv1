@@ -3,7 +3,7 @@
 
 void draw_bg(t_rtv *rtv)
 {
-    int final_color = BLACK;
+    int final_color = YELLOW;
     int x = 0;
     int y = 0;
     while (x < rtv->screen_w)

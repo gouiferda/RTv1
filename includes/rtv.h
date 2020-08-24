@@ -36,6 +36,19 @@ typedef struct		s_ray
 	t_vector		dir;
 }					t_ray;
 
+
+
+typedef struct s_figure
+{
+	int type;
+	float  radius;
+	t_vector		pos;
+	t_vector		dir;
+	int color;
+} t_figure;
+
+
+
 typedef struct s_light
 {
 	t_vector		pos;
@@ -49,17 +62,6 @@ typedef struct	s_color
 	unsigned int	g;
 	unsigned int	b;
 }				t_color;
-
-typedef struct s_figure
-{
-	int type;
-	float  radius;
-	t_vector		pos;
-	t_vector		dir;
-	int color;
-} t_figure;
-
-
 
 // typedef struct{
 // 	float red, green, blue;

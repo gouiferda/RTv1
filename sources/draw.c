@@ -93,8 +93,8 @@ void draw_figures_v1(t_rtv *rtv)
     double ray_start_z = -1000;
     int ray_len = 1000;
 
-    int ray_up_angle = 200;
-    int ray_left_angle = 400;
+    int ray_up_angle = 0;
+    int ray_left_angle = 0;
 
     t_ray ray;
     //Ray = { starting point, direction };
@@ -111,7 +111,6 @@ void draw_figures_v1(t_rtv *rtv)
     int k = 0;
     while (k < figures_count)
     {
-
         figures[k].pos = newVect(start_x, (rtv->screen_h / 2), 0);
         if (k <= 2)
             figures[k].pos = newVect(start_x, (rtv->screen_h / 2) - sphere_radius, 0);
@@ -140,6 +139,7 @@ void draw_figures_v1(t_rtv *rtv)
             //for each object in the scene determine closest ray object/intersection;
             k = 0;
             minDistance = ray_len;
+            ray.dir = newVect(x, y, ray_len);
             while (k < figures_count)
             {
                 if (figures[k].type == SPHERE)
@@ -166,7 +166,6 @@ void draw_figures_v1(t_rtv *rtv)
                 }
                 k++;
             }
-            ray.dir = newVect(x, y, ray_len);
             if (closest_object_index != -1)
             {
                 if (figures[closest_object_index].type == SPHERE)
@@ -196,7 +195,6 @@ void draw_figures_v1(t_rtv *rtv)
 void draw(t_rtv *rtv)
 {
     init_draw(rtv);
-
     draw_bg(rtv);
     //draw_colorful_test_screen(rtv);
     draw_figures_v1(rtv);

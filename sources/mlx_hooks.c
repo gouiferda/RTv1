@@ -64,8 +64,9 @@ int expose(void *param)
 {
 	t_rtv *rtv;
 
-	//rtv = (t_rtv *)param;
-	//printf("expose event\n");
+	rtv = (t_rtv *)param;
+	//printf("expose event: %s \n",param);
+	printf("expose event\n");
 
 	return (0);
 }
