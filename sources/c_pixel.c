@@ -25,3 +25,7 @@ void add_px(t_rtv *rtv, int x, int y, int color)
     }
 }
 
+void add_px2(t_rtv *rtv, int x, int y, int color)
+{
+    add_px(rtv, x + (rtv->screen_w / 2), (-y + (rtv->screen_h / 2)), color);
+}

@@ -49,13 +49,16 @@
 # define YELLOW_HEX 0xFFFF00
 # define BLACK_HEX 0x000000
 
-# define C_GREY1 14540253
-# define C_GREY2 
+# define C_GREY1 7236973
+# define C_GREY2 14209997
 # define C_DARK_BLUE1 1779244
 # define C_AQUA1 47042
 # define C_PINK1 14265773
 # define C_TEAL1 8694188
 # define C_TEAL2 9030072
+# define C_GREEN1 8499732
+# define C_YELLOW1 16636730
+# define C_RED1 14494720
 
 
 #endif

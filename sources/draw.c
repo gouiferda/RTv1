@@ -14,19 +14,19 @@
 
 int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
 {
-    t_vector plane_normal = vectSub(figure.dir,figure.pos);
+    t_vector plane_normal = vectSub(figure.dir, figure.pos);
     t_vector plane_point = figure.pos;
-    t_vector ray_normal = vectSub(ray.dir,ray.pos);
+    t_vector ray_normal = vectSub(ray.dir, ray.pos);
     t_vector intersection_p;
-    if (vectDot(ray_normal,plane_normal) == 0)
+    if (vectDot(ray_normal, plane_normal) >= 0)
         return (0);
-    t_vector diff = vectSub(ray.pos,plane_point);
-    t_vector av1 = vectAdd(diff,plane_point);
-    double dot1 = vectDot(ray_normal,plane_normal);
-    double dot2 = vectDot(diff,plane_normal);
-    t_vector sv1 = vectScale(ray_normal,-dot2 / dot1);
+    t_vector diff = vectSub(ray.pos, plane_point);
+    t_vector av1 = vectAdd(diff, plane_point);
+    double dot1 = vectDot(ray_normal, plane_normal);
+    double dot2 = vectDot(diff, plane_normal);
+    t_vector sv1 = vectScale(ray_normal, -dot2 / dot1);
 
-    intersection_p = vectAdd(av1,sv1);
+    intersection_p = vectAdd(av1, sv1);
     *s1 = intersection_p;
     return 1;
 }
@@ -64,48 +64,48 @@ void draw_figures_v1(t_rtv *rtv)
     double ray_start_z = -1000;
     int ray_max_z = 1000;
 
-    int ray_up_angle = 0;
-    int ray_left_angle = 0;
+    int ray_up_angle = 250;
+    int ray_left_angle = -100;
 
     t_ray ray;
     //Ray = { starting point, direction };
-    ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
+    ray.pos = newVect(0 + ray_left_angle, 0 + ray_up_angle, ray_start_z);
 
     int figures_count = 5;
     t_figure figures[figures_count];
-    int colors[] = {C_PINK1, C_TEAL1, C_TEAL2, C_AQUA1, C_DARK_BLUE1};
-    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE, PLANE};
-    int start_x = rtv->screen_w / 3;
+    int colors[] = {C_GREEN1, C_YELLOW1, C_RED1, C_GREY1, C_GREY2}; //, C_DARK_BLUE1
+    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE, PLANE};    //, PLANE
+    int start_x = 0;
     int bet_s = 30;
     int sphere_radius = 50;
 
     int k = 0;
     while (k < figures_count)
     {
-        figures[k].pos = newVect(start_x, (rtv->screen_h / 2), 0);
+        figures[k].pos = newVect(0, 0, 400);
         if (k <= 2)
-            figures[k].pos = newVect(start_x, (rtv->screen_h / 2) - sphere_radius, 0);
+            figures[k].pos = newVect(start_x, sphere_radius - 10, 0);
         figures[k].radius = sphere_radius;
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
-        figures[k].dir = newVect(start_x, 100, -100);
+        figures[k].dir = newVect(0, 10, 400);
         if (k == 4)
-            figures[k].dir = newVect(start_x, (rtv->screen_h / 2), -100);
+            figures[k].dir = newVect(0, 0, 300);
         start_x += (figures[k].radius * 2) - 30;
         k++;
     }
 
     t_vector s1, s2, s3;
 
-    int x = 0;
-    int y = 0;
+    int x = -(rtv->screen_w / 2);
+    int y = -(rtv->screen_h / 2);
     int closest_object_index = -1;
     int minDistance = ray_max_z;
 
-    while (x < rtv->screen_w)
+    while (x < rtv->screen_w / 2)
     {
-        y = 0;
-        while (y < rtv->screen_h)
+        y = -(rtv->screen_h / 2);
+        while (y < rtv->screen_h / 2)
         {
             //for each object in the scene determine closest ray object/intersection;
             k = 0;
@@ -144,7 +144,7 @@ void draw_figures_v1(t_rtv *rtv)
                     if (sphere_inter_v1(ray, figures[closest_object_index], &s1, &s2) == 1)
                     {
                         final_color = figures[closest_object_index].color;
-                        add_px(rtv, x, y, final_color);
+                        add_px2(rtv, x, y, final_color);
                     }
                 }
                 else if (figures[closest_object_index].type == PLANE)
@@ -152,7 +152,7 @@ void draw_figures_v1(t_rtv *rtv)
                     if (plane_inter_v1(ray, figures[closest_object_index], &s3) == 1)
                     {
                         final_color = figures[closest_object_index].color;
-                        add_px(rtv, x, y, final_color);
+                        add_px2(rtv, x, y, final_color);
                     }
                 }
                 closest_object_index = -1;
@@ -162,7 +162,6 @@ void draw_figures_v1(t_rtv *rtv)
         x++;
     }
 }
-
 
 int cylinder_inter_v1(t_ray ray, t_figure cylinder, double *s1)
 {
@@ -184,8 +183,8 @@ void test_cylinder_inter_v1(t_rtv *rtv)
     t_ray ray;
     double ray_start_z = -1000;
     int ray_end_z = 400;
-    ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
-    ray.dir = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_end_z);
+    ray.pos = newVect(0, 0, ray_start_z);
+    ray.dir = newVect(0, 0, ray_end_z);
 
     //test intersection
     double s1 = 0, s2 = 0;
