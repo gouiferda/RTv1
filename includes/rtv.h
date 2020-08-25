@@ -155,5 +155,15 @@ t_vector newVect(double x, double y,double z);
 void draw_bg(t_rtv *rtv);
 void draw_colorful_test_screen(t_rtv *rtv);
 
+t_vector		vecopx(t_vector a, double x);
+double		vecdot(t_vector a, t_vector b);
+t_vector		vecnorm(t_vector a);
+t_vector		veccross(t_vector a, t_vector b);
+t_vector		vecsub(t_vector a, t_vector b);
+t_vector		vecadd(t_vector a, t_vector b);
+t_vector		vecset(double x, double y, double z);
+
+
+
 
 #endif

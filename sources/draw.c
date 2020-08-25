@@ -164,35 +164,13 @@ void draw_figures_v1(t_rtv *rtv)
 }
 
 
-// t_root			find_cylinder(t_vector origin, t_vector dir, t_figure *obj)
-// {
 
-int cylinder_inter_v1(t_ray ray, t_figure figure, double *s1,double *s2)
+
+int cylinder_inter_v1(t_ray ray, t_figure figure, double *s1)
 {
 
-    t_vector	res;
-	double		discrim;
-	res.x = vectorDot(&ray.dir, &ray.dir) - pow(vectorDot(&ray.dir, &figure.dir), 2.0);
-
-    t_vector vs1 = vectorSub(&ray.pos, &figure.pos);
-
-
-	res.y = (vectorDot(&ray.dir, &vs1) - vectorDot(&ray.dir, &figure.dir) *
-			vectorDot(&vs1, &figure.dir)) * 2.0;
-
-	res.z = vectorDot(&vs1, &vs1) -
-		pow(vectorDot(&vs1, &figure.dir), 2) - (figure.radius * figure.radius);
-	discrim = res.y * res.y - (4.0 * res.x * res.z);
-	if (discrim < 0)
-	{
-        *s1 = -1;
-        *s2 = -1;
-		return 0;
-	}
-	*s1 = ((-res.y + sqrt(discrim)) / (2.0 * res.x));
-	*s2= ((-res.y - sqrt(discrim)) / (2.0 * res.x));
-	
-    return (1);
+    
+	return (1);
 }
 
 void test_cylinder_inter_v1(t_rtv *rtv)
@@ -204,18 +182,18 @@ void test_cylinder_inter_v1(t_rtv *rtv)
     cylinder1.type = CYLINDER;
     cylinder1.radius = 100;
     cylinder1.color = GREEN;
-    cylinder1.pos = newVect(rtv->screen_w / 2, rtv->screen_h / 2, 0);
-    cylinder1.dir = newVect(rtv->screen_w / 2, rtv->screen_h / 2, -300);
+    cylinder1.pos = newVect(rtv->screen_w / 2, rtv->screen_h / 2, 500);
+    cylinder1.dir = newVect(rtv->screen_w / 2, rtv->screen_h / 2, 700);
     t_ray ray;
     double ray_start_z = -1000;
-    int ray_end_z = 1000;
+    int ray_end_z = 400;
     ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
     ray.dir = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_end_z);
 
     //test intersection
-    double s1,s2;
-    int res = cylinder_inter_v1(ray, cylinder1, &s1,&s2);
-    printf("result: %d , solution:  %.2f ", res, s1);
+    double s1 = 0, s2 = 0;
+    int res = cylinder_inter_v1(ray, cylinder1, &s1);
+    printf("result: %d , solution:  s1: %.2f , s2: %.2f  \n", res, s1, s2);
 }
 
 void draw(t_rtv *rtv)
