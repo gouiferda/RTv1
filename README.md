@@ -2,6 +2,11 @@
 
 Ray tracer in C
 
+## Run
+
+cd RTv1;
+make run;
+
 ## To do
 
 - [X] Author file
