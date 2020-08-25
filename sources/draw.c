@@ -69,7 +69,7 @@ void draw_figures_v1(t_rtv *rtv)
 
     t_ray ray;
     //Ray = { starting point, direction };
-    ray.pos = newVect((rtv->screen_w / 2) - ray_left_angle, (rtv->screen_h / 2) - ray_up_angle, ray_start_z);
+    ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
 
     int figures_count = 5;
     t_figure figures[figures_count];
