@@ -145,23 +145,21 @@ void	rz(int *x, int *y, double gamma);
 
 t_color		get_color_s(int r, int g, int b);
 
-t_vector vectorSub(t_vector *v1, t_vector *v2);
-float vectorDot(t_vector *v1, t_vector *v2);
-t_vector vectorScale(float c, t_vector *v);
-t_vector vectorAdd(t_vector *v1, t_vector *v2);
 
-t_vector newVect(double x, double y,double z);
 
 void draw_bg(t_rtv *rtv);
 void draw_colorful_test_screen(t_rtv *rtv);
 
-t_vector		vecopx(t_vector a, double x);
-double		vecdot(t_vector a, t_vector b);
-t_vector		vecnorm(t_vector a);
-t_vector		veccross(t_vector a, t_vector b);
-t_vector		vecsub(t_vector a, t_vector b);
-t_vector		vecadd(t_vector a, t_vector b);
-t_vector		vecset(double x, double y, double z);
+
+
+t_vector newVect(double x, double y,double z);
+t_vector		vectScale(t_vector a, double x);
+t_vector		vectNorm(t_vector a);
+t_vector		vectAdd(t_vector a, t_vector b);
+t_vector		vectSub(t_vector a, t_vector b);
+t_vector		vectCross(t_vector a, t_vector b);
+double		vectDot(t_vector a, t_vector b);
+
 
 
 

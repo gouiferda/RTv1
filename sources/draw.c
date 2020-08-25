@@ -14,19 +14,19 @@
 
 int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
 {
-    t_vector plane_normal = vectorSub(&figure.dir, &figure.pos);
+    t_vector plane_normal = vectSub(figure.dir,figure.pos);
     t_vector plane_point = figure.pos;
-    t_vector ray_normal = vectorSub(&ray.dir, &ray.pos);
+    t_vector ray_normal = vectSub(ray.dir,ray.pos);
     t_vector intersection_p;
-    if (vectorDot(&ray_normal, &plane_normal) == 0)
+    if (vectDot(ray_normal,plane_normal) == 0)
         return (0);
-    t_vector diff = vectorSub(&ray.pos, &plane_point);
-    t_vector av1 = vectorAdd(&diff, &plane_point);
-    double dot1 = vectorDot(&ray_normal, &plane_normal);
-    double dot2 = vectorDot(&diff, &plane_normal);
-    t_vector sv1 = vectorScale(-dot2 / dot1, &ray_normal);
+    t_vector diff = vectSub(ray.pos,plane_point);
+    t_vector av1 = vectAdd(diff,plane_point);
+    double dot1 = vectDot(ray_normal,plane_normal);
+    double dot2 = vectDot(diff,plane_normal);
+    t_vector sv1 = vectScale(ray_normal,-dot2 / dot1);
 
-    intersection_p = vectorAdd(&av1, &sv1);
+    intersection_p = vectAdd(av1,sv1);
     *s1 = intersection_p;
     return 1;
 }
@@ -198,7 +198,7 @@ void draw(t_rtv *rtv)
     init_draw(rtv);
     draw_bg(rtv);
     //draw_colorful_test_screen(rtv);
-    //draw_figures_v1(rtv);
-    test_cylinder_inter_v1(rtv);
+    draw_figures_v1(rtv);
+    //test_cylinder_inter_v1(rtv);
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }

@@ -13,33 +13,6 @@
 
 #include "rtv.h"
 
-/* Subtract two vectors and return the resulting t_vector */
-t_vector vectorSub(t_vector *v1, t_vector *v2)
-{
-	t_vector result = {v1->x - v2->x, v1->y - v2->y, v1->z - v2->z};
-	return result;
-}
-
-/* Multiply two vectors and return the resulting scalar (dot product) */
-float vectorDot(t_vector *v1, t_vector *v2)
-{
-	return v1->x * v2->x + v1->y * v2->y + v1->z * v2->z;
-}
-
-/* Calculate t_vector x Scalar and return resulting t_vector*/
-t_vector vectorScale(float c, t_vector *v)
-{
-	t_vector result = {v->x * c, v->y * c, v->z * c};
-	return result;
-}
-
-/* Add two vectors and return the resulting t_vector */
-t_vector vectorAdd(t_vector *v1, t_vector *v2)
-{
-	t_vector result = {v1->x + v2->x, v1->y + v2->y, v1->z + v2->z};
-	return result;
-}
-
 t_vector newVect(double x, double y,double z)
 {
 	t_vector v;
@@ -47,4 +20,59 @@ t_vector newVect(double x, double y,double z)
 	v.y = y;
 	v.z = z;
 	return v;
+}
+
+double		vectDot(t_vector a, t_vector b)
+{
+	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
+}
+
+t_vector		vectScale(t_vector a, double x)
+{
+	t_vector	v;
+
+	v.x = a.x * x;
+	v.y = a.y * x;
+	v.z = a.z * x;
+	return (v);
+}
+
+t_vector		vectNorm(t_vector a)
+{
+	double	k;
+
+	if (a.x == 0.0 && a.y == 0.0 && a.z == 0.0)
+		return (newVect(0, 0, 0));
+	k = 1.0 / sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+	return (vectScale(a, k));
+}
+
+t_vector		vectAdd(t_vector a, t_vector b)
+{
+	t_vector	v;
+
+	v.x = a.x + b.x;
+	v.y = a.y + b.y;
+	v.z = a.z + b.z;
+	return (v);
+}
+
+t_vector		vectSub(t_vector a, t_vector b)
+{
+	t_vector	v;
+
+	v.x = a.x - b.x;
+	v.y = a.y - b.y;
+	v.z = a.z - b.z;
+	return (v);
+}
+
+t_vector		vectCross(t_vector a, t_vector b)
+{
+	t_vector	v;
+
+	v.x = a.y * b.z - a.z * b.y;
+	v.y = a.z * b.x - a.x * b.z;
+	v.z = a.x * b.y - a.y * b.x;
+	return (v);
 }

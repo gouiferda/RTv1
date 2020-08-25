@@ -37,8 +37,7 @@ make run;
 - [ ] Moving and rotating the camera
 - [ ] Norm & Handle errors and leaks and messages
 - [ ] Bonuses: Shine effect, Multi lights (spots)
-
-- [ ] Extras: Antialiasing, External files for scene description, Reflection, Transparency, Shadow according to transparency, Textures
+- [ ] Extra Bonuses: Antialiasing, External files for scene description, Reflection, Transparency, Shadow according to transparency, Textures
 
 
 ## Key definitions
@@ -69,4 +68,4 @@ make run;
 - look for cylinder/line intersection
 - look for cone/line intersection
 - research on how to add specular and diffuse mode
-- create maps json parser
+- create maps json parser (External files for scene description)
