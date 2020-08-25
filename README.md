@@ -10,9 +10,10 @@ Ray tracer in C
     - [X] vector
     - [X] ray
     - [X] figure
+    - [ ] camera
     - [ ] light
     - [ ] color
-    - [ ] material
+    - [ ] material (diffuse and specular/shiningness)
 - [ ] Figures intersection with ray
     - [X] sphere
     - [X] plane
