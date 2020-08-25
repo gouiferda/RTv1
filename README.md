@@ -53,13 +53,11 @@ make run;
 
 ## Helpful links
 
-### Vectors
-- N/A
-
 ### Ray tracing explained
 - [Ray tracing 1](https://www.canva.com/design/DAD4I2tioJs/Gq5G-MR2jv_SpXNCVrlxjg/view?utm_content=DAD4I2tioJs&utm_campaign=designshare&utm_medium=link&utm_source=viewer)
 
-### Intersections with figures/shapes/objects
+
+### Ray intersection with figures
 - [Intersection of a line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
 - [Intersection of a Line and a Plane 1](https://www.youtube.com/watch?v=_W3aVWsMp14)
 - [Intersection of a Line and a Plane 2](https://rosettacode.org/wiki/Find_the_intersection_of_a_line_with_a_plane#C)
