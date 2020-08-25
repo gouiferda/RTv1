@@ -1,4 +1,6 @@
+RTv1
 *.o
+*.a
 *.out
 Mkfile.old
 .DS_Store
