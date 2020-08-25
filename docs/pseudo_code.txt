@@ -71,3 +71,24 @@ Or:
 1. Reflection
 1. Phong
 1. Antialiasing
+
+
+
+### Ray tracing intuition
+
+- Problems:
+    - Where does a ray intersect a scene object ?
+    - Do shadow rays intersect other objects before they hit the light source ?
+    - How does the surface reflect light (diffuse,specular) ?
+    - How far away is the light source ?
+    - Where is the camera ?
+
+- Color of points Factors:
+    1. Incoming light: Distance to object, Angle to direction of light
+        - determine if object is visible to light source (shadow ray)
+    1. Reflection: Color of an object, Material, Dull objects deffuse, shiny surfaces: specular
+    1. Camera position
+
+- Spotlight intensity: appearance
+- Diffuse: controls roghness/dullness of object
+- Specular: controls shinningness
