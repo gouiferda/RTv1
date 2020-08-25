@@ -1,0 +1,4 @@
+*.o
+*.out
+Mkfile.old
+.DS_Store
