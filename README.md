@@ -46,22 +46,20 @@ Ray tracer in C
 
 ## Helpful links
 
-- Vectors
+### Vectors
+- N/A
 
-- Ray tracing explained
+### Ray tracing explained
+- [Ray tracing 1](https://www.canva.com/design/DAD4I2tioJs/Gq5G-MR2jv_SpXNCVrlxjg/view?utm_content=DAD4I2tioJs&utm_campaign=designshare&utm_medium=link&utm_source=viewer)
 
-https://www.canva.com/design/DAD4I2tioJs/Gq5G-MR2jv_SpXNCVrlxjg/view?utm_content=DAD4I2tioJs&utm_campaign=designshare&utm_medium=link&utm_source=viewer
+### Intersections with figures/shapes/objects
+- [Intersection of a line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
+- [Intersection of a Line and a Plane 1](https://www.youtube.com/watch?v=_W3aVWsMp14)
+- [Intersection of a Line and a Plane 2](https://rosettacode.org/wiki/Find_the_intersection_of_a_line_with_a_plane#C)
+- [Intersection of a Line and a Plane 3](http://pi.math.cornell.edu/~froh/231f08e1a.pdf)
 
-- Sphere line intersection
 
-http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm
-
-- Plane line intersection
-
-http://pi.math.cornell.edu/~froh/231f08e1a.pdf
-https://rosettacode.org/wiki/Find_the_intersection_of_a_line_with_a_plane#C
-
-# Hmza to do
+## Hmza to do
 - research on ray tracing and vectors
 - look for cylinder/line intersection
 - look for cone/line  intersection

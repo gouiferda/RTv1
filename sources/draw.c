@@ -192,11 +192,17 @@ void draw_figures_v1(t_rtv *rtv)
     }
 }
 
+void test_cylinder_inter_v1(t_rtv *rtv)
+{
+    
+}
+
 void draw(t_rtv *rtv)
 {
     init_draw(rtv);
     draw_bg(rtv);
     //draw_colorful_test_screen(rtv);
-    draw_figures_v1(rtv);
+    //draw_figures_v1(rtv);
+    test_cylinder_inter_v1(rtv);
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }
