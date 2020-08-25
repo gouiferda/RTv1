@@ -50,6 +50,8 @@ Ray tracer in C
 
 - Ray tracing explained
 
+https://www.canva.com/design/DAD4I2tioJs/Gq5G-MR2jv_SpXNCVrlxjg/view?utm_content=DAD4I2tioJs&utm_campaign=designshare&utm_medium=link&utm_source=viewer
+
 - Sphere line intersection
 
 http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm
@@ -60,7 +62,7 @@ http://pi.math.cornell.edu/~froh/231f08e1a.pdf
 https://rosettacode.org/wiki/Find_the_intersection_of_a_line_with_a_plane#C
 
 # Hmza to do
-- read and research helpful links
+- research on ray tracing and vectors
 - look for cylinder/line intersection
 - look for cone/line  intersection
-- add vmod canvas to docs
+- research on how to add specular and diffuse mode
