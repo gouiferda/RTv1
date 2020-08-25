@@ -166,11 +166,10 @@ void draw_figures_v1(t_rtv *rtv)
 
 
 
-int cylinder_inter_v1(t_ray ray, t_figure figure, double *s1)
+int cylinder_inter_v1(t_ray ray, t_figure cylinder, double *s1)
 {
 
-    
-	return (1);
+    return (1);
 }
 
 void test_cylinder_inter_v1(t_rtv *rtv)
