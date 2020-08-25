@@ -17,8 +17,7 @@ make run;
     - [X] figure
     - [ ] camera
     - [ ] light
-    - [ ] color
-    - [ ] material (diffuse and specular/shiningness)
+    - [ ] material (color , diffuse and specular/shiningness)
 - [ ] Figures intersection with ray
     - [X] sphere
     - [X] plane
