@@ -57,7 +57,6 @@ int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s1, t_vector *s2)
     return (res);
 }
 
-
 void draw_figures_v1(t_rtv *rtv)
 {
     int final_color = BLACK;
@@ -164,34 +163,34 @@ void draw_figures_v1(t_rtv *rtv)
     }
 }
 
-
-int cylinder_inter_v1(t_ray ray, t_figure figure, double *s1, double *s2)
+int cylinder_inter_v1(t_ray ray, t_figure figure, double *s1)
 {
+
     
-    return (1);
+        return (0);
 }
 
 void test_cylinder_inter_v1(t_rtv *rtv)
 {
 
-    //creating objects 
+    //creating objects
 
     t_figure cylinder1;
     cylinder1.type = CYLINDER;
     cylinder1.radius = 100;
     cylinder1.color = GREEN;
-    cylinder1.pos = newVect(rtv->screen_w/2 ,rtv->screen_h/2,0);
+    cylinder1.pos = newVect(rtv->screen_w / 2, rtv->screen_h / 2, 0);
+    cylinder1.dir = newVect(rtv->screen_w / 2, rtv->screen_h / 2, -300);
     t_ray ray;
     double ray_start_z = -1000;
     int ray_end_z = 1000;
-    ray.pos = newVect((rtv->screen_w / 2) , (rtv->screen_h / 2) , ray_start_z);
-    ray.dir = newVect((rtv->screen_w / 2) , (rtv->screen_h / 2) , ray_end_z);
-   
+    ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
+    ray.dir = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_end_z);
 
     //test intersection
-     double s1,s2;
-    printf("result: %d , solution:  %.2f , %.2f",cylinder_inter_v1(ray,cylinder1,&s1,&s2));
-
+    double s1;
+    int res = cylinder_inter_v1(ray, cylinder1, &s1);
+    printf("result: %d , solution:  %.2f ", res, s1);
 }
 
 void draw(t_rtv *rtv)
