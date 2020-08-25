@@ -69,6 +69,5 @@ make run;
 ## Hmza to do
 - research on ray tracing and vectors
 - look for plane/line intersection
-- look for cylinder/line intersection
 - research on how to add specular and diffuse mode
 - create maps json parser
