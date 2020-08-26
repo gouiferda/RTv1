@@ -62,4 +62,8 @@
 # define min(a,b) (((a) < (b)) ? (a) : (b))
 
 
+# define NEAR			1e-6
+# define FAR			1000000
+
+
 #endif

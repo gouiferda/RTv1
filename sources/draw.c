@@ -16,9 +16,9 @@ t_figure *gen_figures(int figures_count)
 {
     //generates figures
     t_figure *figures;
-    figures=(t_figure*)malloc(sizeof(t_figure) * (figures_count));
-    int colors[] = {C_GREEN1, C_YELLOW1, C_RED1, C_GREY1, C_GREY2}; //, C_DARK_BLUE1
-    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE, PLANE};    //, PLANE
+    figures = (t_figure *)malloc(sizeof(t_figure) * (figures_count));
+    int colors[] = {C_GREEN1, C_YELLOW1, C_RED1, C_GREY1, C_GREY2, C_YELLOW1}; //, C_DARK_BLUE1
+    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE, PLANE, CYLINDER};     //, PLANE
     int start_x = 0;
     int bet_s = 30;
     int sphere_radius = 50;
@@ -54,17 +54,17 @@ void draw_figures_v1(t_rtv *rtv)
     ray.pos = newVect(0 + ray_left_angle, 0 + ray_up_angle, ray_start_z);
 
     //figures
-    int figures_count = 5;
+    int figures_count = 6;
     t_figure *figures = gen_figures(figures_count);
 
     //for each pixel in the screen send a ray and save the closest object and show it
-    t_vector s1, s2, s3;
+    t_vector s1, s2, s3, s4;
 
     int x = -(rtv->screen_w / 2);
     int y = -(rtv->screen_h / 2);
     int closest_object_index = -1;
     int minDistance = ray_max_z;
-    int k=0;
+    int k = 0;
     while (x < rtv->screen_w / 2)
     {
         y = -(rtv->screen_h / 2);
@@ -98,6 +98,18 @@ void draw_figures_v1(t_rtv *rtv)
                         }
                     }
                 }
+                // else if (figures[k].type == CYLINDER)
+                // {
+                //     if (cylinder_inter_v1(ray, figures[k], &s4) == 1)
+                //     {
+                //         closest_object_index = k;
+                //         if (s4.z < minDistance)
+                //         {
+                //             //minDistance = s4.z;
+                //             closest_object_index = k;
+                //         }
+                //     }
+                // }
                 k++;
             }
             if (closest_object_index != -1)

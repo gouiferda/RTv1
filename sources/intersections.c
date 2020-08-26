@@ -1,9 +1,8 @@
 #include "rtv.h"
 
-
-int cylinder_inter_v1(t_ray ray, t_figure cylinder, double *s1)
+int cylinder_inter_v1(t_ray ray, t_figure cylinder, double *s4)
 {
-
+    
     return (1);
 }
 
@@ -12,24 +11,23 @@ void test_cylinder_inter_v1(t_rtv *rtv)
 
     //creating objects
 
+    t_ray ray;
+    double ray_start_z = -1000;
+    int ray_end_z = 200;
+    ray.pos = newVect(0, 0, ray_start_z);
+    ray.dir = newVect(0, 0, ray_end_z);
+
     t_figure cylinder1;
     cylinder1.type = CYLINDER;
     cylinder1.radius = 100;
     cylinder1.color = GREEN;
-    cylinder1.pos = newVect(rtv->screen_w / 2, rtv->screen_h / 2, 500);
-    cylinder1.dir = newVect(rtv->screen_w / 2, rtv->screen_h / 2, 700);
-    t_ray ray;
-    double ray_start_z = -1000;
-    int ray_end_z = 400;
-    ray.pos = newVect(0, 0, ray_start_z);
-    ray.dir = newVect(0, 0, ray_end_z);
-
+    cylinder1.pos = newVect(0, 0, 500);
+    cylinder1.dir = newVect(0, 0, 700);
     //test intersection
-    double s1 = 0, s2 = 0;
-    int res = cylinder_inter_v1(ray, cylinder1, &s1);
-    printf("result: %d , solution:  s1: %.2f , s2: %.2f  \n", res, s1, s2);
+    double *s1;
+    int res = cylinder_inter_v1(ray, cylinder1, s1);
+    printf("result: %d , solution:  %.2f  \n", res, *s1);
 }
-
 
 int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
 {

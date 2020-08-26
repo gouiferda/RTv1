@@ -18,7 +18,7 @@ int main(int ac, char **av)
     t_rtv *rtv;
     rtv = init_rtv();
     draw(rtv);
-     //test_cylinder_inter_v1(rtv);
+    //test_cylinder_inter_v1(rtv);
     mlx(rtv);
     
     return (0);
