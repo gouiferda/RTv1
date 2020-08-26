@@ -7,7 +7,7 @@ Ray tracer in C
 cd RTv1;
 make run;
 
-## To do
+## To do / Steps
 
 - [X] Author file
 - [X] Minilibx functions: including expose properly (mlx_expose_hook)
@@ -34,6 +34,18 @@ make run;
 - [ ] Bonuses: Shine effect, Multi lights (spots)
 - [ ] Extra Bonuses: Antialiasing, External files for scene description, Reflection, Transparency, Shadow according to transparency, Textures
 
+## Steps (Short)
+
+1. Scanning the screen
+1. casting rays for good
+1. The closest intersection
+1. Sphere-Ray intersection
+1. Lighting our intersection point
+1. Lambert
+1. Reflection
+1. Phong
+1. Antialiasing
+
 
 ## Key definitions
 
@@ -47,7 +59,14 @@ make run;
 ## Helpful links
 
 ### Ray tracing explained
+
+- [Easy explaination](https://www.youtube.com/watch?v=bN8AV_x4BXI)
+- [Khan academy course: Basics and the Mathematics of rendering](https://www.khanacademy.org/partner-content/pixar/rendering/rendering1/v/rendering-1)
+- [Udacity course: Interactive 3D Graphics](https://classroom.udacity.com/courses/cs291)
 - [Ray tracing 1](https://www.canva.com/design/DAD4I2tioJs/Gq5G-MR2jv_SpXNCVrlxjg/view?utm_content=DAD4I2tioJs&utm_campaign=designshare&utm_medium=link&utm_source=viewer)
+- [A Ray Tracer - Part 1](https://www.purplealienplanet.com/node/20)
+- [A Ray Tracer - Part 2](https://www.purplealienplanet.com/node/23)
+
 
 
 ### Ray intersection with figures
