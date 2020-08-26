@@ -12,22 +12,11 @@
 
 #include "rtv.h"
 
-void draw_figures_v1(t_rtv *rtv)
+t_figure *gen_figures(int figures_count)
 {
-    int final_color = BLACK;
-
-    //ray
-    double ray_start_z = -1000;
-    int ray_max_z = 1000;
-    int ray_up_angle = 250;
-    int ray_left_angle = -100;
-
-    t_ray ray;
-    ray.pos = newVect(0 + ray_left_angle, 0 + ray_up_angle, ray_start_z);
-
     //figures
-    int figures_count = 5;
-    t_figure figures[figures_count];
+    t_figure *figures;
+    figures=(t_figure*)malloc(sizeof(t_figure) * (figures_count));
     int colors[] = {C_GREEN1, C_YELLOW1, C_RED1, C_GREY1, C_GREY2}; //, C_DARK_BLUE1
     int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE, PLANE};    //, PLANE
     int start_x = 0;
@@ -48,7 +37,25 @@ void draw_figures_v1(t_rtv *rtv)
         start_x += (figures[k].radius * 2) - 30;
         k++;
     }
+    return figures;
+}
 
+void draw_figures_v1(t_rtv *rtv)
+{
+    int final_color = BLACK;
+
+    //ray
+    double ray_start_z = -1000;
+    int ray_max_z = 1000;
+    int ray_up_angle = 250;
+    int ray_left_angle = -100;
+
+    t_ray ray;
+    ray.pos = newVect(0 + ray_left_angle, 0 + ray_up_angle, ray_start_z);
+
+    //figures
+    int figures_count = 5;
+    t_figure *figures = gen_figures(figures_count);
 
     //for each pixel in the screen send a ray and save the closest object and show it
     t_vector s1, s2, s3;
@@ -57,7 +64,7 @@ void draw_figures_v1(t_rtv *rtv)
     int y = -(rtv->screen_h / 2);
     int closest_object_index = -1;
     int minDistance = ray_max_z;
-
+    int k=0;
     while (x < rtv->screen_w / 2)
     {
         y = -(rtv->screen_h / 2);
@@ -97,22 +104,6 @@ void draw_figures_v1(t_rtv *rtv)
             {
                 final_color = figures[closest_object_index].color;
                 add_px2(rtv, x, y, final_color);
-                // if (figures[closest_object_index].type == SPHERE)
-                // {
-                //     if (sphere_inter_v1(ray, figures[closest_object_index], &s1, &s2) == 1)
-                //     {
-                //         final_color = figures[closest_object_index].color;
-                //         add_px2(rtv, x, y, final_color);
-                //     }
-                // }
-                // else if (figures[closest_object_index].type == PLANE)
-                // {
-                //     if (plane_inter_v1(ray, figures[closest_object_index], &s3) == 1)
-                //     {
-                //         final_color = figures[closest_object_index].color;
-                //         add_px2(rtv, x, y, final_color);
-                //     }
-                // }
                 closest_object_index = -1;
             }
             y++;
