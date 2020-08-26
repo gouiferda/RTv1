@@ -14,7 +14,7 @@
 
 t_figure *gen_figures(int figures_count)
 {
-    //figures
+    //generates figures
     t_figure *figures;
     figures=(t_figure*)malloc(sizeof(t_figure) * (figures_count));
     int colors[] = {C_GREEN1, C_YELLOW1, C_RED1, C_GREY1, C_GREY2}; //, C_DARK_BLUE1
