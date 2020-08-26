@@ -45,7 +45,8 @@ SOURCES_LIST = main.c \
 				utils.c\
 				t_rotation.c\
 				draw_helpers.c\
-				c_vector.c
+				c_vector.c\
+				intersections.c
 				
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 

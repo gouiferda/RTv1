@@ -112,7 +112,7 @@ void mlx(t_rtv *rtv);
 
 
 void    add_px(t_rtv *rtv, int x, int y, int color);
-void add_px2(t_rtv *rtv, int x, int y, int color)
+void add_px2(t_rtv *rtv, int x, int y, int color);
 
 void	draw(t_rtv *rtv);
 

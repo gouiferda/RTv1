@@ -26,6 +26,8 @@ void init_draw(t_rtv *rtv)
         img[i] = BACKGROUND;
         i++;
     }
+    draw_bg(rtv);
+    //draw_colorful_test_screen(rtv);
 }
 
 void    set_defaults(t_rtv *rtv)
