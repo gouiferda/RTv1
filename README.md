@@ -51,7 +51,7 @@ make run;
 1. [ ] Antialiasing
 
 
-## Key definitions
+## 🗺 Key definitions
 
 - Ambiant: Color alone of the object
 - Diffuse: controls roghness/dullness of object
@@ -60,7 +60,7 @@ make run;
 - Indirect illumination: Light bounding off of other objects in the scene (Reflected rays)
 - Shading model: diffuse + specular reflection
 
-## Helpful links
+## 🔗 Helpful links
 
 ### Ray tracing explained
 
@@ -72,7 +72,6 @@ make run;
 - [A Ray Tracer - Part 2](https://www.purplealienplanet.com/node/23)
 
 
-
 ### Ray/Line intersection with figures/objects
 - [Intersection of a Line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
 - [Intersection of a Line and a Plane 1](https://www.youtube.com/watch?v=_W3aVWsMp14)
@@ -80,7 +79,7 @@ make run;
 - [Intersection of a Line and a Plane 3](http://pi.math.cornell.edu/~froh/231f08e1a.pdf)
 
 
-## Hamza to do
+## 👨🏻‍💻 Hamza to do
 Research:
 - [ ] ray tracing
 - [ ] vectors
