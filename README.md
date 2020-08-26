@@ -8,7 +8,7 @@ gcl https://github.com/gouiferda/RTv1.git;
 cd RTv1;
 make run;
 
-## To do
+## 📝 To do
 
 - [X] Author file
 - [X] Minilibx functions: including expose properly (mlx_expose_hook)
@@ -35,17 +35,20 @@ make run;
 - [ ] Bonuses: Shine effect, Multi lights (spots)
 - [ ] Extra Bonuses: Antialiasing, External files for scene description, Reflection, Transparency, Shadow according to transparency...
 
-## Steps
+## ✅ Steps
 
-1. Scanning the screen
-1. casting rays for good
-1. The closest intersection
-1. Sphere-Ray intersection
-1. Lighting our intersection point
-1. Lambert
-1. Reflection
-1. Phong
-1. Antialiasing
+1. [X] Scanning the screen
+1. [X] casting rays for good
+1. [X] The closest intersection
+1. [X] Sphere-Ray intersection
+1. [X] Plane-Ray intersection
+1. [ ] Cylinder-Ray intersection
+1. [ ] Cone-Ray intersection
+1. [ ] Lighting our intersection point
+1. [ ] Lambert
+1. [ ] Reflection
+1. [ ] Phong
+1. [ ] Antialiasing
 
 
 ## Key definitions
