@@ -44,7 +44,8 @@ typedef struct s_figure
 	float  radius;
 	t_vector		pos;
 	t_vector		dir;
-	int color;
+	double specular; // (value between 0–1)
+	t_vector diffuse; // (3 values between 0–1, for R-G-B)
 } t_figure;
 
 

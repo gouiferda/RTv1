@@ -2,12 +2,13 @@
 
 Ray tracer in C
 
-## Run
+## 🚀 Clone and Run
 
+gcl https://github.com/gouiferda/RTv1.git;
 cd RTv1;
 make run;
 
-## To do / Steps
+## To do
 
 - [X] Author file
 - [X] Minilibx functions: including expose properly (mlx_expose_hook)
@@ -34,7 +35,7 @@ make run;
 - [ ] Bonuses: Shine effect, Multi lights (spots)
 - [ ] Extra Bonuses: Antialiasing, External files for scene description, Reflection, Transparency, Shadow according to transparency...
 
-## Steps (Short)
+## Steps
 
 1. Scanning the screen
 1. casting rays for good
@@ -69,18 +70,18 @@ make run;
 
 
 
-### Ray intersection with figures
-- [Intersection of a line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
+### Ray/Line intersection with figures/objects
+- [Intersection of a Line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
 - [Intersection of a Line and a Plane 1](https://www.youtube.com/watch?v=_W3aVWsMp14)
 - [Intersection of a Line and a Plane 2](https://rosettacode.org/wiki/Find_the_intersection_of_a_line_with_a_plane#C)
 - [Intersection of a Line and a Plane 3](http://pi.math.cornell.edu/~froh/231f08e1a.pdf)
 
 
-## Hmza to do
+## Hamza to do
 Research:
 - [ ] ray tracing
 - [ ] vectors
-Do:
+Do a test for:
 - [ ] cylinder/line intersection
 - [ ] cone/line intersection
 - [ ] create maps json parser (External files for scene description)
