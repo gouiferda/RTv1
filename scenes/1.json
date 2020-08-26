@@ -1,5 +1,25 @@
-[
-    {
-        "light": "light"
-    }
-]
+{
+    "title": "Scene 1",
+    "description": "Scene bla bla bla",
+    "lights": [
+        {
+            "pos_x": "0",
+            "pos_y": "0",
+            "pos_z": "0",
+            "intensity": "0"
+        }
+    ],
+    "figures": [
+        {
+            "pos_x": "0",
+            "pos_y": "0",
+            "pos_z": "0",
+            "dir_x": "0",
+            "dir_y": "0",
+            "dir_z": "0",
+            "type": "SPHERE",
+            "radius": "100",
+            "color_hex": "DD2C00"
+        }
+    ]
+}
