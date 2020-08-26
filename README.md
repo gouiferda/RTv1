@@ -19,13 +19,8 @@ make run;
     - [ ] light
     - [ ] material (color , diffuse and specular/shiningness)
 - [X] Mapping the coords system (0,0,0) to screen (0,0)
-- [ ] Figures intersection with ray
-    - [X] sphere
-    - [X] plane
-    - [ ] cylinder
-    - [ ] cone
 - [ ] Light works on fixed and moved objects - Multi objects and intersections
-    - [ ] ambiant light
+    - [ ] ambiant light / intersection with ray
         - [X] sphere
         - [X] plane
         - [ ] cylinder
