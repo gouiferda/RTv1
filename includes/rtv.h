@@ -48,12 +48,10 @@ typedef struct s_figure
 } t_figure;
 
 
-
 typedef struct s_light
 {
 	t_vector		pos;
-	int				type;
-	double			intens;
+	double			intensity;
 } t_light;
 
 typedef struct	s_color
@@ -63,19 +61,17 @@ typedef struct	s_color
 	unsigned int	b;
 }				t_color;
 
+
 // typedef struct{
 // 	float red, green, blue;
 // }colour;
+
 
 // typedef struct{
 // 	colour diffuse;
 // 	float reflection;
 // }material;
 
-// typedef struct{
-// 	t_vector pos;
-// 	colour intensity;
-// }light;
 
 
 typedef struct s_rtv
