@@ -12,14 +12,23 @@
 
 #include "rtv.h"
 
-int		get_color(int r, int g, int b)
+int get_color(int r, int g, int b)
 {
 	return (r << 16) + (g << 8) + (b);
 }
 
-
-t_color		get_color_s(int r, int g, int b)
+t_color get_color_s(int r, int g, int b)
 {
-	t_color color = {r,g,b};
+	t_color color = {r, g, b};
 	return color;
+}
+
+t_color colorConverter(int c)
+{
+	t_color rgbColor;
+
+	rgbColor.r = 1;
+	rgbColor.g = 1;
+	rgbColor.b = 0;
+	return rgbColor;
 }

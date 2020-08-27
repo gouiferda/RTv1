@@ -46,7 +46,9 @@
 # define ROSE 16711935
 # define ROSE2 16711830
 
-# define YELLOW_HEX 0xFFFF00
+# define YELLOW_HEX 0xffff00
+# define BLUE_HEX 0x0000ff
+# define RED_HEX 0xff0000
 # define BLACK_HEX 0x000000
 
 # define C_GREY1 7236973

@@ -162,8 +162,6 @@ t_vector		vectSub(t_vector a, t_vector b);
 t_vector		vectCross(t_vector a, t_vector b);
 double		vectDot(t_vector a, t_vector b);
 
-void add_c(t_rtv *rtv, int x, int y, t_color c);
-int		rgb_to_int(t_color col, double c);
-
+t_color colorConverter(int c);
 
 #endif

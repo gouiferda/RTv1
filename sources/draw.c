@@ -31,9 +31,11 @@ t_figure *gen_figures(int figures_count)
         figures[k].radius = sphere_radius;
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
+        // figures[k].c = colorConverter(colors[k]);
+        
         figures[k].c.r = 1;
         figures[k].c.g = (k % 2 == 0) ? 0 : 1;
-        figures[k].c.b = (k % 3 != 0) ? 0 : 1;
+        figures[k].c.b = (k % 4 != 0) ? 0 : 1;
         //figures[k].reflection = 0;
         figures[k].specular = 1;
         figures[k].diffuse = 1;
@@ -86,7 +88,7 @@ void draw_figures_v1(t_rtv *rtv)
     t_figure *figures = gen_figures(figures_count);
 
     t_light light1;
-    light1.pos = newVect(-300, 400, 0);
+    light1.pos = newVect(0, 400, 10);
     light1.c.r = 1;
     light1.c.g = 1;
     light1.c.b = 1;
