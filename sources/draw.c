@@ -135,7 +135,7 @@ void draw_figures_v1(t_rtv *rtv)
                     t_vector hit_normal = vectNorm(vectSub(s2, figures[closest_object_index].pos));
                     t_vector hit_to_cam = vectSub(ray.pos, s2);
                     t_vector v_tolight = vectSub(light1.pos, s2);
-                    int specular_k = 50;
+                    int specular_k = 1;
                     t_vector half_vect = vectNorm(vectAdd(v_tolight, hit_to_cam));
 
 
@@ -145,7 +145,7 @@ void draw_figures_v1(t_rtv *rtv)
                     final_c.g = figures[closest_object_index].c.g * op;
                     final_c.b = figures[closest_object_index].c.b * op;
 
-
+//d
                   
                     // final_color = figures[closest_object_index].color * op;
 
