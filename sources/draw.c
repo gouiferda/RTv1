@@ -31,6 +31,10 @@ t_figure *gen_figures(int figures_count)
         figures[k].radius = sphere_radius;
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
+        figures[k].c.r = 0;
+        figures[k].c.g = 0;
+        figures[k].c.b = 1;
+        figures[k].reflection = 0.4;
         figures[k].dir = newVect(0, 10, 400);
         if (k == 4)
             figures[k].dir = newVect(0, 0, 300);
@@ -60,7 +64,9 @@ void draw_figures_v1(t_rtv *rtv)
 
     t_light light1;
     light1.pos = newVect(0,3000,0);
-    light1.intensity=100;
+    light1.intensity.r=1;
+    light1.intensity.g=1;
+    light1.intensity.b=1;
 
     //for each pixel in the screen send a ray and save the closest object and show it
     t_vector s1, s2, s3, s4;

@@ -51,16 +51,17 @@ typedef struct s_figure
 	t_vector		pos;
 	t_vector		dir;
 	int color;
-	t_color c;
+	t_color c; // (3 values between 0–1, for R-G-B)
 	double specular; // (value between 0–1)
-	t_vector diffuse; // (3 values between 0–1, for R-G-B)
+	//t_vector diffuse; 
+	double reflection;
 } t_figure;
 
 
 typedef struct s_light
 {
 	t_vector		pos;
-	double			intensity;
+	t_color			intensity;
 } t_light;
 
 

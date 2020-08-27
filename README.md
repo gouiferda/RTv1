@@ -1,4 +1,4 @@
-# RTv1
+# RTv1 - Let there be light
 
 Ray tracer in C
 
@@ -20,7 +20,7 @@ make run;
     - [ ] light
     - [ ] material (color , diffuse and specular/shiningness)
 - [X] Mapping the coords system (0,0,0) to screen (0,0)
-- [ ] Light works on fixed and moved objects - Multi objects and intersections
+- [ ] Shading - Light works on fixed and moved objects - Multi objects and intersections / Phong model
     - [ ] ambiant light / intersection with ray
         - [X] sphere
         - [X] plane
@@ -44,7 +44,7 @@ make run;
 1. [X] Plane-Ray intersection
 1. [ ] Cylinder-Ray intersection
 1. [ ] Cone-Ray intersection
-1. [ ] Lighting our intersection point
+1. [X] Lighting our intersection point
 1. [ ] Lambert
 1. [ ] Reflection
 1. [ ] Phong
@@ -55,7 +55,7 @@ make run;
 
 - Ambiant: Color alone of the object
 - Diffuse: controls roghness/dullness of object
-- Specular: controls shinningness
+- Specular: controls shinningness (noticable in : metal , marbles)
 - Specular + Diffuse: How surface responds to light
 - Indirect illumination: Light bounding off of other objects in the scene (Reflected rays)
 - Shading model: diffuse + specular reflection
@@ -71,6 +71,46 @@ make run;
 - [A Ray Tracer - Part 1](https://www.purplealienplanet.com/node/20)
 - [A Ray Tracer - Part 2](https://www.purplealienplanet.com/node/23)
 
+###  Shading / Diffuse mat shading
+
+
+- [Ray Tracing: shading](https://www.youtube.com/watch?v=mZvPv7i9E18)
+- [Building a Ray Tracer in Python](https://www.youtube.com/watch?v=fu_LuFU7iFo)
+
+**Lambert: (Diffuse)**
+
+To caluclate the color we need:
+1. surface normal (intersection point - center of sphere) normalized
+1. direction to the light (light pos - intersection point) normalized
+1. do a dot product 
+1. refelective color of the sphere
+
+each rgb has from 0 to 1
+color = (l.n) x light.intensity x color of figure rgb 
+color = (L.N) x M diff x color of figure rgb 
+L: Ray towards light direction
+N: normal at hit pos,
+M diffuse: material's diffuse coeficcient // how much the figure is absorbing light / 1 max 0 min
+C object: color of object
+Dot product should not be negative
+
+
+**Blinn-Phong shading model: (Specular shading)**
+
+Phong_term = (V.R)^k
+
+V- Ray towards viewer
+R- Light ray reflexted direction
+k - Material's specular coefficient (shininess)
+(L: intersection to light, N normal, R referse of L : reflection, V intersection to viewer ray to point)
+Dot product should not be negative
+
+Half way vector:
+
+H = L + V
+H = norm (H)
+
+Blinn term = (H.R)^k
 
 ### Ray/Line intersection with figures/objects
 - [Intersection of a Line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
