@@ -17,8 +17,8 @@ t_figure *gen_figures(int figures_count)
     //generates figures
     t_figure *figures;
     figures = (t_figure *)malloc(sizeof(t_figure) * (figures_count));
-    int colors[] = {C_GREEN1, C_YELLOW1, C_RED1, C_GREY1, C_GREY2, C_YELLOW1}; //, C_DARK_BLUE1
-    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE, PLANE, CYLINDER};     //, PLANE
+    int colors[] = {C_GREEN1, C_YELLOW1, C_RED1, C_GREY1, C_GREY2}; //, C_DARK_BLUE1
+    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE, PLANE};    //, PLANE
     int start_x = 0;
     int bet_s = 30;
     int sphere_radius = 50;
@@ -32,10 +32,11 @@ t_figure *gen_figures(int figures_count)
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
         figures[k].c.r = 1;
-        figures[k].c.g = 0;
-        figures[k].c.b = 0;
-        figures[k].reflection = 1;
+        figures[k].c.g = (k % 2 == 0) ? 0 : 1;
+        figures[k].c.b = (k % 3 != 0) ? 0 : 1;
+        //figures[k].reflection = 0;
         figures[k].specular = 1;
+        figures[k].diffuse = 1;
         figures[k].dir = newVect(0, 10, 400);
         if (k == 4)
             figures[k].dir = newVect(0, 0, 300);
@@ -43,6 +44,28 @@ t_figure *gen_figures(int figures_count)
         k++;
     }
     return figures;
+}
+
+int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
+{
+    int final_color = BLACK;
+    t_color final_c;
+    final_c.r = 0;
+    final_c.g = 0;
+    final_c.b = 0;
+    int specular_k = 250;
+    t_vector hit_normal = vectNorm(vectSub(i, f.pos));
+    t_vector hit_to_cam = vectSub(r.pos, i);
+    t_ray v_tolight_r;
+    v_tolight_r.pos = i;
+    v_tolight_r.dir = vectSub(l.pos, i);
+    t_vector half_vect = vectNorm(vectAdd(v_tolight_r.dir, hit_to_cam));
+    double kk = f.specular * max(vectDot(hit_normal, half_vect), 0) * specular_k;
+    final_c.r += f.c.r * l.c.r * kk;
+    final_c.g += f.c.g * l.c.g * kk;
+    final_c.b += f.c.b * l.c.b * kk;
+    final_color = get_color(final_c.r, final_c.b, final_c.b);
+    return final_color;
 }
 
 void draw_figures_v1(t_rtv *rtv)
@@ -59,7 +82,7 @@ void draw_figures_v1(t_rtv *rtv)
     ray.pos = newVect(0 + ray_left_angle, 0 + ray_up_angle, ray_start_z);
 
     //figures
-    int figures_count = 3;
+    int figures_count = 5;
     t_figure *figures = gen_figures(figures_count);
 
     t_light light1;
@@ -132,23 +155,12 @@ void draw_figures_v1(t_rtv *rtv)
             {
                 if (sphere_inter_v1(ray, figures[closest_object_index], &s1, &s2) == 1)
                 {
-                    t_vector hit_normal = vectNorm(vectSub(s2, figures[closest_object_index].pos));
-                    t_vector hit_to_cam = vectSub(ray.pos, s2);
-                    t_vector v_tolight = vectSub(light1.pos, s2);
-                    int specular_k = 1;
-                    t_vector half_vect = vectNorm(vectAdd(v_tolight, hit_to_cam));
-
-
-                     double op = max(vectDot(hit_normal, v_tolight), 0) * figures[closest_object_index].specular * max(vectDot(hit_normal, half_vect), 0) * specular_k;
-                 op = 1;
-                    final_c.r = figures[closest_object_index].c.r * light1.c.r * op;
-                    final_c.g = figures[closest_object_index].c.g * light1.c.g * op;
-                    final_c.b = figures[closest_object_index].c.b * light1.c.b * op;
-
-                  
-              
-
-                    final_color = get_color(final_c.r, final_c.b, final_c.b);
+                    final_color = get_surface_color(figures[closest_object_index], s2, ray, light1);
+                    add_px2(rtv, x, y, final_color);
+                }
+                if (plane_inter_v1(ray, figures[closest_object_index], &s3) == 1)
+                {
+                    final_color = get_surface_color(figures[closest_object_index], s3, ray, light1);
                     add_px2(rtv, x, y, final_color);
                 }
                 closest_object_index = -1;

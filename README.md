@@ -117,6 +117,7 @@ Material:
 - Ambient: what color it reflects in ambient light
 - Diffuse: what color it reflect in diffuse light
 - Specular: what is the color of its specular hihglight
+
 ### Ray/Line intersection with figures/objects
 - [Intersection of a Line and a sphere](http://www.ambrsoft.com/TrigoCalc/Sphere/SpherLineIntersection_.htm)
 - [Intersection of a Line and a Plane 1](https://www.youtube.com/watch?v=_W3aVWsMp14)

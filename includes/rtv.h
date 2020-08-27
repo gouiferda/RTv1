@@ -53,7 +53,7 @@ typedef struct s_figure
 	int color;
 	t_color c; // (3 values between 0–1, for R-G-B)
 	double specular; // (value between 0–1)
-	//t_vector diffuse; 
+	double diffuse; // (value between 0–1)
 	double reflection;
 } t_figure;
 
