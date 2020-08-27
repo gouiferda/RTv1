@@ -61,7 +61,7 @@ typedef struct s_figure
 typedef struct s_light
 {
 	t_vector		pos;
-	t_color			intensity;
+	t_color			c;
 } t_light;
 
 
@@ -146,7 +146,7 @@ void	ry(int *x, int *z, double beta);
 void	rz(int *x, int *y, double gamma);
 
 t_color		get_color_s(int r, int g, int b);
-
+int		get_color(int r, int g, int b);
 
 
 void draw_bg(t_rtv *rtv);
@@ -162,8 +162,8 @@ t_vector		vectSub(t_vector a, t_vector b);
 t_vector		vectCross(t_vector a, t_vector b);
 double		vectDot(t_vector a, t_vector b);
 
-
-
+void add_c(t_rtv *rtv, int x, int y, t_color c);
+int		rgb_to_int(t_color col, double c);
 
 
 #endif

@@ -29,3 +29,16 @@ void add_px2(t_rtv *rtv, int x, int y, int color)
 {
     add_px(rtv, x + (rtv->screen_w / 2), (-y + (rtv->screen_h / 2)), color);
 }
+
+void add_px3(t_rtv *rtv, int x, int y, t_color c)
+{
+    int i;
+
+    if (x > 0 && y > 0 && x < (rtv->screen_w) && y < rtv->screen_h)
+    {
+        i = (x * rtv->bpp / 8) + (y * rtv->size_line);
+        rtv->img_data[i] = min(c.r*255.0f, 255.0f);
+        rtv->img_data[++i] = min(c.g*255.0f, 255.0f);
+        rtv->img_data[++i] = min(c.b*255.0f, 255.0f);
+    }
+}
