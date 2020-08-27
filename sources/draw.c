@@ -140,15 +140,13 @@ void draw_figures_v1(t_rtv *rtv)
 
 
                      double op = max(vectDot(hit_normal, v_tolight), 0) * figures[closest_object_index].specular * max(vectDot(hit_normal, half_vect), 0) * specular_k;
-                    // op = 1;
-                    final_c.r = figures[closest_object_index].c.r * op;
-                    final_c.g = figures[closest_object_index].c.g * op;
-                    final_c.b = figures[closest_object_index].c.b * op;
+                 op = 1;
+                    final_c.r = figures[closest_object_index].c.r * light1.c.r * op;
+                    final_c.g = figures[closest_object_index].c.g * light1.c.g * op;
+                    final_c.b = figures[closest_object_index].c.b * light1.c.b * op;
 
-//d
                   
-                    // final_color = figures[closest_object_index].color * op;
-
+              
 
                     final_color = get_color(final_c.r, final_c.b, final_c.b);
                     add_px2(rtv, x, y, final_color);
