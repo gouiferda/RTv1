@@ -86,7 +86,7 @@ void draw_figures_v1(t_rtv *rtv)
     t_figure *figures = gen_figures(figures_count);
 
     t_light light1;
-    light1.pos = newVect(0, 3000, 0);
+    light1.pos = newVect(-300, 400, 0);
     light1.c.r = 1;
     light1.c.g = 1;
     light1.c.b = 1;
