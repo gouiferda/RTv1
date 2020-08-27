@@ -26,8 +26,9 @@ make run;
         - [X] plane
         - [ ] cylinder
         - [ ] cone
-    - [ ] diffusion: lambert diffuse model
+    - [X] diffusion: lambert diffuse model
     - [ ] specular: blinn specular model
+- [X] Fix color (decimal to rgb)
 - [ ] Shadows
 - [ ] Moving and rotating the objects
 - [ ] Moving and rotating the camera
@@ -45,7 +46,7 @@ make run;
 1. [ ] Cylinder-Ray intersection
 1. [ ] Cone-Ray intersection
 1. [X] Lighting our intersection point
-1. [ ] Lambert
+1. [X] Lambert
 1. [ ] Reflection
 1. [ ] Phong
 1. [ ] Antialiasing
