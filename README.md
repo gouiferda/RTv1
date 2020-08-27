@@ -80,10 +80,10 @@ make run;
 
 
 ## 👨🏻‍💻 Hamza to do
-Research:
+Research/learn about:
 - [ ] ray tracing
 - [ ] vectors
 Do a test for:
 - [ ] cylinder/line intersection
 - [ ] cone/line intersection
-- [ ] create maps json parser (External files for scene description)
+- [ ] create json maps parser (Read External files for scene description)

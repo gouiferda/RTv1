@@ -37,7 +37,12 @@ typedef struct		s_ray
 	t_vector		dir;
 }					t_ray;
 
-
+typedef struct	s_color
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+}				t_color;
 
 typedef struct s_figure
 {
@@ -46,6 +51,7 @@ typedef struct s_figure
 	t_vector		pos;
 	t_vector		dir;
 	int color;
+	t_color c;
 	double specular; // (value between 0–1)
 	t_vector diffuse; // (3 values between 0–1, for R-G-B)
 } t_figure;
@@ -57,12 +63,7 @@ typedef struct s_light
 	double			intensity;
 } t_light;
 
-typedef struct	s_color
-{
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-}				t_color;
+
 
 
 // typedef struct{

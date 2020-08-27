@@ -57,6 +57,11 @@ void draw_figures_v1(t_rtv *rtv)
     int figures_count = 6;
     t_figure *figures = gen_figures(figures_count);
 
+
+    t_light light1;
+    light1.pos = newVect(0,3000,0);
+    light1.intensity=100;
+
     //for each pixel in the screen send a ray and save the closest object and show it
     t_vector s1, s2, s3, s4;
 
