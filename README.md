@@ -26,7 +26,7 @@ make run;
         - [X] plane
         - [ ] cylinder
         - [ ] cone
-    - [X] diffusion: lambert diffuse model
+    - [ ] diffusion: lambert diffuse model
     - [ ] specular: blinn specular model
 - [X] Fix color (decimal to rgb)
 - [ ] Shadows

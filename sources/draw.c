@@ -70,6 +70,27 @@ int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
     return final_color;
 }
 
+t_color get_surface_color2(t_figure f, t_vector i, t_ray r, t_light l)
+{
+    int final_color = BLACK;
+    t_color final_c;
+    final_c.r = 0;
+    final_c.g = 0;
+    final_c.b = 0;
+    int specular_k = 250;
+    t_vector hit_normal = vectNorm(vectSub(i, f.pos));
+    t_vector hit_to_cam = vectSub(r.pos, i);
+    t_ray v_tolight_r;
+    v_tolight_r.pos = i;
+    v_tolight_r.dir = vectSub(l.pos, i);
+    t_vector half_vect = vectNorm(vectAdd(v_tolight_r.dir, hit_to_cam));
+    double kk = f.specular * max(vectDot(hit_normal, half_vect), 0) * specular_k;
+    final_c.r += f.c.r * l.c.r * kk;
+    final_c.g += f.c.g * l.c.g * kk;
+    final_c.b += f.c.b * l.c.b * kk;
+    return final_c;
+}
+
 void draw_figures_v1(t_rtv *rtv)
 {
     int final_color = BLACK;
@@ -88,7 +109,7 @@ void draw_figures_v1(t_rtv *rtv)
     t_figure *figures = gen_figures(figures_count);
 
     t_light light1;
-    light1.pos = newVect(0, 400, 10);
+    light1.pos = newVect(0, 600, -300);
     light1.c.r = 1;
     light1.c.g = 1;
     light1.c.b = 1;
@@ -159,11 +180,13 @@ void draw_figures_v1(t_rtv *rtv)
                 {
                     final_color = get_surface_color(figures[closest_object_index], s2, ray, light1);
                     add_px2(rtv, x, y, final_color);
+                    // add_px3(rtv, x, y, get_surface_color2(figures[closest_object_index], s3, ray, light1));
                 }
                 if (plane_inter_v1(ray, figures[closest_object_index], &s3) == 1)
                 {
                     final_color = get_surface_color(figures[closest_object_index], s3, ray, light1);
                     add_px2(rtv, x, y, final_color);
+                    //add_px3(rtv, x, y, get_surface_color2(figures[closest_object_index], s3, ray, light1));
                 }
                 closest_object_index = -1;
             }
