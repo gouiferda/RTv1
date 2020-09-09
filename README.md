@@ -128,9 +128,10 @@ Material:
 
 ## 👨🏻‍💻 Hamza to do
 Research/learn about:
-- [ ] ray tracing
-- [ ] vectors
+- [ ] ray tracing and vectors in maths
 Do a test for:
+- [ ] plane line intersection
 - [ ] cylinder/line intersection
 - [ ] cone/line intersection
 - [ ] create json maps parser (Read External files for scene description)
+- [ ] Antialiasing
