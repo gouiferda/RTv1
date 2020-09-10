@@ -42,7 +42,7 @@ int main()
     s.radius = 100;
     s.color = 125678;
     s.type = SPHERE;
-    //s.dir = ... //direction (cylinder / con)
+    //s.dir = ... //direction (cylinder / con / plane ..)
 
 
     //intersection
