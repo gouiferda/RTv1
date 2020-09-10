@@ -104,9 +104,9 @@ int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
     double diffu = vectDot(hit_normal, half_vect);
     double diff_c = fmax(0, fmin(diffu, 1.0));
     
-   // spec_c = fmin(spec_c, 1.0));
+    double spec_c = 0.01;
    
-    final_color = color_mix(f.color, diff_c, 0.07);
+    final_color = color_mix(f.color, diff_c, spec_c);
     return final_color;
 }
 

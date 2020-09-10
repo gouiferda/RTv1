@@ -26,9 +26,9 @@ make run;
         - [X] plane
         - [ ] cylinder
         - [ ] cone
-    - [ ] diffusion: lambert diffuse model
+    - [x] diffusion: lambert diffuse model
     - [ ] specular: blinn specular model
-- [ ] Fix color (decimal to rgb)
+- [x] Fix color (decimal to rgb)
 - [ ] Shadows
 - [ ] Moving and rotating the objects
 - [ ] Moving and rotating the camera
@@ -127,11 +127,13 @@ Material:
 
 
 ## 👨🏻‍💻 Hamza to do
-Research/learn about:
-- [ ] ray tracing and vectors in maths
-Do a test for:
-- [ ] plane line intersection
+
+- [ ] Research/learn about: ray tracing and vectors in maths
+- [ ] Do a test and understand: plane line intersection
+
 - [ ] cylinder/line intersection
 - [ ] cone/line intersection
-- [ ] create json maps parser (Read External files for scene description)
+
 - [ ] Antialiasing
+- [ ] create YML maps parser (Read External files for scene description)
+
