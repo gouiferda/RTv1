@@ -3,3 +3,4 @@
 
 gcc $1 vectors.c -oprogram
 ./program
+rm -rf program

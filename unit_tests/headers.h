@@ -1,4 +1,17 @@
 
+#include <stdio.h>
+#include <math.h>
+
+
+# define PLANE 1
+# define SPHERE 2
+# define CYLINDER 3
+# define CONE 4
+
+# define NEAR			1e-6
+# define FAR			1000000
+
+
 typedef struct		s_vector
 {
 	double 			x;
@@ -23,6 +36,8 @@ typedef struct s_figure
 	double diffuse; // (value between 0–1)
 	double reflection;
 } t_figure;
+
+
 
 
 t_vector newVect(double x, double y,double z);
