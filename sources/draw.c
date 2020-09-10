@@ -44,12 +44,12 @@ t_figure *gen_figures(int figures_count)
         figures[k].type = figure_types[k];
         // figures[k].c = colorConverter(colors[k]);
 
-        figures[k].c.r = 1;
-        figures[k].c.g = (k % 2 == 0) ? 0 : 1;
-        figures[k].c.b = (k % 4 != 0) ? 0 : 1;
+        // figures[k].c.r = 1;
+        // figures[k].c.g = (k % 2 == 0) ? 0 : 1;
+        // figures[k].c.b = (k % 4 != 0) ? 0 : 1;
         //figures[k].reflection = 0;
-        figures[k].specular = 1;
-        figures[k].diffuse = 1;
+        figures[k].specular = 10;
+        figures[k].diffuse = 5;
         figures[k].dir = newVect(0, 10, 400);
         if (k == 4)
             figures[k].dir = newVect(0, 0, 300);
@@ -59,6 +59,34 @@ t_figure *gen_figures(int figures_count)
     return figures;
 }
 
+int color_mix(int color, float d, float s)
+{
+    unsigned char *tab;
+
+    tab = (unsigned char *)&color;
+    tab[0] = (tab[0] + (255 - tab[0]) * s) * d;
+    tab[1] = (tab[1] + (255 - tab[1]) * s) * d;
+    tab[2] = (tab[2] + (255 - tab[2]) * s) * d;
+    return (color);
+}
+
+t_vector reflection_vector(t_vector nor, t_vector light)
+{
+    t_vector r;
+
+    r = vectNorm(vectSub(vectScale(nor, 2 * vectDot(nor, light)), light));
+    return (r);
+}
+
+float			f_max(float a)
+{
+	if (a < 0.0)
+		return (0.0);
+	if (a > 1.0)
+		return (1.0);
+	return (a);
+}
+
 int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
 {
     int final_color = BLACK;
@@ -66,41 +94,22 @@ int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
     final_c.r = 0;
     final_c.g = 0;
     final_c.b = 0;
-    int specular_k = 250;
+    int specular_k = 1;
     t_vector hit_normal = vectNorm(vectSub(i, f.pos));
     t_vector hit_to_cam = vectSub(r.pos, i);
     t_ray v_tolight_r;
     v_tolight_r.pos = i;
     v_tolight_r.dir = vectSub(l.pos, i);
     t_vector half_vect = vectNorm(vectAdd(v_tolight_r.dir, hit_to_cam));
-    double kk = f.specular * max(vectDot(hit_normal, half_vect), 0) * specular_k;
-    final_c.r += f.c.r * l.c.r * kk;
-    final_c.g += f.c.g * l.c.g * kk;
-    final_c.b += f.c.b * l.c.b * kk;
-    final_color = get_color(final_c.r, final_c.b, final_c.b);
+    double diffu = vectDot(hit_normal, half_vect);
+    double diff_c = fmax(0, fmin(diffu, 1.0));
+    
+   // spec_c = fmin(spec_c, 1.0));
+   
+    final_color = color_mix(f.color, diff_c, 0.07);
     return final_color;
 }
 
-t_color get_surface_color2(t_figure f, t_vector i, t_ray r, t_light l)
-{
-    int final_color = BLACK;
-    t_color final_c;
-    final_c.r = 0;
-    final_c.g = 0;
-    final_c.b = 0;
-    int specular_k = 250;
-    t_vector hit_normal = vectNorm(vectSub(i, f.pos));
-    t_vector hit_to_cam = vectSub(r.pos, i);
-    t_ray v_tolight_r;
-    v_tolight_r.pos = i;
-    v_tolight_r.dir = vectSub(l.pos, i);
-    t_vector half_vect = vectNorm(vectAdd(v_tolight_r.dir, hit_to_cam));
-    double kk = f.specular * max(vectDot(hit_normal, half_vect), 0) * specular_k;
-    final_c.r += f.c.r * l.c.r * kk;
-    final_c.g += f.c.g * l.c.g * kk;
-    final_c.b += f.c.b * l.c.b * kk;
-    return final_c;
-}
 
 void draw_figures_v1(t_rtv *rtv)
 {
@@ -186,7 +195,7 @@ void draw_figures_v1(t_rtv *rtv)
             }
             if (closest_object_index != -1)
             {
-                if (sphere_inter_v1(ray, figures[closest_object_index], &s2)  == 1)
+                if (sphere_inter_v1(ray, figures[closest_object_index], &s2) == 1)
                 {
                     final_color = get_surface_color(figures[closest_object_index], s2, ray, light1);
                     add_px2(rtv, x, y, final_color);
@@ -212,3 +221,29 @@ void draw(t_rtv *rtv)
     draw_figures_v1(rtv);
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }
+
+
+
+
+/*
+t_color get_surface_color2(t_figure f, t_vector i, t_ray r, t_light l)
+{
+    int final_color = BLACK;
+    t_color final_c;
+    final_c.r = 0;
+    final_c.g = 0;
+    final_c.b = 0;
+    int specular_k = 250;
+    t_vector hit_normal = vectNorm(vectSub(i, f.pos));
+    t_vector hit_to_cam = vectSub(r.pos, i);
+    t_ray v_tolight_r;
+    v_tolight_r.pos = i;
+    v_tolight_r.dir = vectSub(l.pos, i);
+    t_vector half_vect = vectNorm(vectAdd(v_tolight_r.dir, hit_to_cam));
+    double kk = f.specular * fmax(vectDot(hit_normal, half_vect), 0) * specular_k;
+    final_c.r += f.c.r * l.c.r * kk;
+    final_c.g += f.c.g * l.c.g * kk;
+    final_c.b += f.c.b * l.c.b * kk;
+    return final_c;
+}
+*/

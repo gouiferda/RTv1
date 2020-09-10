@@ -28,7 +28,7 @@ make run;
         - [ ] cone
     - [ ] diffusion: lambert diffuse model
     - [ ] specular: blinn specular model
-- [X] Fix color (decimal to rgb)
+- [ ] Fix color (decimal to rgb)
 - [ ] Shadows
 - [ ] Moving and rotating the objects
 - [ ] Moving and rotating the camera

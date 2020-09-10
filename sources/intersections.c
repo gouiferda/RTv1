@@ -55,11 +55,12 @@ int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
     t_vector plane_point = figure.pos;
     t_vector ray_normal = vectSub(ray.dir, ray.pos);
     t_vector intersection_p;
-    if (vectDot(ray_normal, plane_normal) >= 0)
+
+    double dot1 = vectDot(ray_normal, plane_normal);
+    if (dot1 >= 0)
         return (0);
     t_vector diff = vectSub(ray.pos, plane_point);
     t_vector av1 = vectAdd(diff, plane_point);
-    double dot1 = vectDot(ray_normal, plane_normal);
     double dot2 = vectDot(diff, plane_normal);
     t_vector sv1 = vectScale(ray_normal, -dot2 / dot1);
 
@@ -72,14 +73,13 @@ int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s2)
 {
     double a, b, c, t2, d;
 
-    a = pow((ray.dir.x - ray.pos.x), 2) + pow((ray.dir.y - ray.pos.y), 2) + pow((ray.dir.z - ray.pos.z), 2);
+    //a = pow((ray.dir.x - ray.pos.x), 2) + pow((ray.dir.y - ray.pos.y), 2) + pow((ray.dir.z - ray.pos.z), 2);
     b = -2 * ((ray.dir.x - ray.pos.x) * (figure.pos.x - ray.pos.x) + (ray.dir.y - ray.pos.y) * (figure.pos.y - ray.pos.y) + (figure.pos.z - ray.pos.z) * (ray.dir.z - ray.pos.z));
-   // c = pow((figure.pos.x - ray.pos.x), 2) + pow((figure.pos.y - ray.pos.y), 2) + pow((figure.pos.z - ray.pos.z), 2) - pow(figure.radius, 2);
-    
+    // c = pow((figure.pos.x - ray.pos.x), 2) + pow((figure.pos.y - ray.pos.y), 2) + pow((figure.pos.z - ray.pos.z), 2) - pow(figure.radius, 2);
 
-    // a = vectDot(ray.dir, ray.dir);
+    a = vectDot(vectSub(ray.pos, ray.dir), vectSub(ray.pos, ray.dir));
     // b = vectDot(vectScale(ray.pos, 2), vectSub(ray.pos, figure.pos));
-     c = vectDot(vectSub(ray.pos, figure.pos), vectSub(ray.pos, figure.pos)) - pow(figure.radius, 2);
+    c = vectDot(vectSub(ray.pos, figure.pos), vectSub(ray.pos, figure.pos)) - pow(figure.radius, 2);
     d = pow(b, 2) - (4 * a * c);
     t2 = solution(a, b, c);
 
