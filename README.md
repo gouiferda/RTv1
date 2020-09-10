@@ -128,8 +128,8 @@ Material:
 
 ## 👨🏻‍💻 Hamza to do
 
-- [ ] Research/learn about: ray tracing and vectors in maths
-- [ ] Do a test and understand: plane line intersection
+- [X] Research/learn about: ray tracing and vectors in maths
+- [X] Do a test and understand: plane line intersection
 
 - [ ] cylinder/line intersection
 - [ ] cone/line intersection

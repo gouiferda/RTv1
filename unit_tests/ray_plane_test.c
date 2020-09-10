@@ -1,6 +1,3 @@
-
-//source : https://rosettacode.org/wiki/Find_the_intersection_of_a_line_with_a_plane#C
-
 #include<stdio.h>
  
 typedef struct{
@@ -29,28 +26,25 @@ vector intersectionPoint(vector lineVector, vector linePoint, vector planeNormal
 	return addVectors(addVectors(diff,planePoint),scaleVector(-dotProduct(diff,planeNormal)/dotProduct(lineVector,planeNormal),lineVector));
 }
  
-int main(int argC,char* argV[])
+int main()
 {
-	vector lV,lP,pN,pP,iP;
- 
-	if(argC!=5)
-		printf("Usage : %s <line direction, point on line, normal to plane and point on plane given as (x,y,z) tuples separated by space>");
-	else{
-		sscanf(argV[1],"(%lf,%lf,%lf)",&lV.x,&lV.y,&lV.z);
-		sscanf(argV[3],"(%lf,%lf,%lf)",&pN.x,&pN.y,&pN.z);
- 
+
+	vector lV = {0,0,0}; //line direction
+    vector lP = {0,2,0}; //point on line
+    vector pN = {0,0,2}; //normal to plane
+    vector pP = {0,0,0}; // point on plane
+    vector iP;
+
+
 		if(dotProduct(lV,pN)==0)
 			printf("Line and Plane do not intersect, either parallel or line is on the plane");
 		else{
-			sscanf(argV[2],"(%lf,%lf,%lf)",&lP.x,&lP.y,&lP.z);
-			sscanf(argV[4],"(%lf,%lf,%lf)",&pP.x,&pP.y,&pP.z);
  
 			iP = intersectionPoint(lV,lP,pN,pP);
  
 			printf("Intersection point is (%lf,%lf,%lf)",iP.x,iP.y,iP.z);
 		}
-	}
+	
  
 	return 0;
 }
- 
