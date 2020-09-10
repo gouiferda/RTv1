@@ -1,8 +1,28 @@
 #include "rtv.h"
 
+double solution(float a, float b, float c)
+{
+    double discriminant;
+    double t1;
+    double t2;
+
+    discriminant = ((b * b) - (4 * a * c));
+    if (discriminant < 0)
+        return (FAR);
+    if (discriminant == 0)
+        return (-b / 2 * a);
+    t1 = (-b + sqrt(discriminant)) / (2 * a);
+    t2 = (-b - sqrt(discriminant)) / (2 * a);
+    if (t1 < t2 && t1 > 0 && t1 < 100000)
+        return (t1);
+    if (t2 < t1 && t2 > 0 && t2 < 100000)
+        return (t2);
+    return (FAR);
+}
+
 int cylinder_inter_v1(t_ray ray, t_figure cylinder, double *s4)
 {
-    
+
     return (1);
 }
 
@@ -48,28 +68,26 @@ int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
     return 1;
 }
 
-int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s1, t_vector *s2)
+int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s2)
 {
-    double a, b, c, t1, t2;
-    int res = 0;
+    double a, b, c, t2, d;
 
     a = pow((ray.dir.x - ray.pos.x), 2) + pow((ray.dir.y - ray.pos.y), 2) + pow((ray.dir.z - ray.pos.z), 2);
     b = -2 * ((ray.dir.x - ray.pos.x) * (figure.pos.x - ray.pos.x) + (ray.dir.y - ray.pos.y) * (figure.pos.y - ray.pos.y) + (figure.pos.z - ray.pos.z) * (ray.dir.z - ray.pos.z));
-    c = pow((figure.pos.x - ray.pos.x), 2) + pow((figure.pos.y - ray.pos.y), 2) + pow((figure.pos.z - ray.pos.z), 2) - pow(figure.radius, 2);
+   // c = pow((figure.pos.x - ray.pos.x), 2) + pow((figure.pos.y - ray.pos.y), 2) + pow((figure.pos.z - ray.pos.z), 2) - pow(figure.radius, 2);
+    
 
-    t1 = (-b + sqrt(pow(b, 2) - (4 * a * c))) / (2 * a);
-    t2 = (-b - sqrt(pow(b, 2) - (4 * a * c))) / (2 * a);
-
-    s1->x = ray.pos.x + ((ray.dir.x - ray.pos.x) * t1);
-    s1->y = ray.pos.y + ((ray.dir.y - ray.pos.y) * t1);
-    s1->z = ray.pos.z + ((ray.dir.z - ray.pos.z) * t1);
+    // a = vectDot(ray.dir, ray.dir);
+    // b = vectDot(vectScale(ray.pos, 2), vectSub(ray.pos, figure.pos));
+     c = vectDot(vectSub(ray.pos, figure.pos), vectSub(ray.pos, figure.pos)) - pow(figure.radius, 2);
+    d = pow(b, 2) - (4 * a * c);
+    t2 = solution(a, b, c);
 
     s2->x = ray.pos.x + ((ray.dir.x - ray.pos.x) * t2);
     s2->y = ray.pos.y + ((ray.dir.y - ray.pos.y) * t2);
     s2->z = ray.pos.z + ((ray.dir.z - ray.pos.z) * t2);
 
-    if ((pow(b, 2) - (4 * a * c)) >= 0)
-        res = 1;
-
-    return (res);
+    if (t2 == FAR)
+        return 0;
+    return (1);
 }

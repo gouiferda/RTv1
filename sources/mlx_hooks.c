@@ -43,7 +43,8 @@ int keys_hook(int keycode, void *param)
 	t_rtv *rtv;
 
 	rtv = (t_rtv *)param;
-	
+	//  printf("position:	keycode %d\n", keycode);
+	// return 0; 
 	if (keycode == MAIN_PAD_ESC)
 		closer_hook(rtv);
 	if (keycode == MAIN_PAD_SPACE)
@@ -55,7 +56,8 @@ int keys_hook(int keycode, void *param)
 	if (keycode == N_PLUS || keycode == N_MINUS)
 		zoom(keycode, rtv);
 	if (keycode == ARROW_UP || keycode == ARROW_DOWN ||
-		keycode == ARROW_LEFT || keycode == ARROW_RIGHT)
+		keycode == ARROW_LEFT || keycode == ARROW_RIGHT || 
+		keycode == PAGE_DOWN || keycode == PAGE_UP )
 		position(keycode, rtv);
 	return (0);
 }

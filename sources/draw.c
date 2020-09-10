@@ -17,8 +17,19 @@ t_figure *gen_figures(int figures_count)
     //generates figures
     t_figure *figures;
     figures = (t_figure *)malloc(sizeof(t_figure) * (figures_count));
-    int colors[] = {C_GREEN1, C_YELLOW1, C_RED1, C_GREY1, C_GREY2}; //, C_DARK_BLUE1
-    int figure_types[] = {SPHERE, SPHERE, SPHERE, PLANE, PLANE};    //, PLANE
+    int colors[] = {
+        C_GREEN1,
+        C_YELLOW1,
+        C_RED1,
+        //C_GREY1,
+        //C_GREY2
+    }; //, C_DARK_BLUE1
+    int figure_types[] = {
+        SPHERE,
+        SPHERE,
+        //SPHERE,
+        //PLANE,
+        PLANE}; //, PLANE
     int start_x = 0;
     int bet_s = 30;
     int sphere_radius = 50;
@@ -26,13 +37,13 @@ t_figure *gen_figures(int figures_count)
     while (k < figures_count)
     {
         figures[k].pos = newVect(0, 0, 400);
-        if (k <= 2)
+        if (k <= 1)
             figures[k].pos = newVect(start_x, sphere_radius - 10, 0);
         figures[k].radius = sphere_radius;
         figures[k].color = colors[k];
         figures[k].type = figure_types[k];
         // figures[k].c = colorConverter(colors[k]);
-        
+
         figures[k].c.r = 1;
         figures[k].c.g = (k % 2 == 0) ? 0 : 1;
         figures[k].c.b = (k % 4 != 0) ? 0 : 1;
@@ -105,11 +116,11 @@ void draw_figures_v1(t_rtv *rtv)
     ray.pos = newVect(0 + ray_left_angle, 0 + ray_up_angle, ray_start_z);
 
     //figures
-    int figures_count = 5;
+    int figures_count = 3;
     t_figure *figures = gen_figures(figures_count);
 
     t_light light1;
-    light1.pos = newVect(0, 600, -300);
+    light1.pos = newVect(0 + (rtv->offset_x * 10), 600 - (rtv->offset_y * 10), -300 + (rtv->offset_z * 10));
     light1.c.r = 1;
     light1.c.g = 1;
     light1.c.b = 1;
@@ -127,7 +138,6 @@ void draw_figures_v1(t_rtv *rtv)
         y = -(rtv->screen_h / 2);
         while (y < rtv->screen_h / 2)
         {
-
             t_color final_c;
             final_c.r = 0;
             final_c.g = 0;
@@ -140,7 +150,7 @@ void draw_figures_v1(t_rtv *rtv)
             {
                 if (figures[k].type == SPHERE)
                 {
-                    if (sphere_inter_v1(ray, figures[k], &s1, &s2) == 1)
+                    if (sphere_inter_v1(ray, figures[k], &s2) == 1)
                     {
                         if (s2.z < minDistance)
                         {
@@ -176,7 +186,7 @@ void draw_figures_v1(t_rtv *rtv)
             }
             if (closest_object_index != -1)
             {
-                if (sphere_inter_v1(ray, figures[closest_object_index], &s1, &s2) == 1)
+                if (sphere_inter_v1(ray, figures[closest_object_index], &s2)  == 1)
                 {
                     final_color = get_surface_color(figures[closest_object_index], s2, ray, light1);
                     add_px2(rtv, x, y, final_color);

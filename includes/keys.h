@@ -97,4 +97,7 @@
 
 # define KEY_SEMI 41
 
+# define PAGE_UP 116
+# define PAGE_DOWN 121
+
 #endif
