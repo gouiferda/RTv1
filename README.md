@@ -48,7 +48,7 @@ make run;
 1. [X] Lighting our intersection point
 1. [X] Lambert
 1. [ ] Reflection
-1. [ ] Phong
+1. [ ] Specular: Phong
 1. [ ] Antialiasing
 
 
