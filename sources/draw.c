@@ -78,24 +78,35 @@ t_vector reflection_vector(t_vector nor, t_vector light)
     return (r);
 }
 
-float			f_max(float a)
+float f_max(float a)
 {
-	if (a < 0.0)
-		return (0.0);
-	if (a > 1.0)
-		return (1.0);
-	return (a);
+    if (a < 0.0)
+        return (0.0);
+    if (a > 1.0)
+        return (1.0);
+    return (a);
+}
+
+t_vector sphere_normal(t_figure f, t_vector i, t_ray r)
+{
+    t_vector n;
+    t_vector ii;
+
+    ii = vectAdd(r.pos, vectScale(r.dir, i.z));
+    n = vectNorm(vectSub(ii, f.pos));
+    return (n);
 }
 
 int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
 {
     int final_color = BLACK;
-    t_color final_c;
-    final_c.r = 0;
-    final_c.g = 0;
-    final_c.b = 0;
-    int specular_k = 1;
-    t_vector hit_normal = vectNorm(vectSub(i, f.pos));
+
+    // diffuse
+    t_vector hit_normal;
+    if (f.type == SPHERE)
+        hit_normal = vectNorm(vectSub(i, f.pos));
+    if (f.type == PLANE)
+        hit_normal = vectNorm(vectSub(f.dir, f.pos));
     t_vector hit_to_cam = vectSub(r.pos, i);
     t_ray v_tolight_r;
     v_tolight_r.pos = i;
@@ -103,15 +114,20 @@ int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
     t_vector half_vect = vectNorm(vectAdd(v_tolight_r.dir, hit_to_cam));
     double diffu = vectDot(hit_normal, half_vect);
     double diff_c = fmax(0, fmin(diffu, 1.0));
-    
-    double spec_c = 0.2;
-    int specular_k = 250;
-    double kk = f.specular * fmax(diffu, 0) * specular_k;
-   
-    final_color = color_mix(f.color, diff_c, kk);
+
+    //specular
+    double specular_k = 1;
+    double spec_f;
+    // spec_f = f_spec * fmax(diffu, 0) * specular_k;
+    // spec_f = fmax(0, fmin(spec_f, 1.0));
+    double f_spec = diffu / 3 ;
+    spec_f = fmax(0, fmin(f_spec, 1.0));
+
+
+
+    final_color = color_mix(f.color, diff_c, spec_f);
     return final_color;
 }
-
 
 void draw_figures_v1(t_rtv *rtv)
 {
@@ -223,9 +239,6 @@ void draw(t_rtv *rtv)
     draw_figures_v1(rtv);
     mlx_put_image_to_window(rtv->mlx, rtv->win, rtv->img_ptr, 0, 0);
 }
-
-
-
 
 /*
 t_color get_surface_color2(t_figure f, t_vector i, t_ray r, t_light l)
