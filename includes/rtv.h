@@ -109,6 +109,7 @@ typedef struct s_rtv
 	int offset_z;
 } t_rtv;
 
+
 void    set_defaults(t_rtv *rtv);
 void init_draw(t_rtv *rtv);
 t_rtv *init_rtv(void);

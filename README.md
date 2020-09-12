@@ -18,7 +18,6 @@ make run;
     - [X] figure
     - [ ] camera
     - [ ] light
-    - [ ] material (color , diffuse and specular/shiningness)
 - [X] Mapping the coords system (0,0,0) to screen (0,0)
 - [ ] Shading - Light works on fixed and moved objects - Multi objects and intersections / Phong model
     - [ ] ambiant light / intersection with ray
@@ -36,7 +35,7 @@ make run;
 - [ ] Bonuses: Shine effect, Multi lights (spots)
 - [ ] Extra Bonuses: Antialiasing, External files for scene description, Reflection, Transparency, Shadow according to transparency...
 
-## ✅ Steps
+## ✅ Steps (Overall)
 
 1. [X] Scanning the screen
 1. [X] casting rays for good
@@ -45,11 +44,11 @@ make run;
 1. [X] Plane-Ray intersection
 1. [ ] Cylinder-Ray intersection
 1. [ ] Cone-Ray intersection
-1. [X] Lighting our intersection point
-1. [X] Lambert
-1. [ ] Reflection
+1. [X] Lambert / Lighting our intersection point
 1. [ ] Specular: Phong
+1. [ ] Shadows
 1. [ ] Antialiasing
+1. [ ] Reflection
 
 
 ## 🗺 Key definitions

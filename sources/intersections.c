@@ -49,7 +49,7 @@ void test_cylinder_inter_v1(t_rtv *rtv)
     printf("result: %d , solution:  %.2f  \n", res, *s1);
 }
 
-int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
+int plane_inter(t_ray ray, t_figure figure, t_vector *s1)
 {
     t_vector plane_normal = vectSub(figure.dir, figure.pos);
     t_vector plane_point = figure.pos;
@@ -69,7 +69,7 @@ int plane_inter_v1(t_ray ray, t_figure figure, t_vector *s1)
     return 1;
 }
 
-int sphere_inter_v1(t_ray ray, t_figure figure, t_vector *s2)
+int sphere_inter(t_ray ray, t_figure figure, t_vector *s2)
 {
     double a, b, c, t2, d;
 
