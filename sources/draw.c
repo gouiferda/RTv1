@@ -21,7 +21,7 @@ t_figure *gen_figures(int figures_count)
         C_GREEN1,
         C_YELLOW1,
         C_RED1,
-        C_AQUA1,
+        C_TEAL1,
         //C_GREY2
     }; //, C_DARK_BLUE1
     int figure_types[] = {
@@ -101,12 +101,12 @@ int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
 {
     int final_color = BLACK;
 
-    // diffuse
+    /* diffuse */
     t_vector hit_normal;
     if (f.type == SPHERE)
         hit_normal = vectNorm(vectSub(i, f.pos));
     if (f.type == PLANE)
-        hit_normal = vectNorm(vectSub(f.dir, f.pos));
+        hit_normal = vectNorm(vectSub(vectNorm(f.dir), f.pos));
     t_vector hit_to_cam = vectSub(r.pos, i);
     t_ray v_tolight_r;
     v_tolight_r.pos = i;
@@ -115,17 +115,25 @@ int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
     double diffu = vectDot(hit_normal, half_vect);
     double diff_c = fmax(0, fmin(diffu, 1.0));
 
-    //specular
-    double specular_k = 1;
-    double spec_f;
+    /* specular */
+    // double specular_k = 1;
+    // double spec_f;
     // spec_f = f_spec * fmax(diffu, 0) * specular_k;
     // spec_f = fmax(0, fmin(spec_f, 1.0));
-    double f_spec = diffu / 3 ;
-    spec_f = fmax(0, fmin(f_spec, 1.0));
+    // double f_spec = diffu / 3 ;
+    //ks: 1 kd 1  n 60
+
+ 
+    t_vector ii = vectAdd(r.pos, vectScale(r.dir, i.z));
+    t_vector ll = vectNorm(vectSub(l.pos, i));
+    t_vector rr = vectNorm(vectSub(vectScale(hit_normal, 2 * vectDot(hit_normal, ll)), ll));
+    double f_spec = (1 * pow(f_max(vectDot(rr, vectScale(r.dir, -1))), 60));
 
 
 
-    final_color = color_mix(f.color, diff_c, spec_f);
+    f_spec = fmax(0, fmin(f_spec, 1.0));
+
+    final_color = color_mix(f.color, diff_c, f_spec);
     return final_color;
 }
 

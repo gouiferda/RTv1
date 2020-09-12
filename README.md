@@ -26,9 +26,9 @@ make run;
         - [X] plane
         - [ ] cylinder
         - [ ] cone
-    - [ ] diffusion: lambert diffuse model
+    - [X] diffusion: lambert diffuse model
     - [ ] specular: blinn specular model
-- [x] Fix color (decimal to rgb)
+- [X] Fix color (decimal to rgb)
 - [ ] Shadows
 - [ ] Moving and rotating the objects
 - [ ] Moving and rotating the camera
@@ -48,6 +48,8 @@ make run;
 1. [X] Lambert / Lighting our intersection point
 1. [ ] Specular: Phong
 1. [ ] Shadows
+1. [ ] Moving objects and camera
+1. [ ] External files
 1. [ ] Antialiasing
 1. [ ] Reflection
 
