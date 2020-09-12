@@ -4,6 +4,7 @@ Ray tracer in C
 
 ## 🚀 Clone and Run
 
+cd ~/Desktop;
 gcl https://github.com/gouiferda/RTv1.git;
 cd RTv1;
 make run;
@@ -15,7 +16,7 @@ make run;
 - [ ] Functions and structures 
     - [X] vector
     - [X] ray
-    - [X] figure
+    - [X] figure (sphere,plane,cylinder,cone)
     - [ ] camera
     - [ ] light
 - [X] Mapping the coords system (0,0,0) to screen (0,0)

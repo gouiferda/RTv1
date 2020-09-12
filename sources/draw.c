@@ -105,8 +105,10 @@ int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
     double diff_c = fmax(0, fmin(diffu, 1.0));
     
     double spec_c = 0.2;
+    int specular_k = 250;
+    double kk = f.specular * fmax(diffu, 0) * specular_k;
    
-    final_color = color_mix(f.color, diff_c, spec_c);
+    final_color = color_mix(f.color, diff_c, kk);
     return final_color;
 }
 
@@ -233,13 +235,13 @@ t_color get_surface_color2(t_figure f, t_vector i, t_ray r, t_light l)
     final_c.r = 0;
     final_c.g = 0;
     final_c.b = 0;
-    int specular_k = 250;
     t_vector hit_normal = vectNorm(vectSub(i, f.pos));
     t_vector hit_to_cam = vectSub(r.pos, i);
     t_ray v_tolight_r;
     v_tolight_r.pos = i;
     v_tolight_r.dir = vectSub(l.pos, i);
     t_vector half_vect = vectNorm(vectAdd(v_tolight_r.dir, hit_to_cam));
+    int specular_k = 250;
     double kk = f.specular * fmax(vectDot(hit_normal, half_vect), 0) * specular_k;
     final_c.r += f.c.r * l.c.r * kk;
     final_c.g += f.c.g * l.c.g * kk;
