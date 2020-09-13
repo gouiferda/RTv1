@@ -23,6 +23,10 @@ int sphere_ray_inter(t_ray ray, t_figure figure, t_vector *s2)
 
 
 
+
+
+
+
 int main()
 {
     

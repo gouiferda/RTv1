@@ -10,6 +10,7 @@
 
 # define NEAR			1e-6
 # define FAR			1000000
+# define MIN_NBR 		1e-4
 
 
 typedef struct		s_vector
