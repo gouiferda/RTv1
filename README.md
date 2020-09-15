@@ -12,7 +12,8 @@ make run;
 ## 📝 To do
 
 - [X] Author file
-- [X] Minilibx functions: including expose properly (mlx_expose_hook)
+- [X] Minilibx functions
+- [ ] expose properly (mlx_expose_hook)
 - [ ] Functions and structures 
     - [X] vector
     - [X] ray
