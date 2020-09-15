@@ -163,7 +163,7 @@ void draw_figures_v1(t_rtv *rtv)
 
     int x = -(rtv->screen_w / 2);
     int y = -(rtv->screen_h / 2);
-    int closest_object_index = -1;
+    int closest_figure_index = -1;
     int minDistance = ray_max_z;
     int k = 0;
     while (x < rtv->screen_w / 2)
@@ -188,7 +188,7 @@ void draw_figures_v1(t_rtv *rtv)
                         if (s2.z < minDistance)
                         {
                             minDistance = s2.z;
-                            closest_object_index = k;
+                            closest_figure_index = k;
                         }
                     }
                 }
@@ -199,7 +199,7 @@ void draw_figures_v1(t_rtv *rtv)
                         if (s3.z < minDistance)
                         {
                             minDistance = s3.z;
-                            closest_object_index = k;
+                            closest_figure_index = k;
                         }
                     }
                 }
@@ -207,31 +207,31 @@ void draw_figures_v1(t_rtv *rtv)
                 // {
                 //     if (cylinder_inter_v1(ray, figures[k], &s4) == 1)
                 //     {
-                //         closest_object_index = k;
+                //         closest_figure_index = k;
                 //         if (s4.z < minDistance)
                 //         {
                 //             //minDistance = s4.z;
-                //             closest_object_index = k;
+                //             closest_figure_index = k;
                 //         }
                 //     }
                 // }
                 k++;
             }
-            if (closest_object_index != -1)
+            if (closest_figure_index != -1)
             {
-                if (sphere_inter(ray, figures[closest_object_index], &s2) == 1)
+                if (sphere_inter(ray, figures[closest_figure_index], &s2) == 1)
                 {
-                    final_color = get_surface_color(figures[closest_object_index], s2, ray, light1);
+                    final_color = get_surface_color(figures[closest_figure_index], s2, ray, light1);
                     add_px2(rtv, x, y, final_color);
-                    // add_px3(rtv, x, y, get_surface_color2(figures[closest_object_index], s3, ray, light1));
+                    // add_px3(rtv, x, y, get_surface_color2(figures[closest_figure_index], s3, ray, light1));
                 }
-                if (plane_inter(ray, figures[closest_object_index], &s3) == 1)
+                if (plane_inter(ray, figures[closest_figure_index], &s3) == 1)
                 {
-                    final_color = get_surface_color(figures[closest_object_index], s3, ray, light1);
+                    final_color = get_surface_color(figures[closest_figure_index], s3, ray, light1);
                     add_px2(rtv, x, y, final_color);
-                    //add_px3(rtv, x, y, get_surface_color2(figures[closest_object_index], s3, ray, light1));
+                    //add_px3(rtv, x, y, get_surface_color2(figures[closest_figure_index], s3, ray, light1));
                 }
-                closest_object_index = -1;
+                closest_figure_index = -1;
             }
             y++;
         }

@@ -108,7 +108,7 @@ bool intersectRaySphere(ray *r, sphere *s, float *t){
 		if(t0 > t1)
 			t0 = t1;
 
-		/* Verify t1 larger than 0 and less than the original t */
+		/* Verify t1 larger than 0 and less than the posal t */
 		if((t0 > 0.001f) && (t0 < *t)){
 			*t = t0;
 			retval = true;

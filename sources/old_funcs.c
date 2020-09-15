@@ -7,7 +7,7 @@ void draw_test1(t_rtv *rtv)
     int ray_len = 1000;
 
     t_ray ray;
-    ray.origin = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
+    ray.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), ray_start_z);
 
     t_figure figure1;
     figure1.pos = newVect((rtv->screen_w / 2), (rtv->screen_h / 2), 0);
