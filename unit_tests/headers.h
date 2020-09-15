@@ -10,18 +10,8 @@
 
 # define NEAR			1e-6
 # define FAR			1000000
-# define MIN_NBR 		1e-4
-
-# define VEC(a, b, c) (t_vector){a, b, c}
-
-
-//
-typedef	struct	s_interval
-{
-	double		t_min;
-	double		t_max;
-}				t_interval;
-//
+//# define MIN_NBR 		1e-4
+# define MIN_NBR 1e-4
 
 
 

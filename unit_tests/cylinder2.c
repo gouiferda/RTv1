@@ -3,72 +3,41 @@
 
 
 
-
-
-t_vector	ft_sub(t_vector a, t_vector b)
+double	get_t(double a, double b, double d)
 {
-	return (VEC(a.x - b.x, a.y - b.y, a.z - b.z));
+	double t1;
+	double t2;
+
+	t1 = (-b - sqrt(d)) / (2 * a);
+	t2 = (-b + sqrt(d)) / (2 * a);
+	if ((t1 <= t2 && t1 >= 0) || (t1 >= 0 && t2 < 0))
+		return (t1);
+	else if ((t2 <= t1 && t2 >= 0) || (t1 < 0 && t2 >= 0))
+		return (t2);
+	return (-1);
+}
+//cylinder_intersect(ray->orig, ray->dir, obj)
+double	cylinder_intersect(t_ray ray, t_figure obj)
+{
+	t_vector o=ray.pos;
+	t_vector dir=ray.dir;
+	double	a;
+	double	b;
+	double	c;
+	double	d;
+	t_vector	x;
+
+	x = vectSub(o, obj.pos);
+	a = vectDot(dir, dir) - pow(vectDot(dir, obj.dir), 2);
+	b = 2 * (vectDot(dir, x) - (vectDot(dir, obj.dir) * vectDot(x, obj.dir)));
+	c = vectDot(x, x) - pow(vectDot(x, obj.dir), 2) - pow(obj.radius, 2);
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return (-1);
+	return (get_t(a, b, d));
 }
 
-double		ft_dot(t_vector a, t_vector b)
-{
-	return (a.x * b.x + a.y * b.y + a.z * b.z);
-}
 
-t_vector	ft_pro_k(t_vector a, double k)
-{
-	return (VEC(a.x * k, a.y * k, a.z * k));
-}
-
-
-t_vector	ft_normalize(t_vector a)
-{
-	float k;
-
-	if (a.x == 0.0 && a.y == 0.0 && a.z == 0.0)
-		return (VEC(0, 0, 0));
-	k = 1.0 / sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
-	return (ft_pro_k(a, k));
-}
-
-
-t_vector	ft_add(t_vector a, t_vector b)
-{
-	return (VEC(a.x + b.x, a.y + b.y, a.z + b.z));
-}
-
-
-t_vector	ft_ray_function(t_ray *r, double t)
-{
-	return (ft_add(r->pos, ft_pro_k(r->dir, t)));
-}
-
-int			ft_hit_cylinder(t_figure *o, t_ray *r, t_interval t, t_hit *rec)
-{
-	rec->oc = ft_sub(r->pos, o->pos);
-	rec->coef[0] = ft_dot(r->dir, r->dir) - pow(ft_dot(r->dir, o->rot), 2);
-	rec->coef[1] = 2 * (ft_dot(r->dir, rec->oc) - (ft_dot(r->dir, o->rot)
-				* ft_dot(rec->oc, o->rot)));
-	rec->coef[2] = ft_dot(rec->oc, rec->oc) - pow(ft_dot(rec->oc, o->rot), 2)
-		- o->size * o->size;
-	rec->delta = rec->coef[1] * rec->coef[1] - 4 * rec->coef[0] * rec->coef[2];
-	if (rec->delta >= 0)
-	{
-		rec->r[0] = (-rec->coef[1] - sqrt(rec->delta)) / (2 * rec->coef[0]);
-		rec->r[1] = (-rec->coef[1] + sqrt(rec->delta)) / (2 * rec->coef[0]);
-		rec->r[0] = rec->r[0] < rec->r[1] ? rec->r[0] : rec->r[1];
-		if (rec->r[0] < t.t_max && rec->r[0] > t.t_min)
-		{
-			rec->t = rec->r[0];
-			rec->p = ft_ray_function(r, rec->t);
-			rec->n = ft_normalize(ft_sub(ft_sub(rec->p, o->pos),
-						ft_pro_k(o->rot, ft_dot(r->dir, o->rot)
-							* rec->t + ft_dot(rec->oc, o->rot))));
-			return (1);
-		}
-	}
-	return (0);
-}
 
 
 
@@ -88,21 +57,21 @@ int main()
     //object 
     t_figure s;
     s.pos = newVect(0,0,0);
-    s.radius = 100;
-    s.color = 125678;
-    s.type = SPHERE;
-    //s.dir = ... //direction (cylinder / con / plane ..)
+    s.radius = 10;
+    //s.color = 125678;
+    s.type = CYLINDER;//(cylinder / con / plane ..)
+    s.dir = newVect(0,10,300); //direction 
 
 
     //intersection
     t_vector p_i;
-    int is_inter = 0;
+    double is_inter = 0;
 
-    is_inter = sphere_ray_inter(ray,s,&p_i);
+    is_inter = cylinder_intersect(ray,s);
   
+	printf("is_intersected2: %.2f \n",is_inter);
 
-
-    printf("is_intersected: %d, point(x,y,z): (%.f,%.f,%.f) \n",is_inter, p_i.x, p_i.y,p_i.z);
+   // printf("is_intersected: %d, point(x,y,z): (%.f,%.f,%.f) \n",is_inter, p_i.x, p_i.y,p_i.z);
 
 
     return 0;
