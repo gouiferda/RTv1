@@ -43,7 +43,7 @@ int main()
 	obj.pos = newVect(0, 0,0);
 	obj.radius = 100;
 	obj.type = CYLINDER;								// (cylinder / con / plane ..)
-	obj.dir = vectSub(newVect(10, 10, 300),obj.pos); //direction
+	obj.dir = vectSub(newVect(0, 0, 300),obj.pos); //direction
 
 	//intersection
 	t_vector p_i;
