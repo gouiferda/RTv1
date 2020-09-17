@@ -126,12 +126,12 @@ int get_surface_color(t_figure f, t_vector i, t_ray r, t_light l)
     // double f_spec = diffu / 3 ;
     //ks: 1 kd 1  n 60
     t_vector ii = vectAdd(r.pos, vectScale(r.dir, i.z));
-    t_vector ll = vectNorm(vectSub( ii,l.pos));
+    t_vector ll = vectNorm(vectSub(l.pos, i));
     t_vector rr = vectNorm(vectSub(vectScale(hit_normal, 2 * vectDot(hit_normal, ll)), ll));
     double f_spec = (1 * pow(f_max(vectDot(rr, vectScale(r.dir, -1))), 60));
-    f_spec = fmax(0, fmin(f_spec, 1));
-
-    final_color = color_mix(f.color, diff_c, f_spec);
+    f_spec = fmax(0, fmin(f_spec, 1.0));
+    //final_color = color_mix(f.color, diff_c, f_spec);
+    final_color = (color_mix(f.color, fmax(0, fmin(0.2 + diff_c, 1.0)), fmax(0, fmin(f_spec, 1.0))));
     return final_color;
 }
 
