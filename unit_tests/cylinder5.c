@@ -1,8 +1,24 @@
 #include "headers.h"
 
 
-void			intersect_cylinder(t_ray ray,
-									t_figure cylinder, double *ts)
+t_vec	substruct(t_vec v1, t_vec v2)
+{
+	return ((t_vec) { v1.x - v2.x, v1.y - v2.y, v1.z - v2.z });
+}
+
+
+double		limit_cylinder(t_object *cylinder, t_vec cam,
+								double tmp, double t)
+{
+	double	m;
+
+	m = tmp * t + dot(substruct(cam, cylinder->center), cylinder->normal);
+	return ((m < 0.0 || m > CYLINDER_D->height) ? INFINITY : t);
+}
+
+
+void			intersect_cylinder(t_vec camera, t_vec dir,
+									t_object *cylinder, double *ts)
 {
 	t_vector		oc;
 	double		k[3];
