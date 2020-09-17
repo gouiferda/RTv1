@@ -14,6 +14,14 @@
 //# define MIN_NBR 		1e-4
 # define MIN_NBR 1e-4
 
+//cylinder8
+# define SQ(a)					((a) * (a))
+# define SWAP(a, b, T)			{T temp = a; a = b; b = temp;}
+//
+
+//cylinder9
+# define MAX_DEGREE 4
+
 
 
 typedef struct		s_vector

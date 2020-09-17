@@ -10,14 +10,14 @@ t_root			hit_cylinder(t_vector dir, t_vector camera, t_obj *cylinder)
 	double		discrim;
 	t_root		root;
 
-	res.x = ft_vec_dot(dir, dir) - pow(ft_vec_dot(dir, cylinder->dir), 2.0);
-	res.y = (ft_vec_dot(dir, ft_vec_subtract(camera, cylinder->pos))
-				- ft_vec_dot(dir, cylinder->dir)
-				* ft_vec_dot(ft_vec_subtract(camera, cylinder->pos),
+	res.x = ft_vectDot(dir, dir) - pow(ft_vectDot(dir, cylinder->dir), 2.0);
+	res.y = (ft_vectDot(dir, ft_vec_subtract(camera, cylinder->pos))
+				- ft_vectDot(dir, cylinder->dir)
+				* ft_vectDot(ft_vec_subtract(camera, cylinder->pos),
 					cylinder->dir)) * 2.0;
-	res.z = ft_vec_dot(ft_vec_subtract(camera, cylinder->pos),
+	res.z = ft_vectDot(ft_vec_subtract(camera, cylinder->pos),
 						ft_vec_subtract(camera, cylinder->pos))
-			- pow(ft_vec_dot(ft_vec_subtract(camera, cylinder->pos),
+			- pow(ft_vectDot(ft_vec_subtract(camera, cylinder->pos),
 							cylinder->dir), 2)
 			- (cylinder->radius * cylinder->radius);
 	discrim = res.y * res.y - (4.0 * res.x * res.z);

@@ -1,6 +1,7 @@
 #include "headers.h"
 
 
+
 float	ft_min_posi(float t1, float t2)
 {
 	if (t1 < t2)
@@ -21,14 +22,13 @@ float	ft_min_posi(float t1, float t2)
 }
 
 
-
-float	ft_inter_cylinder(t_cam cam, t_obj obj, t_val *v)
+float	ft_inter_cylinder(t_figure cam, t_obj obj, t_val *v)
 {
 	t_vect	x;
 	t_var	var;
 	float	t1;
 
-	x = vec_sub(cam.pos, obj.pos);
+	x = vectSub(cam.pos, obj.pos);
 	var.a = (vectDot(cam.ray, cam.ray) - (vectDot(cam.ray, obj.dir)
 			* vectDot(cam.ray, obj.dir)));
 	var.b = 2 * (vectDot(cam.ray, x) - (vectDot(cam.ray, obj.dir)
@@ -78,7 +78,7 @@ int main()
     //intersection
     t_vector p_i;
     float is_inter;
-    is_inter = cylinder_intersection(ray,obj);
+    is_inter = ft_inter_cylinder(ray,obj);
 	printf("is_intersected: %.2f \n",is_inter);
 	//printf("is_intersected: %d, point(x,y,z): (%.f,%.f,%.f) \n",is_inter, p_i.x, p_i.y,p_i.z);
 
