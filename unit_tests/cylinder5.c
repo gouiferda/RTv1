@@ -1,19 +1,14 @@
 #include "headers.h"
 
 
-t_vec	substruct(t_vec v1, t_vec v2)
-{
-	return ((t_vec) { v1.x - v2.x, v1.y - v2.y, v1.z - v2.z });
-}
 
-
-double		limit_cylinder(t_object *cylinder, t_vec cam,
+double		limit_cylinder(double cylinder_height, t_object cylinder, t_vec cam,
 								double tmp, double t)
 {
 	double	m;
 
-	m = tmp * t + dot(substruct(cam, cylinder->center), cylinder->normal);
-	return ((m < 0.0 || m > CYLINDER_D->height) ? INFINITY : t);
+	m = tmp * t + vectDot(vectSub(cam, cylinder->center), cylinder->normal);
+	return ((m < 0.0 || m > cylinder.height) ? INFINITY : t);
 }
 
 
