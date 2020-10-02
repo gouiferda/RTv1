@@ -13,14 +13,14 @@ make run;
 
 - [X] Minilibx functions
 - [ ] expose properly (mlx_expose_hook)
-- [ ] Functions and structures 
+- [X] Functions and structures 
     - [X] vector
     - [X] ray
     - [X] figure (sphere,plane,cylinder,cone)
     - [ ] camera
     - [ ] light
 - [X] Mapping the coords system (0,0,0) to screen (0,0)
-- [ ] ambiant light / intersection with ray
+- [X] ambiant light / intersection with ray
     - [X] sphere
     - [X] plane
     - [ ] cylinder
@@ -28,11 +28,13 @@ make run;
 - [X] diffusion: lambert diffuse model
 - [ ] specular: blinn specular model
 - [ ] Shadows
-- [ ] Multi lights (spots)
-- [ ] Reflection
 - [ ] Moving and rotating the objects
 - [ ] Moving and rotating the camera
 - [ ] Norm & Handle errors and leaks and messages
+
+
+- [ ] Multi lights (spots)
+- [ ] Reflection
 - [ ] Extra Bonuses: Antialiasing, External files for scene description, Reflection, Transparency, Shadow according to transparency...
 
 ## 👨🏻‍💻 To do (Hamza)
