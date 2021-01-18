@@ -9,7 +9,7 @@ gcl https://github.com/gouiferda/RTv1.git;
 cd RTv1;
 make run;
 
-## 📝 To do (Soufiane)
+## 📝 To do
 
 - [X] Minilibx functions
 - [ ] expose properly (mlx_expose_hook)
@@ -37,7 +37,6 @@ make run;
 - [ ] Reflection
 - [ ] Extra Bonuses: Antialiasing, External files for scene description, Reflection, Transparency, Shadow according to transparency...
 
-## 👨🏻‍💻 To do (Hamza)
 
 - [X] Research/learn about: ray tracing and vectors in maths
 - [X] Do a test and understand: plane line intersection
