@@ -116,7 +116,8 @@ t_rtv *init_rtv(void);
 
 void mlx(t_rtv *rtv);
 
-
+int sphere_inter(t_ray ray, t_figure figure, t_vector *s2);
+int plane_inter(t_ray ray, t_figure figure, t_vector *s1);
 void    add_px(t_rtv *rtv, int x, int y, int color);
 void add_px2(t_rtv *rtv, int x, int y, int color);
 void add_px3(t_rtv *rtv, int x, int y, t_color c);
